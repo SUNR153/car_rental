@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Rentals - CarRental</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>CarRental</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="car_list.html">Cars</a></li>
+                <li><a href="register.html">Register</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="my_rentals.html">My Rentals</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>My Rentals</h2>
+        <div class="rentals-list">
+            <div class="rental-item">
+                <h3>Toyota Corolla</h3>
+                <p><strong>Pickup Date:</strong> April 5, 2025</p>
+                <p><strong>Return Date:</strong> April 10, 2025</p>
+                <p><strong>Status:</strong> Active</p>
+                <button class="cancel-button">Cancel Rental</button>
+            </div>
+            <div class="rental-item">
+                <h3>Honda Civic</h3>
+                <p><strong>Pickup Date:</strong> March 20, 2025</p>
+                <p><strong>Return Date:</strong> March 25, 2025</p>
+                <p><strong>Status:</strong> Completed</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 CarRental. All rights reserved.</p>
+    </footer>
+
+    <style>
+        .rentals-list { max-width: 600px; margin: auto; display: flex; flex-direction: column; gap: 15px; }
+        .rental-item { padding: 15px; border: 1px solid #ddd; background: #fff; border-radius: 10px; }
+        .cancel-button { padding: 10px; background: red; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        .cancel-button:hover { background: darkred; }
+    </style>
+</body>
+</html>

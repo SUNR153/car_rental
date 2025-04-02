@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rent a Car - CarRental</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>CarRental</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="car_list.html">Cars</a></li>
+                <li><a href="register.html">Register</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Rent a Car</h2>
+        <form action="rental_submit.html" method="POST" class="rental-form">
+            <label for="full_name">Full Name:</label>
+            <input type="text" id="full_name" name="full_name" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="pickup_date">Pickup Date:</label>
+            <input type="date" id="pickup_date" name="pickup_date" required>
+            
+            <label for="return_date">Return Date:</label>
+            <input type="date" id="return_date" name="return_date" required>
+            
+            <label for="payment_method">Payment Method:</label>
+            <select id="payment_method" name="payment_method">
+                <option value="credit_card">Credit Card</option>
+                <option value="paypal">PayPal</option>
+                <option value="bank_transfer">Bank Transfer</option>
+            </select>
+            
+            <button type="submit" class="button">Confirm Rental</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 CarRental. All rights reserved.</p>
+    </footer>
+
+    <style>
+        .rental-form { max-width: 400px; margin: auto; display: flex; flex-direction: column; gap: 10px; background: #fff; padding: 20px; border-radius: 10px; }
+        .rental-form label { font-weight: bold; }
+        .rental-form input, .rental-form select { padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+        .rental-form .button { width: 100%; }
+    </style>
+</body>
+</html>

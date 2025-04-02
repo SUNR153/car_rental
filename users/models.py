@@ -3,14 +3,15 @@ from django.db import models
 
 class User(AbstractUser):
     ROLE_CHOICES = [
-        ('renter'),
-        ('owner'),
-        ('moderator'),
-        ('admin'),
+        ('renter', 'Арендатор'),  
+        ('owner', 'Владелец'),  
+        ('moderator', 'Модератор'),  
+        ('admin', 'Администратор'),  
     ]
+    
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='renter')
     email = models.EmailField(unique=True)
-    
+
     REQUIRED_FIELDS = ["email"]
 
 class Profile(models.Model):
@@ -21,4 +22,4 @@ class Profile(models.Model):
     is_verified = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"{self.user.username} ({self.user.role})"
+        return f"{self.user.username} ({self.user.get_role_display()})"  # Выводим название роли
