@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results - CarRental</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>CarRental</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="car_list.html">Cars</a></li>
+                <li><a href="register.html">Register</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Search Results</h2>
+        <form action="search_results.html" method="GET">
+            <input type="text" name="query" placeholder="Search for cars..." required>
+            <button type="submit">Search</button>
+        </form>
+        
+        <div class="car-list">
+            <div class="car-item">
+                <img src="car1.jpg" alt="Car">
+                <h3>Toyota Corolla</h3>
+                <p><strong>Price:</strong> $50/day</p>
+                <a href="car_details.html" class="button">View Details</a>
+            </div>
+            <div class="car-item">
+                <img src="car2.jpg" alt="Car">
+                <h3>Honda Civic</h3>
+                <p><strong>Price:</strong> $55/day</p>
+                <a href="car_details.html" class="button">View Details</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 CarRental. All rights reserved.</p>
+    </footer>
+
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f4; }
+        header { background: #007bff; color: white; padding: 15px; text-align: center; }
+        nav ul { list-style: none; padding: 0; }
+        nav ul li { display: inline; margin-right: 15px; }
+        nav ul li a { color: white; text-decoration: none; }
+        main { padding: 20px; text-align: center; }
+        form { margin-bottom: 20px; }
+        .car-list { display: flex; justify-content: center; gap: 20px; }
+        .car-item { background: white; padding: 15px; border-radius: 10px; text-align: center; }
+        .car-item img { width: 200px; height: auto; border-radius: 10px; }
+        .button { display: inline-block; padding: 10px 20px; background: #007bff; color: white; text-decoration: none; border-radius: 5px; }
+        .button:hover { background: #0056b3; }
+        footer { text-align: center; padding: 10px; background: #007bff; color: white; margin-top: 20px; }
+    </style>
+</body>
+</html>
