@@ -22,4 +22,4 @@ class Profile(models.Model):
     is_verified = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"{self.user.username} ({self.user.get_role_display()})"  # Выводим название роли
+        return f"{self.user.username} ({self.user.get_role_display()})" 
