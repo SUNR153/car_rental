@@ -3,10 +3,10 @@ from django.db import models
 
 class User(AbstractUser):
     ROLE_CHOICES = [
-        ('renter', 'Арендатор'),  
-        ('owner', 'Владелец'),  
-        ('moderator', 'Модератор'),  
-        ('admin', 'Администратор'),  
+        ('renter', 'Renter'),  
+        ('owner', 'Owner'),  
+        ('moderator', 'Moderator'),  
+        ('admin', 'Admin'),  
     ]
     
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='renter')
