@@ -1,3 +1,51 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Car
 
-# Create your views here.
+# Список всех машин
+def car_list(request):
+    cars = Car.objects.all()
+    return render(request, 'cars/car_list.html', {'cars': cars})
+
+# Информация об одной машине
+def car_detail(request, pk):
+    car = get_object_or_404(Car, pk=pk)
+    return render(request, 'cars/car_detail.html', {'car': car})
+
+# Добавление машины
+def car_create(request):
+    if request.method == 'POST':
+        brand = request.POST['brand']
+        model = request.POST['model']
+        year = request.POST['year']
+        price = request.POST['price_per_day']
+        available = 'is_available' in request.POST
+        Car.objects.create(
+            brand=brand,
+            model=model,
+            year=year,
+            price_per_day=price,
+            is_available=available
+        )
+        return redirect('/cars/')
+    return render(request, 'cars/car_form.html')
+
+# Редактирование машины
+def car_update(request, pk):
+    car = get_object_or_404(Car, pk=pk)
+    if request.method == 'POST':
+        car.brand = request.POST['brand']
+        car.model = request.POST['model']
+        car.year = request.POST['year']
+        car.price_per_day = request.POST['price_per_day']
+        car.is_available = 'is_available' in request.POST
+        car.save()
+        return redirect(f'/cars/{car.pk}/')
+    return render(request, 'cars/car_form.html', {'car': car})
+
+# Удаление машины
+def car_delete(request, pk):
+    car = get_object_or_404(Car, pk=pk)
+    if request.method == 'POST':
+        car.delete()
+        return redirect('/cars/')
+    return render(request, 'cars/car_confirm_delete.html', {'car': car})

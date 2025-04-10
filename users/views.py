@@ -4,6 +4,9 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
+def profile(request):
+    return render(request, 'profile.html')
+
 def user_list(request):
     users = User.objects.all()
     return render(request, 'profile.html', {'users': users})
