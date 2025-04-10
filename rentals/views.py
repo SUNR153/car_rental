@@ -3,17 +3,14 @@ from .models import Rental
 from cars.models import Car
 from users.models import User
 
-# Список всех аренд
 def rental_list(request):
     rentals = Rental.objects.all()
     return render(request, 'rentals/rental_list.html', {'rentals': rentals})
 
-# Детали одной аренды
 def rental_detail(request, pk):
     rental = get_object_or_404(Rental, pk=pk)
     return render(request, 'rentals/rental_detail.html', {'rental': rental})
 
-# Создание аренды
 def rental_create(request):
     if request.method == 'POST':
         car_id = request.POST['car']
@@ -33,7 +30,6 @@ def rental_create(request):
     users = User.objects.all()
     return render(request, 'rentals/rental_form.html', {'cars': cars, 'users': users})
 
-# Редактирование аренды
 def rental_update(request, pk):
     rental = get_object_or_404(Rental, pk=pk)
     if request.method == 'POST':
@@ -48,7 +44,6 @@ def rental_update(request, pk):
     users = User.objects.all()
     return render(request, 'rentals/rental_form.html', {'rental': rental, 'cars': cars, 'users': users})
 
-# Удаление аренды
 def rental_delete(request, pk):
     rental = get_object_or_404(Rental, pk=pk)
     if request.method == 'POST':

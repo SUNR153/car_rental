@@ -1,8 +1,8 @@
 from django.db import models
 
 class TimeStampedModel(models.Model):
-    created_at = models.DateTimeField(auto_now_add=True)  # автоматом при создании
-    updated_at = models.DateTimeField(auto_now=True)      # автоматом при обновлении
+    created_at = models.DateTimeField(auto_now_add=True) 
+    updated_at = models.DateTimeField(auto_now=True)      
 
     class Meta:
-        abstract = True  # не создаёт таблицу, просто наследуется
+        abstract = True  

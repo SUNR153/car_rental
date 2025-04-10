@@ -3,17 +3,14 @@ from .models import Review
 from cars.models import Car
 from users.models import User
 
-# Список всех отзывов
 def review_list(request):
     reviews = Review.objects.all()
     return render(request, 'reviews/review_list.html', {'reviews': reviews})
 
-# Детали отзыва
 def review_detail(request, pk):
     review = get_object_or_404(Review, pk=pk)
     return render(request, 'reviews/review_detail.html', {'review': review})
 
-# Создание отзыва
 def review_create(request):
     if request.method == 'POST':
         car_id = request.POST['car']
@@ -31,7 +28,6 @@ def review_create(request):
     users = User.objects.all()
     return render(request, 'reviews/review_form.html', {'cars': cars, 'users': users})
 
-# Редактирование
 def review_update(request, pk):
     review = get_object_or_404(Review, pk=pk)
     if request.method == 'POST':
@@ -45,7 +41,6 @@ def review_update(request, pk):
     users = User.objects.all()
     return render(request, 'reviews/review_form.html', {'review': review, 'cars': cars, 'users': users})
 
-# Удаление
 def review_delete(request, pk):
     review = get_object_or_404(Review, pk=pk)
     if request.method == 'POST':
