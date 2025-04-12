@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-container">
+    <h2>Delete Rental</h2>
+    <p>Are you sure you want to delete the rental of <strong>{{ rental.car }}</strong> from <strong>{{ rental.start_date }}</strong> to <strong>{{ rental.end_date }}</strong>?</p>
+    
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="button delete-button">Yes, Delete</button>
+        <a href="{% url 'my_rentals' %}" class="button">Cancel</a>
+    </form>
+</div>
+{% endblock %}

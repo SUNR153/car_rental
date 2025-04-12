@@ -26,7 +26,7 @@ def review_create(request):
         return redirect('/reviews/')
     cars = Car.objects.all()
     users = User.objects.all()
-    return render(request, 'reviews/review_form.html', {'cars': cars, 'users': users})
+    return render(request, 'reviews/review_create.html', {'cars': cars, 'users': users})
 
 def review_update(request, pk):
     review = get_object_or_404(Review, pk=pk)
@@ -39,11 +39,11 @@ def review_update(request, pk):
         return redirect(f'/reviews/{review.pk}/')
     cars = Car.objects.all()
     users = User.objects.all()
-    return render(request, 'reviews/review_form.html', {'review': review, 'cars': cars, 'users': users})
+    return render(request, 'reviews/review_update.html', {'review': review, 'cars': cars, 'users': users})
 
 def review_delete(request, pk):
     review = get_object_or_404(Review, pk=pk)
     if request.method == 'POST':
         review.delete()
         return redirect('/reviews/')
-    return render(request, 'reviews/review_confirm_delete.html', {'review': review})
+    return render(request, 'reviews/review_delete.html', {'review': review})

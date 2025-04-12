@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-container">
+    <h2>All Rentals</h2>
+    {% if rentals %}
+        <ul>
+            {% for rental in rentals %}
+                <li>
+                    {{ rental.car }} rented by {{ rental.renter }} from {{ rental.start_date }} to {{ rental.end_date }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No rentals found.</p>
+    {% endif %}
+</div>
+{% endblock %}

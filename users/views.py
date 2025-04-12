@@ -5,15 +5,15 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 def profile(request):
-    return render(request, 'profile.html')
+    return render(request, 'users/profile.html')
 
 def user_list(request):
     users = User.objects.all()
-    return render(request, 'profile.html', {'users': users})
+    return render(request, 'users/profile.html', {'users': users})
 
 def user_detail(request, pk):
     user = get_object_or_404(User, pk=pk)
-    return render(request, 'profile.html', {'user': user})
+    return render(request, 'users/profile.html', {'user': user})
 
 def user_create(request):
     if request.method == 'POST':
@@ -23,7 +23,7 @@ def user_create(request):
             return redirect('/users/')
     else:
         form = UserCreationForm()
-    return render(request, 'profile.html', {'form': form})
+    return render(request, 'users/profile.html', {'form': form})
 
 def user_update(request, pk):
     user = get_object_or_404(User, pk=pk)
@@ -31,11 +31,11 @@ def user_update(request, pk):
     if form.is_valid():
         form.save()
         return redirect(f'/users/{pk}/')
-    return render(request, 'profile.html', {'form': form})
+    return render(request, 'users/profile.html', {'form': form})
 
 def user_delete(request, pk):
     user = get_object_or_404(User, pk=pk)
     if request.method == 'POST':
         user.delete()
         return redirect('/users/')
-    return render(request, 'profile.html', {'user': user})
+    return render(request, 'users/profile.html', {'user': user})

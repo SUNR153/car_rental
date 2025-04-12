@@ -1,17 +1,14 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Car
 
-# Список всех машин
 def car_list(request):
     cars = Car.objects.all()
     return render(request, 'cars/car_list.html', {'cars': cars})
 
-# Информация об одной машине
 def car_detail(request, pk):
     car = get_object_or_404(Car, pk=pk)
-    return render(request, 'cars/car_detail.html', {'car': car})
+    return render(request, 'cars/car_detail.html', {'cars': car})
 
-# Добавление машины
 def car_create(request):
     if request.method == 'POST':
         brand = request.POST['brand']
@@ -27,9 +24,8 @@ def car_create(request):
             is_available=available
         )
         return redirect('/cars/')
-    return render(request, 'cars/car_form.html')
+    return render(request, 'cars/car_create.html')
 
-# Редактирование машины
 def car_update(request, pk):
     car = get_object_or_404(Car, pk=pk)
     if request.method == 'POST':
@@ -40,12 +36,11 @@ def car_update(request, pk):
         car.is_available = 'is_available' in request.POST
         car.save()
         return redirect(f'/cars/{car.pk}/')
-    return render(request, 'cars/car_form.html', {'car': car})
+    return render(request, 'cars/car_update.html', {'cars': car})
 
-# Удаление машины
 def car_delete(request, pk):
     car = get_object_or_404(Car, pk=pk)
     if request.method == 'POST':
         car.delete()
         return redirect('/cars/')
-    return render(request, 'cars/car_confirm_delete.html', {'car': car})
+    return render(request, 'cars/car_delete.html', {'cars': car})

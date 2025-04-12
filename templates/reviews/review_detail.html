@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-container">
+    <h2>Review Detail</h2>
+    <div class="review-card">
+        <h3>{{ review.car }}</h3>
+        <p><strong>By:</strong> {{ review.user }}</p>
+        <p><strong>Rating:</strong> {{ review.rating }}/5</p>
+        <p>{{ review.comment }}</p>
+    </div>
+    <a href="{% url 'review_update' review.pk %}" class="button">Edit</a>
+    <a href="{% url 'review_delete' review.pk %}" class="button delete-button">Delete</a>
+</div>
+{% endblock %}

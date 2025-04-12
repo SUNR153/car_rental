@@ -28,7 +28,7 @@ def rental_create(request):
         return redirect('/rentals/')
     cars = Car.objects.all()
     users = User.objects.all()
-    return render(request, 'rentals/rental_form.html', {'cars': cars, 'users': users})
+    return render(request, 'rentals/rental_create.html', {'cars': cars, 'users': users})
 
 def rental_update(request, pk):
     rental = get_object_or_404(Rental, pk=pk)
@@ -42,11 +42,11 @@ def rental_update(request, pk):
         return redirect(f'/rentals/{pk}/')
     cars = Car.objects.all()
     users = User.objects.all()
-    return render(request, 'rentals/rental_form.html', {'rental': rental, 'cars': cars, 'users': users})
+    return render(request, 'rentals/rental_update.html', {'rental': rental, 'cars': cars, 'users': users})
 
 def rental_delete(request, pk):
     rental = get_object_or_404(Rental, pk=pk)
     if request.method == 'POST':
         rental.delete()
         return redirect('/rentals/')
-    return render(request, 'rentals/rental_confirm_delete.html', {'rental': rental})
+    return render(request, 'rentals/rental_delete.html', {'rental': rental})

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-container">
+    <h2>My Rentals</h2>
+
+    <h3>Rented by Me</h3>
+    {% if my_rented %}
+        <ul>
+            {% for rental in my_rented %}
+                <li>{{ rental.car }} | {{ rental.start_date }} to {{ rental.end_date }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You haven't rented any cars yet.</p>
+    {% endif %}
+
+    <h3>Cars I Rent Out</h3>
+    {% if my_listed %}
+        <ul>
+            {% for rental in my_listed %}
+                <li>{{ rental.car }} | {{ rental.start_date }} to {{ rental.end_date }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Your cars haven't been rented yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

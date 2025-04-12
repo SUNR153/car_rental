@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-container">
+    <h2>Reviews</h2>
+    {% for review in reviews %}
+        <div class="review-card">
+            <h3>{{ review.car }}</h3>
+            <p><strong>By:</strong> {{ review.user }}</p>
+            <p><strong>Rating:</strong> {{ review.rating }}/5</p>
+            <p>{{ review.comment }}</p>
+            <a href="{% url 'review_detail' review.pk %}" class="button small">View</a>
+        </div>
+    {% empty %}
+        <p>No reviews yet.</p>
+    {% endfor %}
+</div>
+{% endblock %}

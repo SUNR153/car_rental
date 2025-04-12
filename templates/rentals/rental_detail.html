@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-container">
+    <h2>Rental Details</h2>
+    <ul>
+        <li><strong>Car:</strong> {{ rental.car }}</li>
+        <li><strong>Renter:</strong> {{ rental.renter }}</li>
+        <li><strong>Owner:</strong> {{ rental.owner }}</li>
+        <li><strong>Start Date:</strong> {{ rental.start_date }}</li>
+        <li><strong>End Date:</strong> {{ rental.end_date }}</li>
+        <li><strong>Status:</strong> {{ rental.status }}</li>
+    </ul>
+    <a href="{% url 'rental_update' rental.pk %}" class="button">Edit</a>
+    <a href="{% url 'rental_delete' rental.pk %}" class="button delete-button">Delete</a>
+</div>
+{% endblock %}
