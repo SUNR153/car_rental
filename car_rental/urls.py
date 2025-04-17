@@ -18,14 +18,16 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('users/', include('users.urls')),
+    path('', include('users.urls'), name='users'),
     path('', include('core.urls')), 
-    path('cars/', include('cars.urls')),
-    path('rentals/', include('rentals.urls')),
-    path('reviews/', include('reviews.urls')),
+    path('', include('cars.urls'), name='cars'),
+    path('', include('rentals.urls'), name='rentals'),
+    path('', include('reviews.urls'), name='reviews'),
+    path('logout/', LogoutView.as_view(template_name='auth/logout.html'), name='logout'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

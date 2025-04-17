@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-container">
+    <h2>You have been logged out</h2>
+    <p>Thank you for using CarRental!</p>
+    <a href="{% url 'login' %}" class="button">Log In Again</a>
+    <a href="{% url 'home' %}" class="button">Go to Home</a>
+</div>
+{% endblock %}
