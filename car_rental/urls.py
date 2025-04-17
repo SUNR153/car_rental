@@ -23,11 +23,12 @@ from django.contrib.auth.views import LogoutView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('users.urls'), name='users'),
-    path('', include('core.urls')), 
+    path('', include('core.urls'), name ='core'), 
     path('', include('cars.urls'), name='cars'),
     path('', include('rentals.urls'), name='rentals'),
     path('', include('reviews.urls'), name='reviews'),
     path('logout/', LogoutView.as_view(template_name='auth/logout.html'), name='logout'),
 ]
 
-urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+#urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)

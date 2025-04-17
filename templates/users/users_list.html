@@ -6,7 +6,7 @@
         {% for u in users %}
             <li>
                 {{ u.username }} - {{ u.email }}
-                <a href="{% url 'user_profile_detail' u.pk %}" class="button small">View</a>
+                <a href="{% url 'users:user_detail' u.pk %}" class="button small">View</a>
             </li>
         {% empty %}
             <li>No users found.</li>
