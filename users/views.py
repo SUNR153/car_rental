@@ -7,7 +7,9 @@ from .form import RegistrationForm, UserCreationForm, UserLoginForm
 User = get_user_model()
 
 def profile(request):
-    return render(request, 'users/profile.html')
+    return render(request, 'users/profile.html', {
+        'u': request.user
+    })
 
 def user_list(request):
     users = User.objects.all()

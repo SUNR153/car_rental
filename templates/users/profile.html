@@ -7,7 +7,7 @@
         <p><strong>Email:</strong> {{ user.email }}</p>
         <p><strong>First name:</strong> {{ user.first_name }}</p>
         <p><strong>Last name:</strong> {{ user.last_name }}</p>
-        <a href="{% url 'users:user_detail' %}" class="button">Edit Profile</a>
+        <a href="{% url 'users:user_update' u.pk%}" class="button">Edit Profile</a>
     </div>
 </div>
 {% endblock %}
