@@ -10,7 +10,7 @@
 <body>
     <header>
         <nav class="navbar">
-            <a href="{% url 'core:index' %}" class="nav-logo">VROOOM</a>
+            <a href="{% url 'core:index' %}"><img src="{% static 'image/logo.png' %}" alt="logo"></a>
             <div class="nav-links">
                 <a href="{% url 'cars:car_list' %}">Cars</a>
                 <a href="{% url 'rentals:rental_list' %}">Rentals</a>
