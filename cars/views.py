@@ -2,12 +2,12 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Car
 
 def car_list(request):
-    cars = Car.objects.all()
-    return render(request, 'cars/car_list.html')
+    car = Car.objects.all()
+    return render(request, 'cars/car_list.html', {'cars': car})
 
 def car_detail(request, pk):
     car = get_object_or_404(Car, pk=pk)
-    return render(request, 'cars/car_detail.html', {'cars': car})
+    return render(request, 'cars/car_details.html')
 
 def car_create(request):
     if request.method == 'POST':

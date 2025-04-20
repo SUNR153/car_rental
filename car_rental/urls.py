@@ -26,9 +26,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('cars.urls'), name='cars'),
     path('', include('users.urls'), name='users'),
-    path('', include('core.urls'), name ='core'), 
     path('', include('rentals.urls'), name='rentals'),
     path('', include('reviews.urls'), name='reviews'),
+    path('', include('core.urls'), name ='core'),
     path('logout/', LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('login/', auth_views.LoginView.as_view(), name='login'),
 
