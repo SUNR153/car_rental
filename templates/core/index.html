@@ -1,9 +1,29 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% load i18n %}
+
+{% block title %}{% trans "Welcome to VROOOM - Car Rental" %}{% endblock %}
+
 {% block content %}
-<div class="page-container">
-    <h2>Welcome to VROOOM</h2>
-    <p>Find the perfect car for your next trip. Browse our collection and rent easily online.</p>
-    <a href="{% url 'cars:car_list' %}" class="button">Browse Cars</a>
-</div>
+<section class="hero">
+    <div class="hero-content">
+        <h1>{% trans "Need a ride?" %}</h1>
+        <p>{% trans "Choose from a wide variety of cars and rent in seconds!" %}</p>
+        <a href="{% url 'cars:car_list' %}" class="btn btn-primary">{% trans "Browse Cars" %}</a>
+    </div>
+</section>
+
+<section class="features">
+    <div class="feature">
+        <h3>{% trans "Affordable Prices" %}</h3>
+        <p>{% trans "We offer the best prices on the market without hidden fees." %}</p>
+    </div>
+    <div class="feature">
+        <h3>{% trans "Trusted by Thousands" %}</h3>
+        <p>{% trans "Join thousands of happy customers who rent with us daily." %}</p>
+    </div>
+    <div class="feature">
+        <h3>{% trans "24/7 Support" %}</h3>
+        <p>{% trans "We’re always here to help, no matter the time or place." %}</p>
+    </div>
+</section>
 {% endblock %}

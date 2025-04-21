@@ -4,6 +4,7 @@
 <div class="page-container">
     <h2>{% trans "User Profile" %}</h2>
     <div class="profile-info">
+        <a href="{% url 'users:settings' %}">{% trans "Settings" %}</a>
         <p><strong>{% trans "Username:" %}</strong> {{ user.username }}</p>
         <p><strong>{% trans "Email:" %}</strong> {{ user.email }}</p>
         <p><strong>{% trans "First name:" %}</strong> {{ user.first_name }}</p>

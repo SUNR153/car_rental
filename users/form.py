@@ -1,87 +1,82 @@
-from django.contrib.auth.forms import UserCreationForm
 from django import forms
-from .models import User
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model, authenticate
+from .models import Profile
 
 User = get_user_model()
 
+# 🔹 Registration Form
 class RegistrationForm(UserCreationForm):
-    password1 = forms.CharField(widget=forms.PasswordInput)
-    password2 = forms.CharField(widget=forms.PasswordInput)
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={
+        'placeholder': 'Password',
+        'id': 'password-input'
+    }))
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs={
+        'placeholder': 'Repeat password',
+        'id': 'password-input'
+    }))
 
     class Meta:
-        model = get_user_model()
+        model = User
         fields = ['first_name', 'last_name', 'email', 'phone']
+        widgets = {
+            'first_name': forms.TextInput(attrs={'placeholder': 'First name'}),
+            'last_name': forms.TextInput(attrs={'placeholder': 'Last name'}),
+            'email': forms.EmailInput(attrs={'placeholder': 'Email'}),
+            'phone': forms.TextInput(attrs={'placeholder': 'Phone'}),
+        }
 
     def save(self, commit=True):
         user = super().save(commit=False)
-        user.username = f'{self.cleaned_data['first_name']}{self.cleaned_data['email']}'
+        user.username = f"{self.cleaned_data['first_name']}_{self.cleaned_data['email'].split('@')[0]}"
         if commit:
+            user.set_password(self.cleaned_data["password1"])  # ensures password is hashed
             user.save()
         return user
-    
-    def clean_password(self):
-        pass1 = self.cleaned_data.get('password1')
-        pass2 = self.cleaned_data.get('password2')
 
+    def clean(self):
+        cleaned_data = super().clean()
+        pass1 = cleaned_data.get('password1')
+        pass2 = cleaned_data.get('password2')
         if pass1 and pass2 and pass1 != pass2:
-            raise forms.ValidationError('check password')
-        return pass2
-    
-    def clean_name(self):
-        return self.cleaned_data['first_name']
-    
-    def clean_surname(self):
-        return self.cleaned_data['last_name']
-    
-    def __init__(self, *args, **kwargs):
-        super(RegistrationForm, self).__init__(*args, **kwargs)
-        self.fields['first_name'].widget.attrs['placeholder'] = 'first name'
-        self.fields['last_name'].widget.attrs['placeholder'] = 'Last name'
-        self.fields['email'].widget.attrs['placeholder'] = 'Email'
-        self.fields['phone'].widget.attrs['placeholder'] = 'phone'
-        self.fields['password1'].widget.attrs['placeholder'] = 'password'
-        self.fields['password2'].widget.attrs['placeholder'] = 'password'
-        
-        self.fields['password1'].widget.attrs['id'] = 'password-input'
-        self.fields['password2'].widget.attrs['id'] = 'password-input'
-    
+            raise forms.ValidationError('Passwords do not match.')
+        return cleaned_data
+
+# 🔹 Login Form
 class UserLoginForm(forms.Form):
-    email = forms.EmailField(label = 'email', required=True, max_length=254)
-    password = forms.CharField(label='paassword', widget=forms.PasswordInput)
+    email = forms.EmailField(label='Email', max_length=254, widget=forms.EmailInput(attrs={
+        'placeholder': 'Email',
+        'id': 'email-input'
+    }))
+    password = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={
+        'placeholder': 'Password',
+        'id': 'password-input'
+    }))
 
     def clean(self):
         email = self.cleaned_data.get('email')
         password = self.cleaned_data.get('password')
         user = authenticate(email=email, password=password)
         if not user:
-            raise forms.ValidationError('incorrecr password or email')
+            raise forms.ValidationError('Incorrect email or password.')
         return self.cleaned_data
-    
-    def __init__(self, *args, **kwargs):
-        super(UserLoginForm, self).__init__(*args, **kwargs)
-        self.fields['email'].widget.attrs['placeholder'] = 'email'
-        self.fields['password'].widget.attrs['placeholder'] = 'password'
-        
-        self.fields['password'].widget.attrs['id'] = 'password-input'
 
-from .models import Profile
-from django.contrib.auth.forms import PasswordChangeForm
-
+# 🔹 Profile Settings Form
 class ProfileSettingsForm(forms.ModelForm):
     THEME_CHOICES = [
-        ('light', 'light'),
-        ('dark', 'dark'),
+        ('light', '🌞 Light'),
+        ('dark', '🌙 Dark'),
     ]
 
     LANGUAGE_CHOICES = [
-        ('ru', 'ру Русский'),
         ('en', '🇺🇸 English'),
-        ('kz', 'кз Қазақша'),
+        ('ru', '🇷🇺 Russian'),
+        ('kz', '🇰🇿 Kazakh'),
     ]
 
-    theme = forms.ChoiceField(choices=THEME_CHOICES, widget=forms.Select())
-    language = forms.ChoiceField(choices=LANGUAGE_CHOICES, widget=forms.Select())
+    theme = forms.ChoiceField(choices=THEME_CHOICES)
+    language = forms.ChoiceField(choices=LANGUAGE_CHOICES)
+
     class Meta:
         model = Profile
         fields = ['avatar', 'theme', 'language']

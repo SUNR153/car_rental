@@ -1,157 +1,132 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Open+Sans&display=swap');
-
+/* Корневая цветовая палитра */
 :root {
-  --bg-color-light: #ffffff;
-  --bg-color-dark: #1a1a1a;
-  --text-color-light: #333;
-  --text-color-dark: #b30000;
   --primary-red: #b30000;
   --accent-red: #ff4d4d;
-  --card-bg-light: #fff;
-  --card-bg-dark: #2b2b2b;
+  --text-light: #ffffff;
+  --text-dark: #333333;
+  --bg-light: #f8f9fa;
+  --bg-dark: #1a1a1a;
 }
 
+/* Базовые стили */
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: var(--bg-color-light);
-  color: var(--text-color-light);
-  transition: all 0.3s ease;
+  background-color: var(--bg-light);
+  color: var(--text-dark);
 }
 
-body.dark {
-  background-color: var(--bg-color-dark);
-  color: var(--text-color-dark);
-}
-
-/* Headings */
-h1, h2, h3 {
-  font-family: 'Montserrat', sans-serif;
-  color: var(--primary-red);
-}
-
-/* Container */
-.container {
-  width: 90%;
-  max-width: 1200px;
-  margin: auto;
-  padding: 40px 0;
-}
-
-/* Toggle Theme Button */
-.toggle-theme {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background-color: var(--accent-red);
-  color: #fff;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s;
-}
-.toggle-theme:hover {
-  background-color: #cc0000;
-}
-
-/* Cards */
-.card {
-  background-color: var(--card-bg-light);
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  overflow: hidden;
-  margin-bottom: 30px;
-  transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
-}
-body.dark .card {
-  background-color: var(--card-bg-dark);
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-}
-
-.card img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.card-body {
-  padding: 20px;
-}
-
-.card-title {
-  font-size: 22px;
-  margin-bottom: 10px;
-  color: var(--primary-red);
-}
-
-.card-description {
-  font-size: 16px;
-  color: inherit;
-  margin-bottom: 20px;
-}
-
-/* Buttons */
-.btn {
-  display: inline-block;
-  padding: 10px 20px;
+/* Header и Footer в красном */
+header, footer {
   background-color: var(--primary-red);
-  color: #990000;
+  color: var(--text-light);
+  padding: 1rem 2rem;
+  text-align: center;
+}
+
+/* Навигация */
+nav a {
+  color: var(--text-light);
   text-decoration: none;
-  border-radius: 8px;
-  transition: background-color 0.3s;
+  margin: 0 1rem;
+  transition: color 0.2s;
 }
 
-.btn:hover {
-  background-color: #990000;
+nav a:hover {
+  color: var(--accent-red);
+  text-decoration: underline;
 }
 
-/* Form Styles */
-form {
-  background-color: var(--card-bg-light);
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-  transition: background-color 0.3s;
-}
-body.dark form {
-  background-color: var(--card-bg-dark);
+/* Основной контент */
+main {
+  padding: 2rem;
 }
 
-input, select, textarea {
-  width: 100%;
-  padding: 12px;
-  margin: 10px 0 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #fff;
-  font-family: 'Open Sans', sans-serif;
-  transition: border-color 0.3s;
-}
-body.dark input, body.dark select, body.dark textarea {
-  background-color: #444;
-  color: #fff;
-  border: 1px solid #666;
+/* Hero секция */
+.hero {
+  position: relative;
+  background: 
+    linear-gradient(rgba(179,0,0,0.6), rgba(179,0,0,0.6)),
+    url('/static/img/hero.jpg') center/cover no-repeat;
+  color: var(--text-light);
+  padding: 5rem 2rem;
+  text-align: center;
 }
 
-input:focus, select:focus, textarea:focus {
-  border-color: var(--primary-red);
-  outline: none;
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
 }
 
-/* Animation */
-.hidden {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
 }
-.fade-in {
-  opacity: 1;
-  transform: translateY(0);
+
+/* Кнопки */
+.btn {
+  padding: 0.7rem 1.5rem;
+  border: none;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: transform 0.2s;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background-color: var(--primary-red);
+  color: var(--text-light);
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-red);
+}
+
+/* Блок преимуществ */
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.feature {
+  max-width: 300px;
+  margin: 1rem;
+}
+
+/* Сообщения */
+.messages {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1.5rem;
+}
+
+.messages li {
+  padding: 0.8rem 1rem;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.messages .error {
+  background-color: #fde2e2;
+  color: #900;
+}
+
+.messages .success {
+  background-color: #e2f7e2;
+  color: #090;
+}
+
+/* Футер */
+footer {
+  margin-top: 3rem;
+  font-size: 0.9rem;
 }
