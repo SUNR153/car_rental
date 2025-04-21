@@ -20,15 +20,17 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth import views as auth_views
+from django.shortcuts import redirect
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('cars.urls'), name='cars'),
-    path('', include('users.urls'), name='users'),
-    path('', include('rentals.urls'), name='rentals'),
-    path('', include('reviews.urls'), name='reviews'),
+    path('users/', include('users.urls'), name='users'),
+    path('rewiews/', include('reviews.urls'), name='reviews'),
+    path('rentals/', include('rentals.urls'), name='rentals'),
     path('', include('core.urls'), name ='core'),
+    #path('', lambda request: redirect('cars:car_list')),
     path('logout/', LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('login/', auth_views.LoginView.as_view(), name='login'),
 

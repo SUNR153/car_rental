@@ -1,63 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Open+Sans&display=swap');
+
 :root {
-  --primary-color: #1F2A44;        /* Тёмно-синий */
-  --secondary-color: #D1D5DB;      /* Светло-серый */
-  --accent-color: #FBBF24;         /* Золотисто-жёлтый */
-  --background-color: #F3F4F6;     /* Фоновый серый */
-  --text-color: #111827;           /* Цвет текста */
-  --border-color: #E5E7EB;
-  --white-color: #FFFFFF;
+  --bg-color-light: #ffffff;
+  --bg-color-dark: #1a1a1a;
+  --text-color-light: #333;
+  --text-color-dark: #b30000;
+  --primary-red: #b30000;
+  --accent-red: #ff4d4d;
+  --card-bg-light: #fff;
+  --card-bg-dark: #2b2b2b;
 }
 
 body {
-  background-color: var(--background-color);
-  color: var(--text-color);
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color-light);
+  color: var(--text-color-light);
+  transition: all 0.3s ease;
 }
 
-.navbar {
-  background-color: var(--primary-color) !important;
+body.dark {
+  background-color: var(--bg-color-dark);
+  color: var(--text-color-dark);
 }
 
-.navbar-brand {
+/* Headings */
+h1, h2, h3 {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--primary-red);
+}
+
+/* Container */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 40px 0;
+}
+
+/* Toggle Theme Button */
+.toggle-theme {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: var(--accent-red);
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
   font-weight: bold;
-  font-size: 1.5rem;
+  transition: background-color 0.3s;
+}
+.toggle-theme:hover {
+  background-color: #cc0000;
 }
 
-.btn-primary {
-  background-color: var(--accent-color);
-  border-color: var(--accent-color);
-  color: var(--primary-color);
-  font-weight: 600;
-}
-
-.btn-primary:hover {
-  background-color: #facc15;
-  border-color: #facc15;
-  color: var(--primary-color);
-}
-
+/* Cards */
 .card {
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  background-color: var(--card-bg-light);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  overflow: hidden;
+  margin-bottom: 30px;
+  transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+}
+body.dark .card {
+  background-color: var(--card-bg-dark);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.card-body {
+  padding: 20px;
 }
 
 .card-title {
-  color: var(--primary-color);
-  font-weight: 600;
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: var(--primary-red);
 }
 
-.form-control,
-.form-select {
+.card-description {
+  font-size: 16px;
+  color: inherit;
+  margin-bottom: 20px;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: var(--primary-red);
+  color: #990000;
+  text-decoration: none;
   border-radius: 8px;
-  border: 1px solid var(--border-color);
+  transition: background-color 0.3s;
 }
 
-hr {
-  border-top: 1px solid var(--border-color);
+.btn:hover {
+  background-color: #990000;
 }
 
-h2, h3 {
-  color: var(--primary-color);
-  font-weight: 700;
+/* Form Styles */
+form {
+  background-color: var(--card-bg-light);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  transition: background-color 0.3s;
+}
+body.dark form {
+  background-color: var(--card-bg-dark);
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  font-family: 'Open Sans', sans-serif;
+  transition: border-color 0.3s;
+}
+body.dark input, body.dark select, body.dark textarea {
+  background-color: #444;
+  color: #fff;
+  border: 1px solid #666;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--primary-red);
+  outline: none;
+}
+
+/* Animation */
+.hidden {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-in {
+  opacity: 1;
+  transform: translateY(0);
 }

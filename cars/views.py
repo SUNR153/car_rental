@@ -3,7 +3,7 @@ from .models import Car
 
 def car_list(request):
     car = Car.objects.all()
-    return render(request, 'cars/car_list.html', {'cars': car})
+    return render(request, 'core/index.html', {'cars': car})
 
 def car_detail(request, pk):
     car = get_object_or_404(Car, pk=pk)

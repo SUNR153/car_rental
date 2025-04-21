@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+<div class="page-container">
+    <h2>{% trans "Profile Settings" %}</h2>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h3>{% trans "Appearance and Language" %}</h3>
+        {{ settings_form.as_p }}
+        <button type="submit" name="save_settings" class="button">{% trans "Save Settings" %}</button>
+    </form>
+
+    <hr>
+
+    <form method="post">
+        {% csrf_token %}
+        <h3>{% trans "Change Password" %}</h3>
+        {{ password_form.as_p }}
+        <button type="submit" name="change_password" class="button">{% trans "Update Password" %}</button>
+    </form>
+</div>
+{% endblock %}

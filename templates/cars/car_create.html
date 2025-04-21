@@ -1,11 +1,12 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block content %}
 <div class="form-container">
-    <h2>Add New Car</h2>
+    <h2>{% trans "Add new car" %}</h2>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Add Car</button>
+        <button type="submit">{% trans "Add car" %}</button>
     </form>
 </div>
 {% endblock %}

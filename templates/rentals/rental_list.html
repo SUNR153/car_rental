@@ -1,17 +1,23 @@
 {% extends "base.html" %}
+{% load i18n %}
+
 {% block content %}
 <div class="page-container">
-    <h2>All Rentals</h2>
+    <h2>{% trans "All Rentals" %}</h2>
+
     {% if rentals %}
-        <ul>
+        <ul class="rental-list">
             {% for rental in rentals %}
-                <li>
-                    {{ rental.car }} rented by {{ rental.renter }} from {{ rental.start_date }} to {{ rental.end_date }}
+                <li class="rental-item">
+                    <strong>{{ rental.car }}</strong> —
+                    {% trans "Rented by" %} <strong>{{ rental.renter }}</strong><br>
+                    {% trans "From" %} {{ rental.start_date }} {% trans "to" %} {{ rental.end_date }}<br>
+                    <a href="{% url 'rental_detail' rental.pk %}" class="button small">{% trans "Details" %}</a>
                 </li>
             {% endfor %}
         </ul>
     {% else %}
-        <p>No rentals found.</p>
+        <p>{% trans "No rentals found." %}</p>
     {% endif %}
 </div>
 {% endblock %}

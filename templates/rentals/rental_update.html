@@ -1,11 +1,18 @@
 {% extends "base.html" %}
+{% load i18n %}
+
 {% block content %}
 <div class="page-container">
-    <h2>Update Rental</h2>
-    <form method="post">
+    <h2>{% trans "Update Rental" %}</h2>
+
+    <form method="post" class="rental-form">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="button">Save Changes</button>
+
+        <div class="form-actions">
+            <button type="submit" class="button">{% trans "Save Changes" %}</button>
+            <a href="{% url 'my_rentals' %}" class="button cancel-button">{% trans "Cancel" %}</a>
+        </div>
     </form>
 </div>
 {% endblock %}

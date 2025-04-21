@@ -10,7 +10,7 @@ class RegistrationForm(UserCreationForm):
     password2 = forms.CharField(widget=forms.PasswordInput)
 
     class Meta:
-        model = User
+        model = get_user_model()
         fields = ['first_name', 'last_name', 'email', 'phone']
 
     def save(self, commit=True):
@@ -64,3 +64,24 @@ class UserLoginForm(forms.Form):
         self.fields['password'].widget.attrs['placeholder'] = 'password'
         
         self.fields['password'].widget.attrs['id'] = 'password-input'
+
+from .models import Profile
+from django.contrib.auth.forms import PasswordChangeForm
+
+class ProfileSettingsForm(forms.ModelForm):
+    THEME_CHOICES = [
+        ('light', 'light'),
+        ('dark', 'dark'),
+    ]
+
+    LANGUAGE_CHOICES = [
+        ('ru', 'ру Русский'),
+        ('en', '🇺🇸 English'),
+        ('kz', 'кз Қазақша'),
+    ]
+
+    theme = forms.ChoiceField(choices=THEME_CHOICES, widget=forms.Select())
+    language = forms.ChoiceField(choices=LANGUAGE_CHOICES, widget=forms.Select())
+    class Meta:
+        model = Profile
+        fields = ['avatar', 'theme', 'language']

@@ -1,12 +1,13 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block content %}
 <div class="page-container">
-    <h2>Contact Us</h2>
-    <p>If you have any questions or need help, feel free to reach out to us.</p>
+    <h2>{% trans "Contact Us" %}</h2>
+    <p>{% trans "If you have any questions or need help, feel free to reach out to us." %}</p>
     <ul>
-        <li>Email: support@carrental.com</li>
-        <li>Phone: +1 (123) 456-7890</li>
-        <li>Address: 123 Rental St, AutoCity, USA</li>
+        <li>{% trans "Email:" %} support@vrooom.com</li>
+        <li>{% trans "Phone:" %} +1 (123) 456-7890</li>
+        <li>{% trans "Address:" %} 123 Rental St, AutoCity, USA</li>
     </ul>
 </div>
 {% endblock %}

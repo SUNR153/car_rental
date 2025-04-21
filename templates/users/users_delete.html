@@ -1,12 +1,13 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block content %}
 <div class="page-container">
-    <h2>Delete Account</h2>
-    <p>Are you sure you want to delete the account for <strong>{{ user_obj.username }}</strong>?</p>
+    <h2>{% trans "Delete Account" %}</h2>
+    <p>{% trans "Are you sure you want to delete the account for" %} <strong>{{ user_obj.username }}</strong>?</p>
     <form method="post">
         {% csrf_token %}
-        <button type="submit" class="button danger">Yes, Delete</button>
-        <a href="{% url 'profile' %}" class="button">Cancel</a>
+        <button type="submit" class="button danger">{% trans "Yes, Delete" %}</button>
+        <a href="{% url 'profile' %}" class="button">{% trans "Cancel" %}</a>
     </form>
 </div>
 {% endblock %}

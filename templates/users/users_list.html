@@ -1,15 +1,16 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block content %}
 <div class="page-container">
-    <h2>All Users</h2>
+    <h2>{% trans "All Users" %}</h2>
     <ul class="user-list">
         {% for u in users %}
             <li>
                 {{ u.username }} - {{ u.email }}
-                <a href="{% url 'users:user_detail' u.pk %}" class="button small">View</a>
+                <a href="{% url 'users:user_detail' u.pk %}" class="button small">{% trans "View" %}</a>
             </li>
         {% empty %}
-            <li>No users found.</li>
+            <li>{% trans "No users found." %}</li>
         {% endfor %}
     </ul>
 </div>

@@ -1,18 +1,19 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block content %}
 <div class="page-container">
     <h2>{{ car.make }} {{ car.model }}</h2>
     <div class="car-detail">
         <img src="{{ car.image.url }}" alt="{{ car.make }} {{ car.model }}">
-        <p><strong>Year:</strong> {{ car.year }}</p>
-        <p><strong>Price:</strong> ${{ car.price_per_day }} / day</p>
-        <p><strong>Condition:</strong> {{ car.condition }}</p>
-        <p><strong>Mileage:</strong> {{ car.mileage }} km</p>
-        <p><strong>Fuel:</strong> {{ car.fuel_type }}</p>
-        <p><strong>Transmission:</strong> {{ car.transmission }}</p>
-        <p><strong>Seats:</strong> {{ car.seats }}</p>
-        <p><strong>Features:</strong> {{ car.features }}</p>
-        <a href="{% url 'rental_create' car.id %}" class="button">Rent This Car</a>
+        <p><strong>{% trans "Year:" %}</strong> {{ car.year }}</p>
+        <p><strong>{% trans "Price:" %}</strong> ${{ car.price_per_day }} / day</p>
+        <p><strong>{% trans "Condition:" %}</strong> {{ car.condition }}</p>
+        <p><strong>{% trans "Miliage:" %}</strong> {{ car.mileage }} km</p>
+        <p><strong>{% trans "Fuel:" %}</strong> {{ car.fuel_type }}</p>
+        <p><strong>{% trans "Transmission:" %}</strong> {{ car.transmission }}</p>
+        <p><strong>{% trans "Seats:" %}</strong> {{ car.seats }}</p>
+        <p><strong>{% trans "Fearures:" %}</strong> {{ car.features }}</p>
+        <a href="{% url 'rental_create' car.id %}" class="button">{% trans "Rent this car" %}</a>
     </div>
 </div>
 {% endblock %}

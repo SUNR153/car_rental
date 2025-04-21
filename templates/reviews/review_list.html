@@ -1,17 +1,20 @@
 {% extends "base.html" %}
+{% load i18n %}
+
 {% block content %}
 <div class="page-container">
-    <h2>Reviews</h2>
+    <h2>{% trans "Reviews" %}</h2>
+
     {% for review in reviews %}
         <div class="review-card">
             <h3>{{ review.car }}</h3>
-            <p><strong>By:</strong> {{ review.user }}</p>
-            <p><strong>Rating:</strong> {{ review.rating }}/5</p>
+            <p><strong>{% trans "By" %}:</strong> {{ review.user }}</p>
+            <p><strong>{% trans "Rating" %}:</strong> {{ review.rating }}/5</p>
             <p>{{ review.comment }}</p>
-            <a href="{% url 'review_detail' review.pk %}" class="button small">View</a>
+            <a href="{% url 'review_detail' review.pk %}" class="button small">{% trans "View" %}</a>
         </div>
     {% empty %}
-        <p>No reviews yet.</p>
+        <p>{% trans "No reviews yet." %}</p>
     {% endfor %}
 </div>
 {% endblock %}

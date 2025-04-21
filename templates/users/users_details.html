@@ -1,9 +1,10 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block content %}
 <div class="page-container">
-    <h2>User Info</h2>
-    <p><strong>Username:</strong> {{ user_obj.username }}</p>
-    <p><strong>Email:</strong> {{ user_obj.email }}</p>
-    <p><strong>Full Name:</strong> {{ user_obj.first_name }} {{ user_obj.last_name }}</p>
+    <h2>{% trans "User Info" %}</h2>
+    <p><strong>{% trans "Username:" %}</strong> {{ user_obj.username }}</p>
+    <p><strong>{% trans "Email:" %}</strong> {{ user_obj.email }}</p>
+    <p><strong>{% trans "Full Name:" %}</strong> {{ user_obj.first_name }} {{ user_obj.last_name }}</p>
 </div>
 {% endblock %}

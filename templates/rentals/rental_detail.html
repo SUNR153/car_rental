@@ -1,16 +1,23 @@
 {% extends "base.html" %}
+{% load i18n %}
+
 {% block content %}
 <div class="page-container">
-    <h2>Rental Details</h2>
-    <ul>
-        <li><strong>Car:</strong> {{ rental.car }}</li>
-        <li><strong>Renter:</strong> {{ rental.renter }}</li>
-        <li><strong>Owner:</strong> {{ rental.owner }}</li>
-        <li><strong>Start Date:</strong> {{ rental.start_date }}</li>
-        <li><strong>End Date:</strong> {{ rental.end_date }}</li>
-        <li><strong>Status:</strong> {{ rental.status }}</li>
+    <h2>{% trans "Rental Details" %}</h2>
+
+    <ul class="rental-details">
+        <li><strong>{% trans "Car:" %}</strong> {{ rental.car }}</li>
+        <li><strong>{% trans "Renter:" %}</strong> {{ rental.renter }}</li>
+        <li><strong>{% trans "Owner:" %}</strong> {{ rental.owner }}</li>
+        <li><strong>{% trans "Start Date:" %}</strong> {{ rental.start_date }}</li>
+        <li><strong>{% trans "End Date:" %}</strong> {{ rental.end_date }}</li>
+        <li><strong>{% trans "Status:" %}</strong> {{ rental.status }}</li>
     </ul>
-    <a href="{% url 'rental_update' rental.pk %}" class="button">Edit</a>
-    <a href="{% url 'rental_delete' rental.pk %}" class="button delete-button">Delete</a>
+
+    <div class="button-group">
+        <a href="{% url 'rental_update' rental.pk %}" class="button">{% trans "Edit" %}</a>
+        <a href="{% url 'rental_delete' rental.pk %}" class="button delete-button">{% trans "Delete" %}</a>
+        <a href="{% url 'my_rentals' %}" class="button back-button">{% trans "Back to My Rentals" %}</a>
+    </div>
 </div>
 {% endblock %}

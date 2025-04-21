@@ -1,13 +1,19 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block content %}
 <div class="page-container">
-    <h2>Delete Rental</h2>
-    <p>Are you sure you want to delete the rental of <strong>{{ rental.car }}</strong> from <strong>{{ rental.start_date }}</strong> to <strong>{{ rental.end_date }}</strong>?</p>
+    <h2>{% trans "Delete Rental" %}</h2>
+    
+    <p>
+        {% blocktrans with car=rental.car start=rental.start_date end=rental.end_date %}
+            Are you sure you want to delete the rental of <strong>{{ car }}</strong> from <strong>{{ start }}</strong> to <strong>{{ end }}</strong>?
+        {% endblocktrans %}
+    </p>
     
     <form method="post">
         {% csrf_token %}
-        <button type="submit" class="button delete-button">Yes, Delete</button>
-        <a href="{% url 'my_rentals' %}" class="button">Cancel</a>
+        <button type="submit" class="button delete-button">{% trans "Yes, Delete" %}</button>
+        <a href="{% url 'my_rentals' %}" class="button">{% trans "Cancel" %}</a>
     </form>
 </div>
 {% endblock %}

@@ -1,25 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ request.user.profile.language|default:'en' }}">
 <head>
     {% load static %}
+    {% load i18n %}
     <meta charset="UTF-8">
     <title>Car Rental System</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Стили -->
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
-<body>
+<body class="{{ request.user.profile.theme|default:'light' }}">
     <header>
         <nav class="navbar">
-            <a href="{% url 'core:index' %}"><img src="{% static 'image/logo.png' %}" alt="logo"></a>
+            <a href="{% url 'core:index' %}"><img src="{% static 'image/logo.png' %}", height="65"></a>
             <div class="nav-links">
-                <a href="{% url 'cars:car_list' %}">Cars</a>
+                <a href="{% url 'cars:car_list' %}">{% trans "Cars" %}</a>
+
                 {% if user.is_authenticated %}
-                    <a href="{% url 'users:profile' %}">Profile</a>
-                    <a href="{% url 'users:register' %}">Register</a>
-                {% else %}
-                    <a href="{% url 'users:login' %}">Login</a>
-                    <a href="{% url 'users:logout' %}">Logout</a>
-                {% endif %}
+                <a href="{% url 'users:profile' %}">{% trans "Profile" %}</a>
+                <!--<a href="{% url 'users:settings' %}">{% trans "Settings" %}</a>-->
+                <a href="{% url 'users:logout' %}">{% trans "Logout" %}</a>
+                    {% else %}
+                    <a href="{% url 'users:register' %}">{% trans "Register" %}</a>
+                    <a href="{% url 'users:login' %}">{% trans "Login" %}</a>
+                    {% endif %}
             </div>
         </nav>
     </header>
@@ -32,11 +37,37 @@
                 {% endfor %}
             </ul>
         {% endif %}
+
         {% block content %}{% endblock %}
     </main>
 
     <footer>
         <p>&copy; 2025 VROOOM. All rights reserved.</p>
     </footer>
+
+    {% if user.is_authenticated %}
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const toggleBtn = document.getElementById("theme-toggle");
+            const body = document.body;
+
+            toggleBtn?.addEventListener("click", () => {
+                const newTheme = body.classList.contains("light") ? "dark" : "light";
+                body.classList.remove("light", "dark");
+                body.classList.add(newTheme);
+
+                // Отправка нового значения темы на сервер
+                fetch("{% url 'users:toggle_theme' %}", {
+                    method: "POST",
+                    headers: {
+                        "X-CSRFToken": "{{ csrf_token }}",
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ theme: newTheme })
+                });
+            });
+        });
+    </script>
+    {% endif %}
 </body>
 </html>

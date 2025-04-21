@@ -7,9 +7,9 @@ class CarForm(forms.ModelForm):
         fields = ['brand', 'model', 'year', 'price_per_day', 'is_available']
 
         widgets = {
-            'brand': forms.TextInput(attrs={'placeholder': 'Марка'}),
-            'model': forms.TextInput(attrs={'placeholder': 'Модель'}),
-            'year': forms.NumberInput(attrs={'placeholder': 'Год'}),
-            'price_per_day': forms.NumberInput(attrs={'placeholder': 'Цена за день'}),
+            'brand': forms.TextInput(attrs={'placeholder': 'Brand'}),
+            'model': forms.TextInput(attrs={'placeholder': 'Model'}),
+            'year': forms.NumberInput(attrs={'placeholder': 'Year'}),
+            'price_per_day': forms.NumberInput(attrs={'placeholder': 'Price per day'}),
             'is_available': forms.CheckboxInput(),
         }
