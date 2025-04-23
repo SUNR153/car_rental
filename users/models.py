@@ -28,8 +28,9 @@ class Profile(models.Model):
     driver_license = models.CharField(max_length=20, blank=True, null=True)
     avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
     is_verified = models.BooleanField(default=False)
-    theme = models.CharField(max_length=10, choices=[('light', 'Light'), ('dark', 'Dark')], default='light')
+    theme = models.CharField(max_length=20, default='light')  # light / dark
     language = models.CharField(max_length=10, default='en')
+    background = models.ImageField(upload_to='backgrounds/', blank=True, null=True)
 
     def __str__(self):
         return f"{self.user.username} ({self.user.get_role_display()})"

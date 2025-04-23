@@ -17,6 +17,8 @@ from django.utils.http import urlsafe_base64_decode
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 import json
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.timezone import now, timedelta
 
 from .form import RegistrationForm, UserLoginForm, ProfileSettingsForm
 from .models import Profile
@@ -71,6 +73,7 @@ def delete_inactive_users():
     User.objects.filter(is_active=False, date_joined__lt=limit).delete()
 
 # 🔹 Registration with email activation
+@csrf_protect
 def register_view(request):
     if request.method == 'POST':
         phone = request.POST.get('phone')
@@ -194,9 +197,20 @@ def activate_account(request, uidb64, token):
     except (TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None
 
-    if user and default_token_generator.check_token(user, token):
-        user.is_active = True
-        user.save()
-        return render(request, 'users/activation_success.html')
+    if user:
+        if user.is_active:
+            return render(request, 'users/fail_activate.html', {'error': 'Account is already activated.'})
+
+        if user and acc_activ_token.check_token(user, token):
+            user.is_active = True
+            user.save()
+            return render(request, 'users/success_activate.html')
+        else:
+            # токен не прошёл проверку – возможно, истёк
+            return render(request, 'users/fail_activate.html', {
+                'error': 'Activation link expired. Please register again.'
+            })
     else:
-        return render(request, 'users/fail_activate.html')
+        return render(request, 'users/fail_activate.html', {
+            'error': 'Invalid activation link.'
+        })

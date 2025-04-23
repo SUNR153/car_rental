@@ -30,8 +30,7 @@ urlpatterns = [
 ]
 
 urlpatterns += i18n_patterns(
-    path('admin/', admin.site.urls),
-    path('', include('cars.urls'), name='cars'),
+    path('cars/', include('cars.urls'), name='cars'),
     path('users/', include('users.urls'), name='users'),
     path('rewiews/', include('reviews.urls'), name='reviews'),
     path('rentals/', include('rentals.urls'), name='rentals'),

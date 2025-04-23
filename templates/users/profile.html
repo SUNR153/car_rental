@@ -1,16 +1,24 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load static i18n %}
+{% block title %}{% trans "User Profile" %}{% endblock %}
 {% block content %}
-<div class="page-container">
-    <h2>{% trans "User Profile" %}</h2>
-    <div class="profile-info">
-        <a href="{% url 'users:settings' %}">{% trans "Settings" %}</a>
-        
-        <p><strong>{% trans "First name:" %}</strong> {{ user.first_name }}</p>
-        <p><strong>{% trans "Last name:" %}</strong> {{ user.last_name }}</p>
-        <p><strong>{% trans "Username:" %}</strong> {{ user.username }}</p>
-        <p><strong>{% trans "Email:" %}</strong> {{ user.email }}</p>
-        <a href="{% url 'users:user_update' user.pk %}" class="button">{% trans "Edit Profile" %}</a>
-    </div>
+<div class="page-container profile-page">
+  <h2>{% trans "User Profile" %}</h2>
+  <div class="profile-info">
+    <a href="{% url 'users:settings' %}">{% trans "Settings" %}</a>
+    {% if user.profile.avatar %}
+      <img src="{{ user.profile.avatar.url }}" alt="{% trans "Avatar" %}" class="avatar-img">
+    {% else %}
+      <img src="{% static 'image/default-avatar.png' %}" alt="{% trans "Default Avatar" %}" class="avatar-img", height="50">
+    {% endif %}
+    <p><strong>{% trans "First name:" %}</strong> {{ user.first_name }}</p>
+    <p><strong>{% trans "Last name:" %}</strong> {{ user.last_name }}</p>
+    <p><strong>{% trans "Username:" %}</strong> {{ user.username }}</p>
+    <p><strong>{% trans "Email:" %}</strong> {{ user.email }}</p>
+    <p><strong>{% trans "Driver's License:" %}</strong>
+      {% if user.profile.has_driver_license %}{% trans "Yes" %}{% else %}{% trans "No" %}{% endif %}
+    </p>
+    <a href="{% url 'users:user_update' user.pk %}" class="btn btn-primary">{% trans "Edit Profile" %}</a>
+  </div>
 </div>
 {% endblock %}

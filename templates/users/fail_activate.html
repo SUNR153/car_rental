@@ -1,4 +1,9 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block content %}
-<p>Время активации аккаунта истекло. Пройдите регистрацию заново.</p>
+  <div class="activation-fail">
+    <h2>{% trans "Account Activation Failed" %}</h2>
+    <p>{% trans "The activation link has expired or is invalid. Please register again." %}</p>
+    <a href="{% url 'users:register' %}" class="btn btn-primary">{% trans "Register Again" %}</a>
+  </div>
 {% endblock %}

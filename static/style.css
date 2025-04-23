@@ -1,5 +1,4 @@
-
-/* Корневая цветовая палитра */
+/* === Цветовая палитра === */
 :root {
   --primary-red: #b30000;
   --accent-red: #ff4d4d;
@@ -10,7 +9,7 @@
   --btn-hover: #ff0000;
 }
 
-/* Базовые стили */
+/* === Базовые стили === */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
@@ -18,16 +17,24 @@ body {
   background-color: var(--bg-light);
   color: var(--text-dark);
   line-height: 1.6;
-}
-
-/* Убираем анимации до подгрузки */
-body:not(.theme-transition) {
-  transition: none !important;
-}
-
-/* Анимация при смене темы */
-body.theme-transition {
   transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+body.theme-dark {
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+}
+
+body.theme-light {
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+}
+
+/* Фон-картинка */
+body.has-background {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 /* Header и Footer */
@@ -36,6 +43,12 @@ header, footer {
   color: var(--text-light);
   padding: 1rem 2rem;
   text-align: center;
+}
+
+body.theme-dark header,
+body.theme-dark footer {
+  background-color: #333333;
+  color: var(--text-light);
 }
 
 /* Навигация */
@@ -50,6 +63,14 @@ nav a:hover {
   color: var(--accent-red);
   text-decoration: underline;
   transform: scale(1.05);
+}
+
+body.theme-dark nav a {
+  color: var(--text-light);
+}
+
+body.theme-dark nav a:hover {
+  color: var(--accent-red);
 }
 
 /* Основной контент */
@@ -102,6 +123,15 @@ main {
   background-color: var(--accent-red);
 }
 
+body.theme-dark .btn-primary {
+  background-color: #444;
+  color: var(--text-light);
+}
+
+body.theme-dark .btn-primary:hover {
+  background-color: #666;
+}
+
 /* Блок преимуществ */
 .features {
   display: flex;
@@ -139,10 +169,14 @@ main {
   color: #090;
 }
 
-/* Футер */
-footer {
-  margin-top: 3rem;
-  font-size: 0.9rem;
+body.theme-dark .messages .error {
+  background-color: #4e1a1a;
+  color: #ffb3b3;
+}
+
+body.theme-dark .messages .success {
+  background-color: #1a4e1a;
+  color: #b3ffb3;
 }
 
 /* Контейнер пароля */
@@ -156,7 +190,7 @@ footer {
 
 .password-wrapper input {
   width: 100%;
-  padding-right: 40px;
+  padding-right: 2.5rem;
   transition: background-color 0.3s ease;
 }
 
@@ -174,7 +208,6 @@ footer {
   transform: scale(1.2);
 }
 
-/* Фокусировка на поле пароля */
 .password-wrapper input[type="password"],
 .password-wrapper input[type="text"] {
   width: 100%;
@@ -185,49 +218,4 @@ footer {
 .password-wrapper input[type="password"]:focus,
 .password-wrapper input[type="text"]:focus {
   background-color: #f0f0f0;
-}
-
-/* ===== Темы ===== */
-body.dark {
-  background-color: #121212;
-  color: #ffffff;
-}
-
-/* Светлая тема */
-body.light {
-  background-color: #ffffff;
-  color: #000000;
-}
-
-body.dark header,
-body.dark footer {
-  background-color: #333333;
-  color: var(--text-light);
-}
-
-body.dark nav a {
-  color: var(--text-light);
-}
-
-body.dark nav a:hover {
-  color: var(--accent-red);
-}
-
-body.dark .btn-primary {
-  background-color: #444;
-  color: var(--text-light);
-}
-
-body.dark .btn-primary:hover {
-  background-color: #666;
-}
-
-body.dark .messages .error {
-  background-color: #4e1a1a;
-  color: #ffb3b3;
-}
-
-body.dark .messages .success {
-  background-color: #1a4e1a;
-  color: #b3ffb3;
 }

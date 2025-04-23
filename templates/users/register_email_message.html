@@ -1,6 +1,7 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block content %}
 <p>
-    Спасибо за регистрацию! На вашу почту {{email}}  было отправлено сообщение для подтверждения регистрации.
+    {% trans "Thank you for registering! A confirmation message has been sent to your email address" {{email}} %}.
 </p>
 {% endblock %}

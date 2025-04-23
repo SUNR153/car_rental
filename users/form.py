@@ -63,10 +63,6 @@ class UserLoginForm(forms.Form):
 
 # 🔹 Profile Settings Form
 class ProfileSettingsForm(forms.ModelForm):
-    THEME_CHOICES = [
-        ('light', '🌞 Light'),
-        ('dark', '🌙 Dark'),
-    ]
 
     LANGUAGE_CHOICES = [
         ('en', '🇺🇸 English'),
@@ -74,9 +70,12 @@ class ProfileSettingsForm(forms.ModelForm):
         ('kz', '🇰🇿 Kazakh'),
     ]
 
-    theme = forms.ChoiceField(choices=THEME_CHOICES)
-    language = forms.ChoiceField(choices=LANGUAGE_CHOICES)
+    language = forms.ChoiceField(
+        choices=LANGUAGE_CHOICES,
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+    avatar = forms.ImageField(required=False)
 
     class Meta:
         model = Profile
-        fields = ['avatar', 'theme', 'language']
+        fields = ['avatar', 'background', 'language']
