@@ -4,11 +4,16 @@
 <div class="page-container">
     <h2>{% trans "Profile Settings" %}</h2>
 
-    <form method="post" enctype="multipart/form-data">
+    <form method="post">
         {% csrf_token %}
-        <h3>{% trans "Appearance and Language" %}</h3>
-        {{ settings_form.as_p }}
-        <button type="submit" name="save_settings" class="button">{% trans "Save Settings" %}</button>
+        <h3>{% trans "Change Language" %}</h3>
+        <label for="language">{% trans "Language" %}</label>
+        <select name="language" id="language">
+            <option value="en" {% if request.user.profile.language == 'en' %}selected{% endif %}>English</option>
+            <option value="ru" {% if request.user.profile.language == 'ru' %}selected{% endif %}>Русский</option>
+            <option value="kz" {% if request.user.profile.language == 'kz' %}selected{% endif %}>Қазақша</option>
+        </select>
+        <button type="submit" class="button">{% trans "Save Language" %}</button>
     </form>
 
     <hr>

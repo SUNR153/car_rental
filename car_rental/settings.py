@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -118,8 +119,8 @@ LANGUAGE_CODE = 'en-us'
 
 gettext = lambda s: s
 LANGUAGES = (
-    ('ru', gettext('Russian')),
     ('en', gettext('English')),
+    ('ru', gettext('Russian')),
     ('kk', gettext('Kazakh')),
 )
 

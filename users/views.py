@@ -12,6 +12,11 @@ from django.template.loader import render_to_string
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.http import JsonResponse
 from django.utils.translation import activate
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.http import urlsafe_base64_decode
+from django.shortcuts import render, redirect
+from django.http import JsonResponse
+import json
 
 from .form import RegistrationForm, UserLoginForm, ProfileSettingsForm
 from .models import Profile
@@ -156,12 +161,14 @@ def profile_settings(request):
 @csrf_exempt
 @login_required
 def toggle_theme(request):
-    if request.method == 'POST':
-        import json
+    if request.method == "POST":
         data = json.loads(request.body)
-        request.user.profile.theme = data.get('theme', 'light')
-        request.user.profile.save()
-        return JsonResponse({'status': 'ok'})
+        theme = data.get("theme")
+        if theme in ["light", "dark"]:
+            request.user.profile.theme = theme
+            request.user.profile.save()
+            return JsonResponse({"status": "ok"})
+    return JsonResponse({"status": "error"}, status=400)
 
 # 🔹 Language switcher
 @csrf_protect
@@ -180,10 +187,6 @@ def change_language(request):
 
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
-from django.contrib.auth.tokens import default_token_generator
-from django.utils.http import urlsafe_base64_decode
-from django.shortcuts import render, redirect
-
 def activate_account(request, uidb64, token):
     try:
         uid = urlsafe_base64_decode(uidb64).decode()
@@ -196,4 +199,4 @@ def activate_account(request, uidb64, token):
         user.save()
         return render(request, 'users/activation_success.html')
     else:
-        return render(request, 'users/activation_failed.html')
+        return render(request, 'users/fail_activate.html')

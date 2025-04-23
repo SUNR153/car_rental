@@ -1,3 +1,4 @@
+
 /* Корневая цветовая палитра */
 :root {
   --primary-red: #b30000;
@@ -6,6 +7,7 @@
   --text-dark: #333333;
   --bg-light: #f8f9fa;
   --bg-dark: #1a1a1a;
+  --btn-hover: #ff0000;
 }
 
 /* Базовые стили */
@@ -15,9 +17,20 @@ body {
   padding: 0;
   background-color: var(--bg-light);
   color: var(--text-dark);
+  line-height: 1.6;
 }
 
-/* Header и Footer в красном */
+/* Убираем анимации до подгрузки */
+body:not(.theme-transition) {
+  transition: none !important;
+}
+
+/* Анимация при смене темы */
+body.theme-transition {
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* Header и Footer */
 header, footer {
   background-color: var(--primary-red);
   color: var(--text-light);
@@ -30,12 +43,13 @@ nav a {
   color: var(--text-light);
   text-decoration: none;
   margin: 0 1rem;
-  transition: color 0.2s;
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
 nav a:hover {
   color: var(--accent-red);
   text-decoration: underline;
+  transform: scale(1.05);
 }
 
 /* Основной контент */
@@ -71,7 +85,7 @@ main {
   border-radius: 0.3rem;
   cursor: pointer;
   font-size: 1rem;
-  transition: transform 0.2s;
+  transition: transform 0.2s ease, background-color 0.3s ease;
 }
 
 .btn:active {
@@ -129,4 +143,91 @@ main {
 footer {
   margin-top: 3rem;
   font-size: 0.9rem;
+}
+
+/* Контейнер пароля */
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  max-width: 300px;
+  margin-top: 1rem;
+}
+
+.password-wrapper input {
+  width: 100%;
+  padding-right: 40px;
+  transition: background-color 0.3s ease;
+}
+
+.password-wrapper .toggle-password {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 1.2rem;
+  color: var(--primary-red);
+  transition: transform 0.2s ease;
+}
+
+.password-wrapper .toggle-password:hover {
+  transform: scale(1.2);
+}
+
+/* Фокусировка на поле пароля */
+.password-wrapper input[type="password"],
+.password-wrapper input[type="text"] {
+  width: 100%;
+  padding-right: 2.5rem;
+  transition: opacity 0.3s ease;
+}
+
+.password-wrapper input[type="password"]:focus,
+.password-wrapper input[type="text"]:focus {
+  background-color: #f0f0f0;
+}
+
+/* ===== Темы ===== */
+body.dark {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+/* Светлая тема */
+body.light {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+body.dark header,
+body.dark footer {
+  background-color: #333333;
+  color: var(--text-light);
+}
+
+body.dark nav a {
+  color: var(--text-light);
+}
+
+body.dark nav a:hover {
+  color: var(--accent-red);
+}
+
+body.dark .btn-primary {
+  background-color: #444;
+  color: var(--text-light);
+}
+
+body.dark .btn-primary:hover {
+  background-color: #666;
+}
+
+body.dark .messages .error {
+  background-color: #4e1a1a;
+  color: #ffb3b3;
+}
+
+body.dark .messages .success {
+  background-color: #1a4e1a;
+  color: #b3ffb3;
 }

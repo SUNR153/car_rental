@@ -21,9 +21,15 @@ from django.conf.urls.static import static
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth import views as auth_views
 from django.shortcuts import redirect
+from django.conf.urls.i18n import i18n_patterns
 
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('i18n/', include('django.conf.urls.i18n')),
+]
+
+urlpatterns += i18n_patterns(
     path('admin/', admin.site.urls),
     path('', include('cars.urls'), name='cars'),
     path('users/', include('users.urls'), name='users'),
@@ -33,8 +39,7 @@ urlpatterns = [
     #path('', lambda request: redirect('cars:car_list')),
     path('logout/', LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('login/', auth_views.LoginView.as_view(), name='login'),
-
-]
+)
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)

@@ -1,27 +1,49 @@
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from .models import User, Profile
 
+# 🔹 Inline Profile admin (embedded in User)
+class ProfileInline(admin.StackedInline):  # можно заменить на TabularInline, если хочешь таблицей
+    model = Profile
+    can_delete = False
+    verbose_name_plural = 'Profile'
+    fk_name = 'user'
+    extra = 0
+
+
+# 🔹 Custom User admin
 @admin.register(User)
-class CustomUserAdmin(UserAdmin):
-    list_display = ('username', 'email', 'role', 'is_staff', 'is_active') 
-    list_filter = ('role', 'is_staff', 'is_active')  
-    search_fields = ('username', 'email')
-    ordering = ('username',) 
+class CustomUserAdmin(BaseUserAdmin):
+    inlines = [ProfileInline]  # 👈 подключаем встроенный профиль
+
+    list_display = ('username', 'email', 'role', 'is_staff', 'is_active')
+    list_filter = ('role', 'is_staff', 'is_active')
+    search_fields = ('username', 'email', 'phone')
+    ordering = ('username',)
+
     fieldsets = (
         (None, {'fields': ('username', 'email', 'password')}),
-        ('Permissions', {'fields': ('role', 'is_staff', 'is_active', 'is_superuser')}),
+        ('Personal info', {'fields': ('first_name', 'last_name', 'phone')}),
+        ('Permissions', {'fields': ('role', 'is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
         ('Important dates', {'fields': ('last_login', 'date_joined')}),
     )
+
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'email', 'password1', 'password2', 'role'),
+            'fields': ('username', 'email', 'first_name', 'last_name', 'phone', 'role', 'password1', 'password2'),
         }),
     )
 
+    def get_inline_instances(self, request, obj=None):
+        if obj:
+            return super().get_inline_instances(request, obj)
+        return []
+
+
+# 🔹 Profile admin (for standalone view)
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', 'phone', 'is_verified')
-    list_filter = ('is_verified',)
-    search_fields = ('user__username', 'phone')
+    list_display = ('user', 'phone', 'is_verified', 'theme', 'language')
+    list_filter = ('is_verified', 'theme', 'language')
+    search_fields = ('user__username', 'user__email', 'phone')

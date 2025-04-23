@@ -5,10 +5,11 @@
     <h2>{% trans "User Profile" %}</h2>
     <div class="profile-info">
         <a href="{% url 'users:settings' %}">{% trans "Settings" %}</a>
-        <p><strong>{% trans "Username:" %}</strong> {{ user.username }}</p>
-        <p><strong>{% trans "Email:" %}</strong> {{ user.email }}</p>
+        
         <p><strong>{% trans "First name:" %}</strong> {{ user.first_name }}</p>
         <p><strong>{% trans "Last name:" %}</strong> {{ user.last_name }}</p>
+        <p><strong>{% trans "Username:" %}</strong> {{ user.username }}</p>
+        <p><strong>{% trans "Email:" %}</strong> {{ user.email }}</p>
         <a href="{% url 'users:user_update' user.pk %}" class="button">{% trans "Edit Profile" %}</a>
     </div>
 </div>

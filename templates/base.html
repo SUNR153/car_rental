@@ -1,3 +1,4 @@
+<!-- base.html -->
 <!DOCTYPE html>
 <html lang="{{ request.LANGUAGE_CODE|default:'en' }}">
 <head>
@@ -6,16 +7,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Car Rental{% endblock %}</title>
-
-    <!-- CSS -->
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
-<body class="{{ request.user.profile.theme|default:'light' }}">
-    <!-- Шапка -->
+<body class="theme-transition {{ request.user.profile.theme|default:'light' }}">
     <header>
         <nav class="navbar">
             <a href="{% url 'core:index' %}" class="logo">
-                <img src="{% static 'image/logo.png' %}" height="50" alt="Logo">
+                <img src="{% static 'image/logo.png' %}" height="50" alt="VROOOM">
             </a>
             <div class="nav-links">
                 <a href="{% url 'cars:car_list' %}">{% trans "Cars" %}</a>
@@ -27,10 +25,20 @@
                     <a href="{% url 'users:login' %}">{% trans "Login" %}</a>
                 {% endif %}
             </div>
+            
+            {% if user.is_authenticated %}
+            <button id="theme-toggle" class="toggle-theme" data-theme="{{ request.user.profile.theme }}">
+                <li class="nav-item">
+                    <span class="nav-link theme-toggle">
+                        <i class="bi bi-moon-stars-fill"></i>
+                    </span>
+                </li>
+                {% if request.user.profile.theme == 'dark' %}☀️{% else %}🌙{% endif %}
+            </button>            
+            {% endif %}
         </nav>
     </header>
 
-    <!-- Основной контент -->
     <main class="main-content">
         {% if messages %}
             <ul class="messages">
@@ -39,39 +47,13 @@
                 {% endfor %}
             </ul>
         {% endif %}
-
         {% block content %}{% endblock %}
     </main>
 
-    <!-- Подвал -->
     <footer>
         <p>&copy; 2025 VROOOM. All rights reserved.</p>
     </footer>
 
-    <!-- Скрипт для переключения темы -->
-    {% if user.is_authenticated %}
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const toggleBtn = document.getElementById("theme-toggle");
-            const body = document.body;
-
-            toggleBtn?.addEventListener("click", () => {
-                const newTheme = body.classList.contains("light") ? "dark" : "light";
-                body.classList.remove("light", "dark");
-                body.classList.add(newTheme);
-
-                fetch("{% url 'users:toggle_theme' %}", {
-                    method: "POST",
-                    headers: {
-                        "X-CSRFToken": "{{ csrf_token }}",
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({ theme: newTheme })
-                });
-            });
-        });
-    </script>
-    <script src="{% static 'scrypts.js' %}"></script>
-    {% endif %} 
+    <script src="{% static 'scripts.js' %}"></script>
 </body>
 </html>

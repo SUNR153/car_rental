@@ -1,11 +1,29 @@
 {% extends "base.html" %}
 {% load i18n %}
+
 {% block content %}
 <div class="form-container">
     <h2>{% trans "Register" %}</h2>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+
+                {% if field.name == "password" or field.name == "password1" or field.name == "password2" %}
+                    <div class="password-wrapper">
+                        {{ field }}
+                        <span class="toggle-password" onclick="togglePasswordVisibility(this)">👁️</span>
+                    </div>
+                {% else %}
+                    {{ field }}
+                {% endif %}
+
+                {% if field.errors %}
+                    <div class="error">{{ field.errors }}</div>
+                {% endif %}
+            </div>
+        {% endfor %}
         <button type="submit">{% trans "Register" %}</button>
     </form>
     <p>{% trans "Already have an account?" %} <a href="{% url 'users:login' %}">{% trans "Login" %}</a></p>
