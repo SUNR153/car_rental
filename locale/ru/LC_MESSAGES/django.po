@@ -1,3 +1,16 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: car_rental\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-04-24 00:00+0000\n"
+"PO-Revision-Date: 2025-04-24 00:00+0000\n"
+"Last-Translator: Зарип <your@email.com>\n"
+"Language-Team: Russian\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
 msgid "The install worked successfully! Congratulations!"
 msgstr "Установка прошла успешно! Поздравляем!"
 
