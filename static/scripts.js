@@ -1,93 +1,147 @@
-// Показывать/скрывать пароль
-function togglePasswordVisibility(icon) {
-    const input = icon.closest('.password-wrapper').querySelector('input');
-    if (input.type === 'password') {
-        input.type = 'text';
-        icon.textContent = '🙈';
-    } else {
-        input.type = 'password';
-        icon.textContent = '👁️';
-    }
-}
-
-// Установка/сброс фонового изображения
-function applyBackground(url) {
-    document.body.style.backgroundImage = `url(${url})`;
-    document.body.classList.add('has-background');
-}
-function clearBackground() {
-    document.body.style.backgroundImage = '';
-    document.body.classList.remove('has-background');
-}
-
-// Глобальная функция для inline onclick и для слушателя
-function toggleTheme() {
-    // Определяем текущую тему
-    const isDark = document.body.classList.contains('theme-dark');
-    const newTheme = isDark ? 'theme-light' : 'theme-dark';
-    applyTheme(newTheme);
-}
-
-// Применить тему и сменить логотип
-function applyTheme(theme) {
-    document.body.classList.remove('theme-light', 'theme-dark');
-    document.body.classList.add(theme);
-    localStorage.setItem('theme', theme);
-    changeLogo(theme);
-}
-
-// Меняем логотип по data-атрибутам
-function changeLogo(theme) {
-    const logo = document.getElementById('logo');
-    if (!logo) return;
-    const lightSrc = logo.getAttribute('data-light-src');
-    const darkSrc  = logo.getAttribute('data-dark-src');
-    logo.src = (theme === 'theme-dark' ? darkSrc : lightSrc) || logo.src;
-}
-
-// Обработка загрузки нового фона
-function handleBackgroundUpload(event) {
-    const file = event.target.files[0];
-    if (!file) return;
-    if (!file.type.startsWith('image/')) {
-        return alert('Пожалуйста, выберите изображение!');
-    }
-    if (file.size > 5 * 1024 * 1024) {
-        return alert('Файл слишком большой. Максимум 5MB.');
-    }
-    const reader = new FileReader();
-    reader.onload = e => {
-        applyBackground(e.target.result);
-        localStorage.setItem('userBackground', e.target.result);
+// Основной модуль приложения
+const App = (function() {
+    // Конфигурация
+    const config = {
+        maxFileSize: 5 * 1024 * 1024, // 5MB
+        defaultTheme: 'theme-light'
     };
-    reader.readAsDataURL(file);
-}
 
-// Вешаем обработчики после загрузки DOM
-document.addEventListener('DOMContentLoaded', () => {
-    // 1) фон
-    const savedBg = localStorage.getItem('userBackground');
-    if (savedBg) applyBackground(savedBg);
+    // Инициализация приложения
+    function init() {
+        initPasswordToggle();
+        initTheme();
+        initBackground();
+    }
 
-    // 2) тема
-    const savedTheme = localStorage.getItem('theme') || 'theme-light';
-    applyTheme(savedTheme);
+    // Функционал переключения видимости пароля
+    function initPasswordToggle() {
+        document.querySelectorAll('.toggle-password').forEach(button => {
+            const input = button.closest('.password-wrapper')?.querySelector('input');
+            const icon = button.querySelector('i');
+            
+            if (!input || !icon) return;
 
-    // 3) глазики
-    document.querySelectorAll('.toggle-password')
-            .forEach(icon => icon.addEventListener('click', () => togglePasswordVisibility(icon)));
+            // Инициализация ARIA-атрибутов
+            button.setAttribute('aria-pressed', 'false');
+            button.setAttribute('role', 'button');
+            button.setAttribute('tabindex', '0');
+            
+            // Обработчик клика
+            button.addEventListener('click', () => togglePassword(input, icon, button));
+            
+            // Поддержка клавиатуры
+            button.addEventListener('keydown', (e) => {
+                if (['Enter', ' '].includes(e.key)) {
+                    e.preventDefault();
+                    togglePassword(input, icon, button);
+                }
+            });
+        });
+    }
 
-    // 4) кнопка переключения темы
-    const btn = document.getElementById('toggle-theme');
-    if (btn) btn.addEventListener('click', toggleTheme);
+    function togglePassword(input, icon, button) {
+        const isVisible = input.type === 'text';
+        input.type = isVisible ? 'password' : 'text';
+        
+        // Переключаем иконки Font Awesome
+        icon.classList.toggle('fa-eye-slash', !isVisible);
+        icon.classList.toggle('fa-eye', isVisible);
+        
+        // Обновляем ARIA-атрибуты
+        button.setAttribute('aria-pressed', String(!isVisible));
+        button.setAttribute('aria-label', 
+            isVisible ? 'Показать пароль' : 'Скрыть пароль');
+        
+        input.focus();
+    }
 
-    // 5) загрузка и сброс фона
-    const inp = document.getElementById('background-input');
-    if (inp) inp.addEventListener('change', handleBackgroundUpload);
-    const reset = document.getElementById('reset-background');
-    if (reset) reset.addEventListener('click', () => {
+    // Функционал темы
+    function initTheme() {
+        // Применяем сохраненную тему или тему по умолчанию
+        applyTheme(localStorage.getItem('theme') || config.defaultTheme);
+        
+        // Вешаем обработчик на кнопку переключения темы
+        document.getElementById('toggle-theme')?.addEventListener('click', toggleTheme);
+    }
+
+    function toggleTheme() {
+        const isDark = document.body.classList.contains('theme-dark');
+        applyTheme(isDark ? 'theme-light' : 'theme-dark');
+    }
+
+    function applyTheme(theme) {
+        document.body.classList.remove('theme-light', 'theme-dark');
+        document.body.classList.add(theme);
+        localStorage.setItem('theme', theme);
+        updateLogo(theme);
+    }
+
+    function updateLogo(theme) {
+        const logo = document.getElementById('logo');
+        if (!logo) return;
+        
+        const newSrc = theme === 'theme-dark' 
+            ? logo.dataset.darkSrc 
+            : logo.dataset.lightSrc;
+        
+        if (newSrc) logo.src = newSrc;
+    }
+
+    // Функционал фона
+    function initBackground() {
+        // Восстанавливаем сохраненный фон
+        const savedBg = localStorage.getItem('userBackground');
+        if (savedBg) applyBackground(savedBg);
+        
+        // Обработчики для загрузки фона
+        document.getElementById('background-input')?.addEventListener('change', handleBackgroundUpload);
+        document.getElementById('reset-background')?.addEventListener('click', resetBackground);
+    }
+
+    function handleBackgroundUpload(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        
+        if (!file.type.startsWith('image/')) {
+            alert('Пожалуйста, выберите изображение!');
+            return;
+        }
+        
+        if (file.size > config.maxFileSize) {
+            alert(`Файл слишком большой. Максимум ${config.maxFileSize / (1024 * 1024)}MB.`);
+            return;
+        }
+        
+        const reader = new FileReader();
+        reader.onload = e => {
+            applyBackground(e.target.result);
+            localStorage.setItem('userBackground', e.target.result);
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function applyBackground(url) {
+        document.body.style.backgroundImage = `url(${url})`;
+        document.body.classList.add('has-background');
+    }
+
+    function resetBackground() {
+        document.body.style.backgroundImage = '';
+        document.body.classList.remove('has-background');
         localStorage.removeItem('userBackground');
-        clearBackground();
         alert('Фон сброшен!');
-    });
-});
+    }
+
+    // Публичные методы
+    return {
+        init,
+        togglePasswordVisibility: togglePassword,
+        toggleTheme,
+        applyTheme,
+        applyBackground,
+        resetBackground
+    };
+})();
+
+// Инициализация приложения после загрузки DOM
+document.addEventListener('DOMContentLoaded', () => App.init());

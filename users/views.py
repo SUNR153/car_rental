@@ -12,12 +12,11 @@ from django.template.loader import render_to_string
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.http import JsonResponse
 from django.utils.translation import activate
-from django.contrib.auth.tokens import default_token_generator
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.http import urlsafe_base64_decode
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 import json
-from django.contrib.auth.tokens import default_token_generator
 from django.utils.timezone import now, timedelta
 
 from .form import RegistrationForm, UserLoginForm, ProfileSettingsForm
@@ -27,22 +26,18 @@ from .token import TokenGenerator
 User = get_user_model()
 acc_activ_token = TokenGenerator()
 
-# 🔹 User Profile Page
 @login_required
 def profile(request):
     return render(request, 'users/profile.html', {'u': request.user})
 
-# 🔹 View all users (admin use)
 def user_list(request):
     users = User.objects.all()
     return render(request, 'users/users_list.html', {'users': users})
 
-# 🔹 View single user (admin use)
 def user_detail(request, pk):
     user = get_object_or_404(User, pk=pk)
     return render(request, 'users/users_details.html', {'user': user})
 
-# 🔹 Create user (admin use)
 def user_create(request):
     form = RegistrationForm(request.POST or None)
     if form.is_valid():
@@ -50,7 +45,6 @@ def user_create(request):
         return redirect('users:user_list')
     return render(request, 'users/users_create.html', {'form': form})
 
-# 🔹 Update user (admin use)
 def user_update(request, pk):
     user = get_object_or_404(User, pk=pk)
     form = RegistrationForm(request.POST or None, instance=user)
@@ -59,7 +53,6 @@ def user_update(request, pk):
         return redirect('users:user_detail', pk=pk)
     return render(request, 'users/users_update.html', {'form': form})
 
-# 🔹 Delete user (admin use)
 def user_delete(request, pk):
     user = get_object_or_404(User, pk=pk)
     if request.method == 'POST':
@@ -67,12 +60,10 @@ def user_delete(request, pk):
         return redirect('users:user_list')
     return render(request, 'users/users_delete.html', {'user': user})
 
-# 🔹 Auto-delete inactive users
 def delete_inactive_users():
     limit = timezone.now() - timezone.timedelta(minutes=15)
     User.objects.filter(is_active=False, date_joined__lt=limit).delete()
 
-# 🔹 Registration with email activation
 @csrf_protect
 def register_view(request):
     if request.method == 'POST':
@@ -117,7 +108,6 @@ def register_view(request):
 
     return render(request, 'users/register.html', {'form': form})
 
-# 🔹 Login view
 def login_view(request):
     form = UserLoginForm(request.POST or None)
     if form.is_valid():
@@ -131,12 +121,10 @@ def login_view(request):
             messages.error(request, 'Invalid email or password.')
     return render(request, 'users/login.html', {'form': form})
 
-# 🔹 Logout view
 def logout_view(request):
     logout(request)
     return redirect('users:login')
 
-# 🔹 Profile settings (theme, language, password, avatar)
 @login_required
 def profile_settings(request):
     profile = request.user.profile
@@ -192,11 +180,11 @@ def change_language(request):
 
 def activate_account(request, uidb64, token):
     try:
-        uid = urlsafe_base64_decode(uidb64).decode()
+        uid = force_str(urlsafe_base64_decode(uidb64))
         user = User.objects.get(pk=uid)
     except (TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None
-
+    print(user)
     if user:
         if user.is_active:
             return render(request, 'users/fail_activate.html', {'error': 'Account is already activated.'})
@@ -206,7 +194,6 @@ def activate_account(request, uidb64, token):
             user.save()
             return render(request, 'users/success_activate.html')
         else:
-            # токен не прошёл проверку – возможно, истёк
             return render(request, 'users/fail_activate.html', {
                 'error': 'Activation link expired. Please register again.'
             })

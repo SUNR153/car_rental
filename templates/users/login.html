@@ -1,28 +1,46 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n static %}
 
 {% block title %}{% trans "Login" %}{% endblock %}
+
 {% block content %}
 <div class="form-container">
     <h2>{% trans "Login" %}</h2>
-    <form method="post">
+    <form method="post" novalidate>
         {% csrf_token %}
+        
         {% for field in form %}
-            <div class="form-group">
-                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                {% if field.name == "password" %}
-                    <div class="password-wrapper">
-                        {{ field }}
-                        <span class="toggle-password" onclick="togglePasswordVisibility(this)">👁️</span>
-                    </div>
-                {% else %}
+        <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            
+            {% if field.name == "password" %}
+                <div class="password-wrapper">
                     {{ field }}
-                {% endif %}
-                {{ field.errors }}
-            </div>
+                    <button type="button" class="toggle-password" aria-label="{% trans 'Show password' %}">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            {% else %}
+                {{ field }}
+            {% endif %}
+            
+            {% if field.errors %}
+                <div class="error">{{ field.errors }}</div>
+            {% endif %}
+        </div>
         {% endfor %}
-        <button type="submit" class="btn btn-primary">{% trans "Login" %}</button>
+        
+        <div class="form-footer">
+            <button type="submit" class="btn btn-primary">{% trans "Login" %}</button>
+        </div>
     </form>
-    <p>{% trans "Don't have an account?" %} <a href="{% url 'users:register' %}">{% trans "Register" %}</a></p>
+    
+    <p class="auth-redirect">
+        {% trans "Don't have an account?" %} 
+        <a href="{% url 'users:register' %}">{% trans "Register" %}</a>
+    </p>
 </div>
+
+<!-- Подключаем общий JS для переключения пароля -->
+<script src="{% static 'scripts.js' %}"></script>
 {% endblock %}

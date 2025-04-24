@@ -13,7 +13,7 @@ urlpatterns = [
     # 👤 User Profile & Settings
     path('profile/', views.profile, name='profile'),
     path('settings/', views.profile_settings, name='settings'),
-    path('toggle_theme/', views.toggle_theme, name='toggle_theme'),
+    path('toggle-theme/', views.toggle_theme, name='toggle-theme'),
     path('change-language/', views.change_language, name='change_language'),
 
     # ⚙️ User Management (Admin use)

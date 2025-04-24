@@ -1,5 +1,6 @@
-/* === Цветовая палитра === */
+/* ================ Глобальные переменные ================ */
 :root {
+  /* Цветовая палитра */
   --primary-red: #b30000;
   --accent-red: #ff4d4d;
   --text-light: #ffffff;
@@ -7,56 +8,86 @@
   --bg-light: #f8f9fa;
   --bg-dark: #1a1a1a;
   --btn-hover: #ff0000;
+  
+  /* Размеры и отступы */
+  --base-padding: 1rem;
+  --large-padding: 2rem;
+  --border-radius: 0.3rem;
+  
+  /* Анимации */
+  --transition-fast: 0.2s ease;
+  --transition-medium: 0.3s ease;
+  --transition-slow: 0.5s ease;
 }
 
-/* === Базовые стили === */
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* ================ Базовые стили ================ */
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  background-color: var(--bg-light);
-  color: var(--text-dark);
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
   line-height: 1.6;
-  transition: background-color 0.5s ease, color 0.5s ease;
-}
-
-body.theme-dark {
-  background-color: var(--bg-dark);
-  color: var(--text-light);
-}
-
-body.theme-light {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   background-color: var(--bg-light);
   color: var(--text-dark);
+  transition: background-color var(--transition-slow), color var(--transition-slow);
 }
 
-/* Фон-картинка */
-body.has-background {
+/* ================ Темы ================ */
+.theme-dark {
+  --bg-light: #1a1a1a;
+  --text-dark: #ffffff;
+  --primary-red: #333333;
+  --accent-red: #666;
+}
+
+.theme-light {
+  --bg-light: #f8f9fa;
+  --text-dark: #333333;
+  --primary-red: #b30000;
+  --accent-red: #ff4d4d;
+}
+
+/* ================ Фоновое изображение ================ */
+.has-background {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  background-attachment: fixed;
 }
 
-/* Header и Footer */
+/* ================ Структура страницы ================ */
 header, footer {
   background-color: var(--primary-red);
   color: var(--text-light);
-  padding: 1rem 2rem;
+  padding: var(--base-padding) var(--large-padding);
   text-align: center;
 }
 
-body.theme-dark header,
-body.theme-dark footer {
-  background-color: #333333;
-  color: var(--text-light);
+main {
+  flex: 1;
+  padding: var(--large-padding);
 }
 
-/* Навигация */
+/* ================ Навигация ================ */
+nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 0.5rem 0;
+}
+
 nav a {
   color: var(--text-light);
   text-decoration: none;
-  margin: 0 1rem;
-  transition: color 0.3s ease, transform 0.3s ease;
+  transition: color var(--transition-medium), transform var(--transition-fast);
+  padding: 0.3rem 0;
 }
 
 nav a:hover {
@@ -65,48 +96,44 @@ nav a:hover {
   transform: scale(1.05);
 }
 
-body.theme-dark nav a {
-  color: var(--text-light);
-}
-
-body.theme-dark nav a:hover {
-  color: var(--accent-red);
-}
-
-/* Основной контент */
-main {
-  padding: 2rem;
-}
-
-/* Hero секция */
+/* ================ Hero секция ================ */
 .hero {
   position: relative;
   background: 
     linear-gradient(rgba(179,0,0,0.6), rgba(179,0,0,0.6)),
     url('/static/img/hero.jpg') center/cover no-repeat;
   color: var(--text-light);
-  padding: 5rem 2rem;
+  padding: 3rem 1rem;
   text-align: center;
+  margin-bottom: 2rem;
 }
 
 .hero h1 {
-  font-size: 3rem;
+  font-size: clamp(2rem, 5vw, 3rem);
   margin-bottom: 1rem;
 }
 
 .hero p {
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
   margin-bottom: 2rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* Кнопки */
+/* ================ Кнопки ================ */
 .btn {
+  display: inline-block;
   padding: 0.7rem 1.5rem;
   border: none;
-  border-radius: 0.3rem;
+  border-radius: var(--border-radius);
   cursor: pointer;
   font-size: 1rem;
-  transition: transform 0.2s ease, background-color 0.3s ease;
+  text-decoration: none;
+  text-align: center;
+  transition: 
+    transform var(--transition-fast),
+    background-color var(--transition-medium);
 }
 
 .btn:active {
@@ -116,106 +143,130 @@ main {
 .btn-primary {
   background-color: var(--primary-red);
   color: var(--text-light);
-  text-decoration: none;
 }
 
 .btn-primary:hover {
   background-color: var(--accent-red);
 }
 
-body.theme-dark .btn-primary {
-  background-color: #444;
-  color: var(--text-light);
-}
-
-body.theme-dark .btn-primary:hover {
-  background-color: #666;
-}
-
-/* Блок преимуществ */
+/* ================ Карточки преимуществ ================ */
 .features {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
   margin-top: 3rem;
-  text-align: center;
 }
 
 .feature {
-  max-width: 300px;
-  margin: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  transition: transform var(--transition-medium);
 }
 
-/* Сообщения */
+.feature:hover {
+  transform: translateY(-5px);
+}
+
+/* ================ Сообщения ================ */
 .messages {
   list-style: none;
   padding: 0;
-  margin-bottom: 1.5rem;
+  margin: 0 0 1.5rem;
 }
 
 .messages li {
   padding: 0.8rem 1rem;
-  border-radius: 4px;
+  border-radius: var(--border-radius);
   margin-bottom: 0.5rem;
+  border-left: 4px solid transparent;
 }
 
 .messages .error {
-  background-color: #fde2e2;
-  color: #900;
+  background-color: color-mix(in srgb, var(--primary-red) 10%, transparent);
+  color: color-mix(in srgb, var(--primary-red) 80%, black);
+  border-left-color: var(--primary-red);
 }
 
 .messages .success {
-  background-color: #e2f7e2;
-  color: #090;
+  background-color: color-mix(in srgb, #00b300 10%, transparent);
+  color: color-mix(in srgb, #00b300 80%, black);
+  border-left-color: #00b300;
 }
 
-body.theme-dark .messages .error {
-  background-color: #4e1a1a;
-  color: #ffb3b3;
+/* ================ Формы и поля ввода ================ */
+.form-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-body.theme-dark .messages .success {
-  background-color: #1a4e1a;
-  color: #b3ffb3;
+.theme-dark .form-container {
+  background: rgba(30, 30, 30, 0.9);
 }
 
-/* Контейнер пароля */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
 .password-wrapper {
   position: relative;
   display: flex;
   align-items: center;
-  max-width: 300px;
-  margin-top: 1rem;
 }
 
 .password-wrapper input {
   width: 100%;
   padding-right: 2.5rem;
-  transition: background-color 0.3s ease;
+  transition: background-color var(--transition-medium);
 }
 
-.password-wrapper .toggle-password {
+.password-wrapper input:focus {
+  background-color: color-mix(in srgb, var(--bg-light) 90%, var(--accent-red));
+  outline: 2px solid var(--accent-red);
+}
+
+.toggle-password {
   position: absolute;
   right: 10px;
   cursor: pointer;
   user-select: none;
   font-size: 1.2rem;
   color: var(--primary-red);
-  transition: transform 0.2s ease;
+  background: none;
+  border: none;
+  transition: transform var(--transition-fast);
+  padding: 0.3rem;
 }
 
-.password-wrapper .toggle-password:hover {
+.toggle-password:hover {
   transform: scale(1.2);
 }
 
-.password-wrapper input[type="password"],
-.password-wrapper input[type="text"] {
-  width: 100%;
-  padding-right: 2.5rem;
-  transition: opacity 0.3s ease;
+/* ================ Адаптивность ================ */
+@media (max-width: 768px) {
+  header, footer {
+    padding: var(--base-padding);
+  }
+  
+  main {
+    padding: var(--base-padding);
+  }
+  
+  .hero {
+    padding: 2rem 1rem;
+  }
 }
 
-.password-wrapper input[type="password"]:focus,
-.password-wrapper input[type="text"]:focus {
-  background-color: #f0f0f0;
+/* ================ Утилитарные классы ================ */
+.text-center {
+  text-align: center;
 }
+
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mt-4 { margin-top: 2rem; }

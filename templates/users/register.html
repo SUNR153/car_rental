@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n static %}
 
 {% block content %}
 <div class="form-container">
@@ -7,25 +7,35 @@
     <form method="post">
         {% csrf_token %}
         {% for field in form %}
-            <div class="form-group">
-                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-
-                {% if field.name == "password" or field.name == "password1" or field.name == "password2" %}
-                    <div class="password-wrapper">
-                        {{ field }}
-                        <span class="toggle-password" onclick="togglePasswordVisibility(this)">👁️</span>
-                    </div>
-                {% else %}
+        <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            
+            {% if field.name == "password" or field.name == "password1" or field.name == "password2" %}
+                <div class="password-wrapper">
                     {{ field }}
-                {% endif %}
-
-                {% if field.errors %}
-                    <div class="error">{{ field.errors }}</div>
-                {% endif %}
-            </div>
+                    <button type="button" class="toggle-password" aria-label="{% trans 'Show password' %}">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            {% else %}
+                {{ field }}
+            {% endif %}
+            
+            {% if field.errors %}
+                <div class="error">{{ field.errors }}</div>
+            {% endif %}
+        </div>
         {% endfor %}
-        <button type="submit">{% trans "Register" %}</button>
+        
+        <button type="submit" class="btn btn-primary">{% trans "Register" %}</button>
     </form>
-    <p>{% trans "Already have an account?" %} <a href="{% url 'users:login' %}">{% trans "Login" %}</a></p>
+    
+    <p class="mt-3">
+        {% trans "Already have an account?" %} 
+        <a href="{% url 'users:login' %}">{% trans "Login" %}</a>
+    </p>
 </div>
+
+<!-- Подключаем JS в конце body -->
+<script src="{% static 'scripts.js' %}"></script>
 {% endblock %}
