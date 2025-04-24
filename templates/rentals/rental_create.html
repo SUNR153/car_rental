@@ -1,12 +1,46 @@
-{% extends "base.html" %}
-{% load i18n %}
+{% extends 'base.html' %}
+{% load static i18n %}
+
 {% block content %}
-<div class="page-container">
-    <h2>{% trans "Create Rental" %}</h2>
-    <form method="post">
+<div class="container">
+    <h2>{% trans "Rent" %} {{ car.brand }} {{ car.model }}</h2>
+    
+    <form method="post" id="rentalForm">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="button">{% trans "Submit Rental" %}</button>
+        
+        <div class="form-group">
+            <label for="start_date">{% trans "Start Date" %}:</label>
+            <input type="date" name="start_date" id="start_date" 
+                   value="{{ default_start }}" class="form-control" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="end_date">{% trans "End Date" %}:</label>
+            <input type="date" name="end_date" id="end_date" 
+                   value="{{ default_end }}" class="form-control" required>
+        </div>
+        
+        <div class="form-group">
+            <label>{% trans "Rental Price" %}:</label>
+            <div id="total-price" class="alert alert-info">
+                {% trans "Select dates to calculate" %}
+            </div>
+            <input type="hidden" name="total_price" id="total_price">
+        </div>
+        
+        <!-- Pass price to JS -->
+        <div id="price-data" data-price-per-day="{{ car.price_per_day }}"></div>
+        
+        <button type="submit" class="btn btn-primary">
+            {% trans "Book Now" %}
+        </button>
+        
+        <a href="{% url 'cars:car_detail' car.id %}" class="btn btn-secondary ml-2">
+            {% trans "Back to Car" %}
+        </a>
     </form>
 </div>
+
+<!-- Include separate JS file -->
+<script src="{% static 'scripts.js' %}"></script>
 {% endblock %}

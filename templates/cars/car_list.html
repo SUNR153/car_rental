@@ -5,16 +5,18 @@
 <div class="page-container">
     <h2>{% trans "Available cars" %}</h2>
     <div class="card-grid">
-        {% for car in cars %}
+        {% for car in car %}
         <div class="card">
-            <img src="{% media 'image/camaro.png' %}" alt="{{ car.make }} {{ car.model }}">
+            <img src="{{ car.image.url }}" alt="{{ car.make }} {{ car.model }}" class="car-image">
             <h3>{{ car.make }} {{ car.model }}</h3>
             <p><strong>{% trans "Price:" %}</strong> ${{ car.price_per_day }} / day</p>
-            <a href="{% url 'car_detail' car.id %}" class="button">{% trans "View car" %}</a>
+            <a href="{% url 'cars:car_detail' car.id %}" class="button">{% trans "View car" %}</a>
+            <a href="{% url 'cars:car_create' %}" class="button">{% trans "new post" %}</a>
         </header>
         </div>
         {% empty %}
         <p>{% trans "No cars available at the moment." %}</p>
+        <a href="{% url 'cars:car_create' %}" class="button">{% trans "new post" %}</a>
         {% endfor %}
     </div>
 </div>

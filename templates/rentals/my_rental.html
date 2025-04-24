@@ -1,29 +1,18 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% load i18n %}
 {% block content %}
-<div class="page-container">
-    <h2>{% trans "My Rentals" %}</h2>
-
-    <h3>{% trans "Rented by Me" %}</h3>
-    {% if my_rented %}
-        <ul>
-            {% for rental in my_rented %}
-                <li>{{ rental.car }} | {{ rental.start_date }} {% trans "to" %} {{ rental.end_date }}</li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>{% trans "You haven't rented any cars yet." %}</p>
-    {% endif %}
-
-    <h3>{% trans "Cars I Rent Out" %}</h3>
-    {% if my_listed %}
-        <ul>
-            {% for rental in my_listed %}
-                <li>{{ rental.car }} | {{ rental.start_date }} {% trans "to" %} {{ rental.end_date }}</li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>{% trans "Your cars haven't been rented yet." %}</p>
-    {% endif %}
-</div>
+<h2>{% trans "My Rentals" %}</h2>
+<p>Debug: {{ rentals|length }} rentals found.</p>
+{% if rentals %}
+    <ul>
+    {% for rental in rentals %}
+        <li>
+            {{ rental.car }} ({{ rental.start_date }} - {{ rental.end_date }}) - {{ rental.total_price }}
+            <a href="{% url 'rentals:rental_detail' pk=rental.id %}">{% trans "Details" %}</a>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>{% trans "No rentals found." %}</p>
+{% endif %}
 {% endblock %}

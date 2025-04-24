@@ -11,7 +11,7 @@
             <p><strong>{% trans "By" %}:</strong> {{ review.user }}</p>
             <p><strong>{% trans "Rating" %}:</strong> {{ review.rating }}/5</p>
             <p>{{ review.comment }}</p>
-            <a href="{% url 'review_detail' review.pk %}" class="button small">{% trans "View" %}</a>
+            <a href="{% url 'reviews:review_detail' review.pk %}" class="button small">{% trans "View" %}</a>
         </div>
     {% empty %}
         <p>{% trans "No reviews yet." %}</p>

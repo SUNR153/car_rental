@@ -7,6 +7,7 @@
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">{% trans "Add car" %}</button>
+        <a href="{% url 'cars:car_list' %}" class="button">{% trans "Back" %}</a>  
     </form>
 </div>
 {% endblock %}

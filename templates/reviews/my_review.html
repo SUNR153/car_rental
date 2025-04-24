@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>My Reviews</h2>
+<ul>
+    {% for review in reviews %}
+    <li>
+        {{ review.comment }} (Rating: {{ review.rating }})
+        <a href="{% url 'reviews:review_detail' pk=review.pk %}">Edit</a>
+    </li>
+    {% empty %}
+    <li>No reviews yet.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

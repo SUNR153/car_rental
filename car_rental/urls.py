@@ -32,7 +32,7 @@ urlpatterns = [
 urlpatterns += i18n_patterns(
     path('cars/', include('cars.urls'), name='cars'),
     path('users/', include('users.urls'), name='users'),
-    path('rewiews/', include('reviews.urls'), name='reviews'),
+    path('reviews/', include('reviews.urls'), name='reviews'),
     path('rentals/', include('rentals.urls'), name='rentals'),
     path('', include('core.urls'), name ='core'),
     #path('', lambda request: redirect('cars:car_list')),

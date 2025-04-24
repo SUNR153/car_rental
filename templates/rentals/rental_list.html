@@ -12,7 +12,7 @@
                     <strong>{{ rental.car }}</strong> —
                     {% trans "Rented by" %} <strong>{{ rental.renter }}</strong><br>
                     {% trans "From" %} {{ rental.start_date }} {% trans "to" %} {{ rental.end_date }}<br>
-                    <a href="{% url 'rental_detail' rental.pk %}" class="button small">{% trans "Details" %}</a>
+                    <a href="{% url 'rentals:rental_detail' rental.id %}" class="button small">{% trans "Details" %}</a>
                 </li>
             {% endfor %}
         </ul>

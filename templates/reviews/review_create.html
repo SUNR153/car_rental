@@ -8,10 +8,10 @@
     <form method="post" class="review-form">
         {% csrf_token %}
         {{ form.as_p }}
-
+        
         <div class="form-actions">
             <button type="submit" class="button">{% trans "Submit" %}</button>
-            <a href="{% url 'my_rentals' %}" class="button cancel-button">{% trans "Cancel" %}</a>
+            <a href="{% url 'rentals:my_rental' %}" class="button cancel-button">{% trans "Cancel" %}</a>
         </div>
     </form>
 </div>

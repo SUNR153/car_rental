@@ -10,6 +10,26 @@ class Car(models.Model):
         ('coupe', 'Coupe'),
         ('other', 'Other'),
     ]
+    
+    CONDITION_CHOICES = [
+        ('excellent', 'Excellent'),
+        ('good', 'Good'),
+        ('fair', 'Fair'),
+        ('poor', 'Poor'),
+    ]
+    
+    FUEL_TYPE_CHOICES = [
+        ('petrol', 'Petrol'),
+        ('diesel', 'Diesel'),
+        ('electric', 'Electric'),
+        ('hybrid', 'Hybrid'),
+    ]
+    
+    TRANSMISSION_CHOICES = [
+        ('manual', 'Manual'),
+        ('automatic', 'Automatic'),
+        ('semi-automatic', 'Semi-Automatic'),
+    ]
 
     brand = models.CharField(max_length=100)
     model = models.CharField(max_length=100)
@@ -32,6 +52,35 @@ class Car(models.Model):
     )
     image = models.ImageField(upload_to='car_images/', blank=True, null=True)
     is_available = models.BooleanField(default=True)
+    
+    # Добавленные поля
+    condition = models.CharField(
+        max_length=20,
+        choices=CONDITION_CHOICES,
+        default='good'
+    )
+    mileage = models.PositiveIntegerField(
+        default=0,
+        validators=[MinValueValidator(0)]
+    )
+    fuel_type = models.CharField(
+        max_length=20,
+        choices=FUEL_TYPE_CHOICES,
+        default='petrol'
+    )
+    transmission = models.CharField(
+        max_length=20,
+        choices=TRANSMISSION_CHOICES,
+        default='automatic'
+    )
+    seats = models.PositiveSmallIntegerField(
+        default=4,
+        validators=[
+            MinValueValidator(2),
+            MaxValueValidator(8)
+        ]
+    )
+    features = models.TextField(blank=True, default='')
 
     def __str__(self):
         return f"{self.brand} {self.model} ({self.year})"

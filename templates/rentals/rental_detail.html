@@ -15,9 +15,9 @@
     </ul>
 
     <div class="button-group">
-        <a href="{% url 'rental_update' rental.pk %}" class="button">{% trans "Edit" %}</a>
-        <a href="{% url 'rental_delete' rental.pk %}" class="button delete-button">{% trans "Delete" %}</a>
-        <a href="{% url 'my_rentals' %}" class="button back-button">{% trans "Back to My Rentals" %}</a>
+        <a href="{% url 'rentals:rental_update' rental.pk %}" class="button">{% trans "Edit" %}</a>
+        <a href="{% url 'rentals:rental_delete' rental.pk %}" class="button delete-button">{% trans "Delete" %}</a>
+        <a href="{% url 'rentals:my_rental' %}" class="button back-button">{% trans "Back to My Rentals" %}</a>
     </div>
 </div>
 {% endblock %}

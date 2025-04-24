@@ -13,8 +13,8 @@
     </div>
 
     <div class="action-buttons">
-        <a href="{% url 'review_update' review.pk %}" class="button">{% trans "Edit" %}</a>
-        <a href="{% url 'review_delete' review.pk %}" class="button delete-button">{% trans "Delete" %}</a>
+        <a href="{% url 'reviews:review_update' review.pk %}" class="button">{% trans "Edit" %}</a>
+        <a href="{% url 'reviews:review_delete' review.pk %}" class="button delete-button">{% trans "Delete" %}</a>
     </div>
 </div>
 {% endblock %}

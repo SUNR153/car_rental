@@ -13,7 +13,7 @@
     <form method="post">
         {% csrf_token %}
         <button type="submit" class="button delete-button">{% trans "Yes, Delete" %}</button>
-        <a href="{% url 'my_rentals' %}" class="button">{% trans "Cancel" %}</a>
+        <a href="{% url 'rentals:my_rental' %}" class="button">{% trans "Cancel" %}</a>
     </form>
 </div>
 {% endblock %}

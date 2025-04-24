@@ -13,7 +13,10 @@
         <p><strong>{% trans "Transmission:" %}</strong> {{ car.transmission }}</p>
         <p><strong>{% trans "Seats:" %}</strong> {{ car.seats }}</p>
         <p><strong>{% trans "Fearures:" %}</strong> {{ car.features }}</p>
-        <a href="{% url 'rental_create' car.id %}" class="button">{% trans "Rent this car" %}</a>
+        <a href="{% url 'rentals:rental_create' car.id %}" class="button">{% trans "Rent this car" %}</a>
+        <a href="{% url 'cars:car_update' car.id %}" class="button">{% trans "Update" %}</a>
+        <a href="{% url 'cars:car_delete' car.id %}" class="button">{% trans "Delete" %}</a>
+        <a href="{% url 'reviews:review_create' %}" class="button">{% trans "Review" %}</a>
     </div>
 </div>
 {% endblock %}
