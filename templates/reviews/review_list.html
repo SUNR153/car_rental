@@ -8,10 +8,10 @@
     {% for review in reviews %}
         <div class="review-card">
             <h3>{{ review.car }}</h3>
-            <p><strong>{% trans "By" %}:</strong> {{ review.user }}</p>
+            <p><strong>{% trans "By" %}:</strong> {{ review.author }}</p>
             <p><strong>{% trans "Rating" %}:</strong> {{ review.rating }}/5</p>
             <p>{{ review.comment }}</p>
-            <a href="{% url 'reviews:review_detail' review.pk %}" class="button small">{% trans "View" %}</a>
+            <a href="{% url 'cars:car_detail' review.car.id %}" class="button small">{% trans "Back" %}</a> 
         </div>
     {% empty %}
         <p>{% trans "No reviews yet." %}</p>

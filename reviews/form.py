@@ -6,6 +6,7 @@ class ReviewForm(forms.ModelForm):
         model = Review
         fields = ['car', 'rating', 'comment']
         widgets = {
+            'car': forms.HiddenInput(),
             'rating': forms.NumberInput(attrs={'min': 1, 'max': 5, 'placeholder': 'Raiting 1-5'}),
             'comment': forms.Textarea(attrs={'placeholder': 'Your comment'}),
         }

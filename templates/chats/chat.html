@@ -1,0 +1,25 @@
+<!-- chats/templates/chats/chat.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Чат по автомобилю: {{ car.name }}</h2>
+
+<div class="chat-messages">
+    {% for message in chat.messages.all %}
+        <div class="{% if message.sender == user %}sent{% else %}received{% endif %}">
+            <p><strong>{{ message.sender.email }}:</strong> {{ message.content }}</p>
+            <small>{{ message.created_at }}</small>
+        </div>
+    {% empty %}
+        <p>Сообщений пока нет. Начните чат!</p>
+    {% endfor %}
+</div>
+
+<form method="post">
+    {% csrf_token %}
+    <textarea name="content" rows="3" placeholder="Напишите сообщение..." required></textarea>
+    <button type="submit">Отправить</button>
+</form>
+
+<a href="{% url 'cars:car_detail' pk=car.pk %}">Вернуться к автомобилю</a>
+{% endblock %}

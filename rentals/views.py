@@ -8,6 +8,7 @@ from datetime import datetime, timedelta
 from django.contrib.auth.models import User
 from .form import RentalForm
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 
 User = get_user_model()
 
@@ -30,8 +31,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .models import Rental, Car
 
+@login_required
 def rental_create(request, car_id):
     car = get_object_or_404(Car, pk=car_id)
+
+    if not request.user.profile.driver_license:
+        messages.error(request, "You must have a valid driver's license to rent a car.")
+        return redirect('cars:car_detail', pk=car.pk)
 
     if request.method == 'POST':
         try:
@@ -53,7 +59,7 @@ def rental_create(request, car_id):
             )
             
             messages.success(request, 'Rental successfully created!')
-            return redirect('cars:car_detail', pk=car.pk)  # Added namespace
+            return redirect('cars:car_detail', pk=car.pk)
             
         except Exception as e:
             messages.error(request, f'Error: {str(e)}')
@@ -86,3 +92,47 @@ def rental_delete(request, pk):
         rental.delete()
         return redirect('/rentals/')
     return render(request, 'rentals/rental_delete.html', {'rental': rental})
+
+from notifications.models import Notification
+
+def rental_create(request, car_id):
+    car = get_object_or_404(Car, pk=car_id)
+
+    if request.method == 'POST':
+        start_date = request.POST.get('start_date')
+        end_date = request.POST.get('end_date')
+
+        start = datetime.strptime(start_date, '%Y-%m-%d').date()
+        end = datetime.strptime(end_date, '%Y-%m-%d').date()
+
+        if end < start:
+            messages.error(request, 'The end date cannot be earlier than the start date.')
+            return redirect('rentals:rental_create', car_id=car_id)
+
+        rental = Rental.objects.create(
+            car=car,
+            customer=request.user,
+            start_date=start,
+            end_date=end
+        )
+
+        # 🔥 Создаём уведомление для арендатора
+        Notification.objects.create(
+            user=request.user,
+            message=f"You successfully rented {car.brand} {car.model}!"
+        )
+
+        # 🔥 Создаём уведомление для владельца авто
+        Notification.objects.create(
+            user=car.author,  # ВАЖНО: нужно чтобы у машины car был owner=User (добавим в модель если нет)
+            message=f"Your car {car.brand} {car.model} was rented!"
+        )
+
+        messages.success(request, 'Rental successfully created!')
+        return redirect('cars:car_detail', pk=car.pk)
+
+    return render(request, 'rentals/rental_create.html', {
+        'car': car,
+        'default_start': datetime.now().strftime('%Y-%m-%d'),
+        'default_end': (datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d')
+    })

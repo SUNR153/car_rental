@@ -18,9 +18,11 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 import json
 from django.utils.timezone import now, timedelta
+import uuid
+from django.core.mail import send_mail
 
-from .form import RegistrationForm, UserLoginForm, ProfileSettingsForm
-from .models import Profile
+from .form import RegistrationForm, UserLoginForm, ProfileSettingsForm, UserUpdateForm, PasswordResetRequestForm, PasswordResetConfirmForm
+from .models import Profile, PasswordResetCode
 from .token import TokenGenerator
 
 User = get_user_model()
@@ -47,11 +49,25 @@ def user_create(request):
 
 def user_update(request, pk):
     user = get_object_or_404(User, pk=pk)
-    form = RegistrationForm(request.POST or None, instance=user)
-    if form.is_valid():
-        form.save()
-        return redirect('users:user_detail', pk=pk)
-    return render(request, 'users/users_update.html', {'form': form})
+
+    if request.method == 'POST':
+        user_form = UserUpdateForm(request.POST, instance=user)
+        profile_form = ProfileSettingsForm(request.POST, request.FILES, instance=user.profile)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            
+            profile_form.save()
+            return redirect('users:profile')
+    else:
+        user_form = UserUpdateForm(instance=user)
+        profile_form = ProfileSettingsForm(instance=user.profile)
+
+    return render(request, 'users/users_update.html', {
+        'user_form': user_form,
+        'profile_form': profile_form,
+    })
+
 
 def user_delete(request, pk):
     user = get_object_or_404(User, pk=pk)
@@ -110,15 +126,22 @@ def register_view(request):
 
 def login_view(request):
     form = UserLoginForm(request.POST or None)
-    if form.is_valid():
-        email = form.cleaned_data['email']
-        password = form.cleaned_data['password']
-        user = authenticate(request, email=email, password=password)
-        if user:
-            login(request, user)
-            return redirect('/')
+
+    if request.method == 'POST':
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            user = authenticate(request, email=email, password=password)
+
+            if user:
+                login(request, user)
+                messages.success(request, 'Successfully logged in!')
+                return redirect('/')
+            else:
+                messages.error(request, 'Invalid email or password.')
         else:
-            messages.error(request, 'Invalid email or password.')
+            messages.error(request, 'Please correct the errors below.')
+
     return render(request, 'users/login.html', {'form': form})
 
 def logout_view(request):
@@ -128,24 +151,31 @@ def logout_view(request):
 @login_required
 def profile_settings(request):
     profile = request.user.profile
-    settings_form = ProfileSettingsForm(request.POST or None, request.FILES or None, instance=profile)
-    password_form = PasswordChangeForm(request.user, request.POST or None)
+
+    settings_form = ProfileSettingsForm(
+        request.POST or None,
+        request.FILES or None,
+        instance=profile  # ✅ КЛЮЧЕВОЕ!
+    )
+
+    password_form = PasswordChangeForm(
+        user=request.user,
+        data=request.POST or None
+    )
 
     if request.method == 'POST':
         if 'save_settings' in request.POST and settings_form.is_valid():
             settings_form.save()
-            messages.success(request, "Settings updated successfully.")
             return redirect('users:settings')
 
         if 'change_password' in request.POST and password_form.is_valid():
             password_form.save()
             update_session_auth_hash(request, request.user)
-            messages.success(request, "Password changed.")
             return redirect('users:settings')
 
     return render(request, 'users/settings.html', {
         'settings_form': settings_form,
-        'password_form': password_form
+        'password_form': password_form,
     })
 
 # 🔹 AJAX theme toggle (dark/light)
@@ -201,3 +231,58 @@ def activate_account(request, uidb64, token):
         return render(request, 'users/fail_activate.html', {
             'error': 'Invalid activation link.'
         })
+    
+def password_reset_request(request):
+    if request.method == 'POST':
+        form = PasswordResetRequestForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            user = User.objects.get(email=email)
+            
+            # Создаём код для сброса
+            reset_code = PasswordResetCode.objects.create(user=user)
+            
+            # Формируем ссылку
+            reset_url = request.build_absolute_uri(
+                f"/en/users/password_reset_confirm/?code={reset_code.code}"
+            )
+            
+            # Отправляем письмо
+            send_mail(
+                subject='Сброс пароля',
+                message=f'Перейдите по ссылке для сброса пароля: {reset_url}',
+                from_email='zarip.tursunov@bk.ru',
+                recipient_list=[email],
+                fail_silently=False,
+            )
+            
+            messages.success(request, 'Письмо с инструкциями отправлено.')
+            return redirect('users:password_reset_done')
+    else:
+        form = PasswordResetRequestForm()
+    return render(request, 'users/password_reset.html', {'form': form})
+
+def password_reset_confirm(request):
+    code = request.GET.get('code', '')
+    if request.method == 'POST':
+        form = PasswordResetConfirmForm(request.POST)
+        if form.is_valid():
+            code = form.cleaned_data['code']
+            new_password = form.cleaned_data['new_password']
+            
+            reset_code = PasswordResetCode.objects.get(code=uuid.UUID(code))
+            user = reset_code.user
+            user.set_password(new_password)
+            user.save()
+            
+            # Удаляем код после использования
+            reset_code.delete()
+            
+            messages.success(request, 'Пароль успешно изменён. Теперь вы можете войти.')
+            return redirect('login')
+    else:
+        form = PasswordResetConfirmForm(initial={'code': code})
+    return render(request, 'users/password_reset_confirm.html', {'form': form})
+
+def password_reset_done(request):
+    return render(request, 'users/password_reset_done.html')

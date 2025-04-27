@@ -20,7 +20,7 @@ class CarForm(forms.ModelForm):
         'category': forms.Select(),
         'image': forms.ClearableFileInput(),
         'is_available': forms.CheckboxInput(),
-        'condition': forms.TextInput(attrs={'placeholder': 'Condition'}),
+        'condition': forms.Select(attrs={'placeholder': 'Condition'}),
         'mileage': forms.NumberInput(attrs={'placeholder': 'Mileage in km'}),
         'fuel_type': forms.Select(choices=[('petrol', 'Petrol'), ('diesel', 'Diesel'), 
                                         ('electric', 'Electric'), ('hybrid', 'Hybrid')]),

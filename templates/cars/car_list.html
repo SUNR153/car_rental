@@ -1,23 +1,29 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load static %}
+
 {% block content %}
 <div class="page-container">
     <h2>{% trans "Available cars" %}</h2>
     <div class="card-grid">
-        {% for car in car %}
+        {% for car in cars %}
         <div class="card">
-            <img src="{{ car.image.url }}" alt="{{ car.make }} {{ car.model }}" class="car-image">
-            <h3>{{ car.make }} {{ car.model }}</h3>
+            {% if car.image %}
+                <img src="{{ car.image.url }}" alt="{{ car.make }} {{ car.model }}" class="car-image">
+            {% else %}
+                <img src="{% static 'images/default_car.jpg' %}" alt="No image" class="car-image">
+            {% endif %}
+            <h3>{{ car.author.last_name }} {{ car.author.first_name }}</h3>
+            <h3>{{ car.brand }} {{ car.model }}</h3>
             <p><strong>{% trans "Price:" %}</strong> ${{ car.price_per_day }} / day</p>
             <a href="{% url 'cars:car_detail' car.id %}" class="button">{% trans "View car" %}</a>
-            <a href="{% url 'cars:car_create' %}" class="button">{% trans "new post" %}</a>
-        </header>
         </div>
         {% empty %}
         <p>{% trans "No cars available at the moment." %}</p>
-        <a href="{% url 'cars:car_create' %}" class="button">{% trans "new post" %}</a>
         {% endfor %}
     </div>
+    {% if user.is_authenticated %}
+    <a href="{% url 'cars:car_create' %}" class="button">{% trans "New post" %}</a>
+    {% endif %}
 </div>
 {% endblock %}

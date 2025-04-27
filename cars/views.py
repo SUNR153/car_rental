@@ -5,16 +5,28 @@ from django.urls import reverse
 
 def car_list(request):
     cars = Car.objects.all()
-    return render(request, 'cars/car_list.html', {'car': cars})
+    return render(request, 'cars/car_list.html', {'cars': cars})
 
 def car_detail(request, pk):
     car = get_object_or_404(Car, pk=pk)
-    return render(request, 'cars/car_details.html', {'car': car})
+    is_favorite = False
+    if request.user.is_authenticated:
+        # Получаем список id машин в избранном
+        favorite_car_ids = request.user.favorites.all().values_list('car_id', flat=True)
+        is_favorite = car.id in favorite_car_ids
+
+    context = {
+        'car': car,
+        'is_favorite': is_favorite,
+    }
+    return render(request, 'cars/car_details.html', context)
 
 def car_create(request):
     form = CarForm(request.POST or None, request.FILES or None)
     if form.is_valid():
-        form.save()
+        car=form.save(commit=False)
+        car.author=request.user
+        car.save()
         return redirect('cars:car_list')
     return render(request, 'cars/car_create.html', {'form': form})
 

@@ -6,7 +6,7 @@
     {% for review in reviews %}
     <li>
         {{ review.comment }} (Rating: {{ review.rating }})
-        <a href="{% url 'reviews:review_detail' pk=review.pk %}">Edit</a>
+        <a href="{% url 'cars:car_detail' pk=review.car.pk %}">view car</a>
     </li>
     {% empty %}
     <li>No reviews yet.</li>

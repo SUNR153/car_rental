@@ -1,16 +1,19 @@
 {% extends "base.html" %}
 {% load i18n static %}
 
+{% block title %}{% trans "Register" %}{% endblock %}
+
 {% block content %}
 <div class="form-container">
     <h2>{% trans "Register" %}</h2>
-    <form method="post">
+
+    <form method="post" novalidate>
         {% csrf_token %}
         {% for field in form %}
         <div class="form-group">
             <label for="{{ field.id_for_label }}">{{ field.label }}</label>
             
-            {% if field.name == "password" or field.name == "password1" or field.name == "password2" %}
+            {% if field.name == "password1" or field.name == "password2" %}
                 <div class="password-wrapper">
                     {{ field }}
                     <button type="button" class="toggle-password" aria-label="{% trans 'Show password' %}">
@@ -29,13 +32,10 @@
         
         <button type="submit" class="btn btn-primary">{% trans "Register" %}</button>
     </form>
-    
+
     <p class="mt-3">
         {% trans "Already have an account?" %} 
         <a href="{% url 'users:login' %}">{% trans "Login" %}</a>
     </p>
 </div>
-
-<!-- Подключаем JS в конце body -->
-<script src="{% static 'scripts.js' %}"></script>
 {% endblock %}

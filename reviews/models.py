@@ -4,17 +4,11 @@ from users.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.contrib.auth import get_user_model
 
+User = get_user_model()
+
 class Review(models.Model):
-    author = models.ForeignKey(
-        get_user_model(),
-        on_delete=models.CASCADE
-    )
-    car = models.ForeignKey(  # Добавьте это, если отзыв привязан к машине
-        Car,
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True
-    )
+    car = models.ForeignKey(Car, on_delete=models.CASCADE, null=True, blank=True)  # Связь с автомобилем, обязательно
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     comment = models.TextField()
     rating = models.PositiveSmallIntegerField(default=5)
     created_at = models.DateTimeField(auto_now_add=True)

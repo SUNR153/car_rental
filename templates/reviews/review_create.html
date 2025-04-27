@@ -3,16 +3,12 @@
 
 {% block content %}
 <div class="page-container">
-    <h2>{% trans "Write a Review" %}</h2>
-
-    <form method="post" class="review-form">
+    <h2>{% trans "Add Review for" %} {{ car }}</h2>
+    <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        
-        <div class="form-actions">
-            <button type="submit" class="button">{% trans "Submit" %}</button>
-            <a href="{% url 'rentals:my_rental' %}" class="button cancel-button">{% trans "Cancel" %}</a>
-        </div>
+        <button type="submit">{% trans "Submit Review" %}</button>
     </form>
+    <a href="{% url 'cars:car_detail' car.id %}" class="button">{% trans "Cancel" %}</a>
 </div>
 {% endblock %}

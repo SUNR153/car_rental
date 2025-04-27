@@ -1,8 +1,11 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from datetime import datetime
+from users.models import User
+from django.conf import settings
 
 class Car(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     CATEGORY_CHOICES = [
         ('sedan', 'Sedan'),
         ('suv', 'SUV'),
@@ -87,3 +90,10 @@ class Car(models.Model):
 
     class Meta:
         ordering = ['-year', 'brand']
+
+    def author_email(self):
+        return self.author.email
+    author_email.short_description = 'Email автора'
+
+    def __str__(self):
+        return f"Review by {self.author}"

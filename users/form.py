@@ -1,7 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model, authenticate
-from .models import Profile
+from .models import Profile, PasswordResetCode
+import uuid
 
 User = get_user_model()
 
@@ -24,6 +25,7 @@ class RegistrationForm(UserCreationForm):
             'last_name': forms.TextInput(attrs={'placeholder': 'Last name'}),
             'email': forms.EmailInput(attrs={'placeholder': 'Email'}),
             'phone': forms.TextInput(attrs={'placeholder': 'Phone'}),
+            'drivers_license': forms.Select(choices=[('Yes'), ('No')])
         }
 
     def save(self, commit=True):
@@ -32,6 +34,10 @@ class RegistrationForm(UserCreationForm):
         if commit:
             user.set_password(self.cleaned_data["password1"])  # ensures password is hashed
             user.save()
+            Profile.objects.create(
+                user=user,
+                phone=user.phone,
+                driver_license=self.cleaned_data['driver_license'])
         return user
 
     def clean(self):
@@ -61,21 +67,45 @@ class UserLoginForm(forms.Form):
             raise forms.ValidationError('Incorrect email or password.')
         return self.cleaned_data
 
-# 🔹 Profile Settings Form
 class ProfileSettingsForm(forms.ModelForm):
-
-    LANGUAGE_CHOICES = [
-        ('en', '🇺🇸 English'),
-        ('ru', '🇷🇺 Russian'),
-        ('kz', '🇰🇿 Kazakh'),
-    ]
-
-    language = forms.ChoiceField(
-        choices=LANGUAGE_CHOICES,
-        widget=forms.Select(attrs={'class': 'form-control'})
-    )
-    avatar = forms.ImageField(required=False)
-
     class Meta:
         model = Profile
-        fields = ['avatar', 'background', 'language']
+        fields = ['avatar', 'driver_license']
+
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'username', 'email', 'phone']
+
+class PasswordResetRequestForm(forms.Form):
+    email = forms.EmailField(label="Email", max_length=254)
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if not User.objects.filter(email=email).exists():
+            raise forms.ValidationError("Пользователь с таким email не найден.")
+        return email
+
+class PasswordResetConfirmForm(forms.Form):
+    code = forms.CharField(label="Код", max_length=36)
+    new_password = forms.CharField(label="Новый пароль", widget=forms.PasswordInput)
+    confirm_password = forms.CharField(label="Подтвердите пароль", widget=forms.PasswordInput)
+
+    def clean_code(self):
+        code = self.cleaned_data['code']
+        try:
+            uuid_obj = uuid.UUID(code)
+            reset_code = PasswordResetCode.objects.get(code=uuid_obj)
+            if reset_code.is_expired():
+                raise forms.ValidationError("Код истёк. Запросите новый.")
+        except (ValueError, PasswordResetCode.DoesNotExist):
+            raise forms.ValidationError("Неверный код.")
+        return code
+
+    def clean(self):
+        cleaned_data = super().clean()
+        new_password = cleaned_data.get('new_password')
+        confirm_password = cleaned_data.get('confirm_password')
+        if new_password and confirm_password and new_password != confirm_password:
+            raise forms.ValidationError("Пароли не совпадают.")
+        return cleaned_data

@@ -1,5 +1,9 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+import uuid
+from datetime import timedelta
+from django.utils import timezone
+
 
 class User(AbstractUser):
     first_name = models.CharField(max_length=50, blank=True)
@@ -7,13 +11,11 @@ class User(AbstractUser):
     phone = models.CharField(max_length=20, blank=True)
     
     ROLE_CHOICES = [
-        ('renter', 'Renter'),  
-        ('owner', 'Owner'),  
-        ('moderator', 'Moderator'),  
-        ('admin', 'Admin'),  
+        ('user', 'User'),  # Может выкладывать и арендовать авто
+        ('admin', 'Admin'),  # Управляет системой
     ]
     
-    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='renter')
+    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='user')
     email = models.EmailField(unique=True)
 
     USERNAME_FIELD = 'email'
@@ -25,12 +27,12 @@ class User(AbstractUser):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     phone = models.CharField(max_length=20, unique=True)
-    driver_license = models.CharField(max_length=20, blank=True, null=True)
     avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
     is_verified = models.BooleanField(default=False)
     theme = models.CharField(max_length=20, default='light')  # light / dark
     language = models.CharField(max_length=10, default='en')
     background = models.ImageField(upload_to='backgrounds/', blank=True, null=True)
+    driver_license = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.user.username} ({self.user.get_role_display()})"
@@ -45,3 +47,20 @@ def create_user_profile(sender, instance, created, **kwargs):
             user=instance,
             phone=instance.phone or f"default-{instance.pk}"
         )
+
+class PasswordResetCode(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    code = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    expires_at = models.DateTimeField()
+
+    def save(self, *args, **kwargs):
+        if not self.expires_at:
+            self.expires_at = timezone.now() + timedelta(hours=1)  # Код действителен 1 час
+        super().save(*args, **kwargs)
+
+    def is_expired(self):
+        return timezone.now() > self.expires_at
+
+    def __str__(self):
+        return f"Reset code for {self.user.email}"

@@ -145,3 +145,10 @@ const App = (function() {
 
 // Инициализация приложения после загрузки DOM
 document.addEventListener('DOMContentLoaded', () => App.init());
+setTimeout(() => {
+    document.querySelectorAll('.alert-box').forEach(alert => {
+        alert.style.transition = "opacity 0.5s";
+        alert.style.opacity = '0';
+        setTimeout(() => alert.remove(), 500);
+    });
+}, 4000);

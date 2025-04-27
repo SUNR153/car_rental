@@ -7,14 +7,17 @@
 
     <div class="review-card">
         <h3>{{ review.car }}</h3>
-        <p><strong>{% trans "By" %}:</strong> {{ review.user }}</p>
+        <p><strong>{% trans "By" %}:</strong> {{ review.author }}</p>
         <p><strong>{% trans "Rating" %}:</strong> {{ review.rating }}/5</p>
         <p><strong>{% trans "Comment" %}:</strong> {{ review.comment }}</p>
     </div>
 
     <div class="action-buttons">
-        <a href="{% url 'reviews:review_update' review.pk %}" class="button">{% trans "Edit" %}</a>
-        <a href="{% url 'reviews:review_delete' review.pk %}" class="button delete-button">{% trans "Delete" %}</a>
+        {% if user.is_authenticated and user == review.author %}
+        <a href="{% url 'reviews:review_update' pk=review.pk %}" class="button">{% trans "Edit" %}</a>
+        <a href="{% url 'reviews:review_delete' pk=review.pk %}" class="button delete-button">{% trans "Delete" %}</a>
+        {% endif %}
+        <a href="{% url 'reviews:review_list' %}" class="button small">{% trans "Back" %}</a>
     </div>
 </div>
 {% endblock %}
