@@ -6,7 +6,6 @@ import uuid
 
 User = get_user_model()
 
-# 🔹 Registration Form
 class RegistrationForm(UserCreationForm):
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={
         'placeholder': 'Password',
@@ -32,7 +31,7 @@ class RegistrationForm(UserCreationForm):
         user = super().save(commit=False)
         user.username = f"{self.cleaned_data['first_name']}_{self.cleaned_data['email'].split('@')[0]}"
         if commit:
-            user.set_password(self.cleaned_data["password1"])  # ensures password is hashed
+            user.set_password(self.cleaned_data["password1"])
             user.save()
             Profile.objects.create(
                 user=user,
@@ -48,7 +47,6 @@ class RegistrationForm(UserCreationForm):
             raise forms.ValidationError('Passwords do not match.')
         return cleaned_data
 
-# 🔹 Login Form
 class UserLoginForm(forms.Form):
     email = forms.EmailField(label='Email', max_length=254, widget=forms.EmailInput(attrs={
         'placeholder': 'Email',

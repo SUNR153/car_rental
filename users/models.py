@@ -11,8 +11,8 @@ class User(AbstractUser):
     phone = models.CharField(max_length=20, blank=True)
     
     ROLE_CHOICES = [
-        ('user', 'User'),  # Может выкладывать и арендовать авто
-        ('admin', 'Admin'),  # Управляет системой
+        ('user', 'User'),
+        ('admin', 'Admin'), 
     ]
     
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='user')
@@ -29,7 +29,7 @@ class Profile(models.Model):
     phone = models.CharField(max_length=20, unique=True)
     avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
     is_verified = models.BooleanField(default=False)
-    theme = models.CharField(max_length=20, default='light')  # light / dark
+    theme = models.CharField(max_length=20, default='light')
     language = models.CharField(max_length=10, default='en')
     background = models.ImageField(upload_to='backgrounds/', blank=True, null=True)
     driver_license = models.BooleanField(default=False)
@@ -56,7 +56,7 @@ class PasswordResetCode(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.expires_at:
-            self.expires_at = timezone.now() + timedelta(hours=1)  # Код действителен 1 час
+            self.expires_at = timezone.now() + timedelta(hours=1)
         super().save(*args, **kwargs)
 
     def is_expired(self):

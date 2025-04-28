@@ -1,4 +1,4 @@
-from notifications.models import Notification  # Предполагаю, что у вас есть модель Notification
+from notifications.models import Notification
 
 def unread_notifications_count(request):
     if request.user.is_authenticated:

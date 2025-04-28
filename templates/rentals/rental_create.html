@@ -28,7 +28,6 @@
             <input type="hidden" name="total_price" id="total_price">
         </div>
         
-        <!-- Pass price to JS -->
         <div id="price-data" data-price-per-day="{{ car.price_per_day }}"></div>
         
         <button type="submit" class="btn btn-primary">
@@ -41,6 +40,5 @@
     </form>
 </div>
 
-<!-- Include separate JS file -->
 <script src="{% static 'scripts.js' %}"></script>
 {% endblock %}

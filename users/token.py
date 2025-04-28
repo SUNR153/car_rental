@@ -1,4 +1,3 @@
-# users/token.py
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from datetime import datetime, timedelta
 from django.utils.timezone import now

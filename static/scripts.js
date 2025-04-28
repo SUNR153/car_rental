@@ -1,19 +1,15 @@
-// Основной модуль приложения
 const App = (function() {
-    // Конфигурация
     const config = {
-        maxFileSize: 5 * 1024 * 1024, // 5MB
+        maxFileSize: 5 * 1024 * 1024,
         defaultTheme: 'theme-light'
     };
 
-    // Инициализация приложения
     function init() {
         initPasswordToggle();
         initTheme();
         initBackground();
     }
 
-    // Функционал переключения видимости пароля
     function initPasswordToggle() {
         document.querySelectorAll('.toggle-password').forEach(button => {
             const input = button.closest('.password-wrapper')?.querySelector('input');
@@ -21,15 +17,12 @@ const App = (function() {
             
             if (!input || !icon) return;
 
-            // Инициализация ARIA-атрибутов
             button.setAttribute('aria-pressed', 'false');
             button.setAttribute('role', 'button');
             button.setAttribute('tabindex', '0');
-            
-            // Обработчик клика
+
             button.addEventListener('click', () => togglePassword(input, icon, button));
-            
-            // Поддержка клавиатуры
+
             button.addEventListener('keydown', (e) => {
                 if (['Enter', ' '].includes(e.key)) {
                     e.preventDefault();
@@ -42,12 +35,10 @@ const App = (function() {
     function togglePassword(input, icon, button) {
         const isVisible = input.type === 'text';
         input.type = isVisible ? 'password' : 'text';
-        
-        // Переключаем иконки Font Awesome
+
         icon.classList.toggle('fa-eye-slash', !isVisible);
         icon.classList.toggle('fa-eye', isVisible);
-        
-        // Обновляем ARIA-атрибуты
+
         button.setAttribute('aria-pressed', String(!isVisible));
         button.setAttribute('aria-label', 
             isVisible ? 'Показать пароль' : 'Скрыть пароль');
@@ -55,12 +46,9 @@ const App = (function() {
         input.focus();
     }
 
-    // Функционал темы
     function initTheme() {
-        // Применяем сохраненную тему или тему по умолчанию
         applyTheme(localStorage.getItem('theme') || config.defaultTheme);
         
-        // Вешаем обработчик на кнопку переключения темы
         document.getElementById('toggle-theme')?.addEventListener('click', toggleTheme);
     }
 
@@ -87,13 +75,10 @@ const App = (function() {
         if (newSrc) logo.src = newSrc;
     }
 
-    // Функционал фона
     function initBackground() {
-        // Восстанавливаем сохраненный фон
         const savedBg = localStorage.getItem('userBackground');
         if (savedBg) applyBackground(savedBg);
         
-        // Обработчики для загрузки фона
         document.getElementById('background-input')?.addEventListener('change', handleBackgroundUpload);
         document.getElementById('reset-background')?.addEventListener('click', resetBackground);
     }
@@ -132,7 +117,6 @@ const App = (function() {
         alert('Фон сброшен!');
     }
 
-    // Публичные методы
     return {
         init,
         togglePasswordVisibility: togglePassword,
@@ -143,7 +127,6 @@ const App = (function() {
     };
 })();
 
-// Инициализация приложения после загрузки DOM
 document.addEventListener('DOMContentLoaded', () => App.init());
 setTimeout(() => {
     document.querySelectorAll('.alert-box').forEach(alert => {
@@ -152,3 +135,4 @@ setTimeout(() => {
         setTimeout(() => alert.remove(), 500);
     });
 }, 4000);
+

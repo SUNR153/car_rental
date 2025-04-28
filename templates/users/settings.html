@@ -5,7 +5,6 @@
 <div class="page-container">
     <h2>{% trans "Profile Settings" %}</h2>
 
-    <!-- ⚙️ Theme / Language / Avatar / Background -->
     <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <h3>{% trans "Personalization" %}</h3>
@@ -17,14 +16,12 @@
         <img src="{{ user.profile.background.url }}" alt="Background" style="max-width: 100%; border-radius: 8px;">
     {% endif %}
 
-    <!-- 🌄 Custom background upload -->
     <h4 style="margin-top: 20px;"> {% trans "Custom Background" %}</h4>
     <input type="file" id="background-input" accept="image/*">
     <button type="button" id="reset-background" class="button" style="margin-top: 10px;">
         {% trans "Reset Background" %}
     </button>
 
-    <!-- 💾 Save button -->
     <button type="submit" name="save_settings" class="button mt-20">
         {% trans "Save Settings" %}
     </button>

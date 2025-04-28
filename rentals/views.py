@@ -116,15 +116,13 @@ def rental_create(request, car_id):
             end_date=end
         )
 
-        # 🔥 Создаём уведомление для арендатора
         Notification.objects.create(
             user=request.user,
             message=f"You successfully rented {car.brand} {car.model}!"
         )
 
-        # 🔥 Создаём уведомление для владельца авто
         Notification.objects.create(
-            user=car.author,  # ВАЖНО: нужно чтобы у машины car был owner=User (добавим в модель если нет)
+            user=car.author,
             message=f"Your car {car.brand} {car.model} was rented!"
         )
 

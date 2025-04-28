@@ -56,7 +56,6 @@ class Car(models.Model):
     image = models.ImageField(upload_to='car_images/', blank=True, null=True)
     is_available = models.BooleanField(default=True)
     
-    # Добавленные поля
     condition = models.CharField(
         max_length=20,
         choices=CONDITION_CHOICES,

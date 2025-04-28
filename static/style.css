@@ -1,6 +1,4 @@
-/* ================ Глобальные переменные ================ */
 :root {
-  /* Цветовая палитра */
   --primary-red: #b30000;
   --accent-red: #ff4d4d;
   --text-light: #ffffff;
@@ -9,18 +7,15 @@
   --bg-dark: #1a1a1a;
   --btn-hover: #ff0000;
   
-  /* Размеры и отступы */
   --base-padding: 1rem;
   --large-padding: 2rem;
   --border-radius: 0.3rem;
   
-  /* Анимации */
   --transition-fast: 0.2s ease;
   --transition-medium: 0.3s ease;
   --transition-slow: 0.5s ease;
 }
 
-/* ================ Базовые стили ================ */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -38,7 +33,6 @@ body {
   transition: background-color var(--transition-slow), color var(--transition-slow);
 }
 
-/* ================ Темы ================ */
 .theme-dark {
   --bg-light: #1a1a1a;
   --text-dark: #ffffff;
@@ -53,7 +47,6 @@ body {
   --accent-red: #ff4d4d;
 }
 
-/* ================ Фоновое изображение ================ */
 .has-background {
   background-size: cover;
   background-repeat: no-repeat;
@@ -61,7 +54,6 @@ body {
   background-attachment: fixed;
 }
 
-/* ================ Структура страницы ================ */
 header, footer {
   background-color: var(--primary-red);
   color: var(--text-light);
@@ -74,7 +66,6 @@ main {
   padding: var(--large-padding);
 }
 
-/* ================ Навигация ================ */
 nav {
   display: flex;
   justify-content: center;
@@ -96,7 +87,6 @@ nav a:hover {
   transform: scale(1.05);
 }
 
-/* ================ Hero секция ================ */
 .hero {
   position: relative;
   background: 
@@ -121,7 +111,6 @@ nav a:hover {
   margin-right: auto;
 }
 
-/* ================ Кнопки ================ */
 .btn {
   display: inline-block;
   padding: 0.7rem 1.5rem;
@@ -149,7 +138,6 @@ nav a:hover {
   background-color: var(--accent-red);
 }
 
-/* ================ Карточки преимуществ ================ */
 .features {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -168,7 +156,6 @@ nav a:hover {
   transform: translateY(-5px);
 }
 
-/* ================ Сообщения ================ */
 .messages {
   list-style: none;
   padding: 0;
@@ -194,7 +181,6 @@ nav a:hover {
   border-left-color: #00b300;
 }
 
-/* ================ Формы и поля ввода ================ */
 .form-container {
   max-width: 500px;
   margin: 0 auto;
@@ -246,7 +232,6 @@ nav a:hover {
   transform: scale(1.2);
 }
 
-/* ================ Адаптивность ================ */
 @media (max-width: 768px) {
   header, footer {
     padding: var(--base-padding);
@@ -261,7 +246,6 @@ nav a:hover {
   }
 }
 
-/* ================ Утилитарные классы ================ */
 .text-center {
   text-align: center;
 }
@@ -305,4 +289,88 @@ nav a:hover {
 @keyframes slideIn {
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+.chat-container {
+  max-width: 800px;
+  margin: 30px auto;
+  background: var(--bg);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.chat-messages {
+  max-height: 400px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.message {
+  max-width: 60%;
+  padding: 10px 15px;
+  border-radius: 16px;
+  word-wrap: break-word;
+}
+
+.my-message {
+  background: #d1ffd6;
+  align-self: flex-end;
+  text-align: right;
+}
+
+.other-message {
+  background: #f0f0f0;
+  align-self: flex-start;
+}
+
+.message-info {
+  font-size: 12px;
+  color: #666;
+}
+
+.message-content {
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+.chat-form {
+  display: flex;
+  gap: 10px;
+}
+
+.chat-form textarea {
+  flex: 1;
+  height: 60px;
+  resize: none;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.chat-form button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  background: #1c3d5a;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.chat-form button:hover {
+  background: #15304b;
+}
+
+.no-messages {
+  text-align: center;
+  color: #888;
+}
+
+.back-link {
+  margin-top: 20px;
+  text-align: center;
 }

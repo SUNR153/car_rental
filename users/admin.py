@@ -2,19 +2,16 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from .models import User, Profile
 
-# 🔹 Inline Profile admin (embedded in User)
-class ProfileInline(admin.StackedInline):  # можно заменить на TabularInline, если хочешь таблицей
+class ProfileInline(admin.StackedInline):
     model = Profile
     can_delete = False
     verbose_name_plural = 'Profile'
     fk_name = 'user'
     extra = 0
 
-
-# 🔹 Custom User admin
 @admin.register(User)
 class CustomUserAdmin(BaseUserAdmin):
-    inlines = [ProfileInline]  # 👈 подключаем встроенный профиль
+    inlines = [ProfileInline]
 
     list_display = ('username', 'email', 'role', 'is_staff', 'is_active')
     list_filter = ('role', 'is_staff', 'is_active')
@@ -40,8 +37,6 @@ class CustomUserAdmin(BaseUserAdmin):
             return super().get_inline_instances(request, obj)
         return []
 
-
-# 🔹 Profile admin (for standalone view)
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'phone', 'is_verified', 'theme', 'language')

@@ -5,7 +5,6 @@ from django.contrib.auth import views as auth_views
 app_name = 'users'
 
 urlpatterns = [
-    # 🔐 Authentication
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
     path('register/', views.register_view, name='register'),
@@ -14,14 +13,10 @@ urlpatterns = [
     path('password_reset/done/', views.password_reset_done, name='password_reset_done'),
     path('password_reset_confirm/', views.password_reset_confirm, name='password_reset_confirm'),
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
-    
-    # 👤 User Profile & Settings
     path('profile/', views.profile, name='profile'),
     path('settings/', views.profile_settings, name='settings'),
     path('toggle-theme/', views.toggle_theme, name='toggle-theme'),
     path('change-language/', views.change_language, name='change_language'),
-
-    # ⚙️ User Management (Admin use)
     path('list/', views.user_list, name='user_list'),
     path('create/', views.user_create, name='user_create'),
     path('<int:pk>/', views.user_detail, name='user_detail'),

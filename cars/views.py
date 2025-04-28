@@ -11,7 +11,6 @@ def car_detail(request, pk):
     car = get_object_or_404(Car, pk=pk)
     is_favorite = False
     if request.user.is_authenticated:
-        # Получаем список id машин в избранном
         favorite_car_ids = request.user.favorites.all().values_list('car_id', flat=True)
         is_favorite = car.id in favorite_car_ids
 
@@ -35,8 +34,8 @@ def car_update(request, pk):
     form = CarForm(request.POST or None, request.FILES or None, instance=car)
     if form.is_valid():
         form.save()
-        return redirect('cars:car_detail', pk=car.pk)  # Убедитесь в правильности namespace
-    return render(request, 'cars/car_update.html', {'form': form, 'car': car})  # Добавлен car в контекст
+        return redirect('cars:car_detail', pk=car.pk)
+    return render(request, 'cars/car_update.html', {'form': form, 'car': car})
 
 def car_delete(request, pk):
     car = get_object_or_404(Car, pk=pk)

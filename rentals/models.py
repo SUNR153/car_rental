@@ -12,7 +12,6 @@ class Rental(models.Model):
     total_price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
     
     def save(self, *args, **kwargs):
-        # Автоматический расчет при сохранении
         if not self.total_price and self.start_date and self.end_date:
             days = (self.end_date - self.start_date).days + 1
             self.total_price = days * self.car.price_per_day

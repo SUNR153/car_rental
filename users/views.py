@@ -155,7 +155,7 @@ def profile_settings(request):
     settings_form = ProfileSettingsForm(
         request.POST or None,
         request.FILES or None,
-        instance=profile  # ✅ КЛЮЧЕВОЕ!
+        instance=profile
     )
 
     password_form = PasswordChangeForm(
@@ -178,7 +178,6 @@ def profile_settings(request):
         'password_form': password_form,
     })
 
-# 🔹 AJAX theme toggle (dark/light)
 @csrf_exempt
 @login_required
 def toggle_theme(request):
@@ -191,7 +190,6 @@ def toggle_theme(request):
             return JsonResponse({"status": "ok"})
     return JsonResponse({"status": "error"}, status=400)
 
-# 🔹 Language switcher
 @csrf_protect
 @login_required
 def change_language(request):
@@ -239,15 +237,12 @@ def password_reset_request(request):
             email = form.cleaned_data['email']
             user = User.objects.get(email=email)
             
-            # Создаём код для сброса
             reset_code = PasswordResetCode.objects.create(user=user)
             
-            # Формируем ссылку
             reset_url = request.build_absolute_uri(
                 f"/en/users/password_reset_confirm/?code={reset_code.code}"
             )
             
-            # Отправляем письмо
             send_mail(
                 subject='Сброс пароля',
                 message=f'Перейдите по ссылке для сброса пароля: {reset_url}',
@@ -275,7 +270,6 @@ def password_reset_confirm(request):
             user.set_password(new_password)
             user.save()
             
-            # Удаляем код после использования
             reset_code.delete()
             
             messages.success(request, 'Пароль успешно изменён. Теперь вы можете войти.')

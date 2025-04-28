@@ -1,20 +1,24 @@
-<!-- chats/templates/chats/my_chats.html -->
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "My Chats" %}{% endblock %}
 
 {% block content %}
-<h2>Мои чаты</h2>
-{% if chats %}
-    <ul>
-    {% for chat in chats %}
-        <li>
-            <a href="{% url 'chats:chat_view' car_id=chat.car.id %}">
-                Чат по автомобилю: {{ chat.car.name }} (с {% for participant in chat.participants.all %}{% if participant != user %}{{ participant.email }}{% endif %}{% endfor %})
-            </a>
-            <small>{{ chat.created_at }}</small>
-        </li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>У вас пока нет чатов.</p>
-{% endif %}
+<div class="chats-list">
+    <h2>{% trans "My Chats" %}</h2>
+
+    {% if chats %}
+        <ul>
+            {% for chat in chats %}
+                <li>
+                    <a href="{% url 'chats:chat_view' car_id=chat.car.id %}">
+                        {% blocktrans %}Chat about {{ chat.car.brand }} {{ chat.car.model }}{% endblocktrans %}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>{% trans "You don't have any chats yet." %}</p>
+    {% endif %}
+</div>
 {% endblock %}

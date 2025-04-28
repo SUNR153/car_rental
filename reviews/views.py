@@ -25,7 +25,6 @@ def review_detail(request, pk):
 
 @login_required
 def review_create(request):
-    # Получаем car_id из GET-параметра, если он есть
     car_id = request.GET.get('car_id')
     car = None
     if car_id:
@@ -37,16 +36,14 @@ def review_create(request):
             review = form.save(commit=False)
             review.author = request.user
             if car:
-                review.car = car  # Привязываем отзыв к автомобилю
+                review.car = car
             review.save()
-            # Если car_id был передан, возвращаемся на страницу автомобиля
             if car:
                 return redirect('cars:car_detail', pk=car.id)
             return redirect('reviews:review_list')
         else:
             print("Form errors:", form.errors)
     else:
-        # Если car_id передан, устанавливаем начальное значение для формы
         initial = {'car': car} if car else {}
         form = ReviewForm(initial=initial)
     return render(request, 'reviews/review_create.html', {'form': form, 'car': car})
@@ -71,9 +68,9 @@ def review_update(request, pk):
 
 @login_required
 def review_delete(request, pk):
-    review = get_object_or_404(Review, pk=pk, author=request.user)  # Проверяем авторство
+    review = get_object_or_404(Review, pk=pk, author=request.user)
     if request.method == 'POST':
         review.delete()
-        return redirect('reviews:review_list')  # Исправлено на именованный URL
+        return redirect('reviews:review_list')
     return render(request, 'reviews/review_delete.html', {'review': review})
 
