@@ -2,10 +2,19 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Car
 from .form import CarForm
 from django.urls import reverse
+from rentals.models import Rental
+from django.utils import timezone
 
 def car_list(request):
-    cars = Car.objects.all()
-    return render(request, 'cars/car_list.html', {'cars': cars})
+    today = timezone.now().date()
+
+    rented_car_ids = Rental.objects.filter(
+        start_date__lte=today, end_date__gte=today
+    ).values_list('car_id', flat=True)
+
+    available_cars = Car.objects.exclude(id__in=rented_car_ids)
+
+    return render(request, 'cars/car_list.html', {'cars': available_cars})
 
 def car_detail(request, pk):
     car = get_object_or_404(Car, pk=pk)

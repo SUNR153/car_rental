@@ -26,11 +26,6 @@ def rental_detail(request, pk):
     rental = get_object_or_404(Rental, pk=pk)
     return render(request, 'rentals/rental_detail.html', {'rental': rental})
 
-from datetime import datetime, timedelta
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib import messages
-from .models import Rental, Car
-
 @login_required
 def rental_create(request, car_id):
     car = get_object_or_404(Car, pk=car_id)

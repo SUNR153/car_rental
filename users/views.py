@@ -1,27 +1,38 @@
+import json
+import uuid
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import login, logout, authenticate, get_user_model, update_session_auth_hash
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import PasswordChangeForm
+from django.http import JsonResponse
 from django.contrib import messages
 from django.utils import timezone
-from django.core.mail import EmailMessage
-from django.utils.encoding import force_bytes, force_str
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.contrib.sites.shortcuts import get_current_site
-from django.template.loader import render_to_string
-from django.views.decorators.csrf import csrf_protect, csrf_exempt
-from django.http import JsonResponse
-from django.utils.translation import activate
-from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from django.utils.http import urlsafe_base64_decode
-from django.shortcuts import render, redirect
-from django.http import JsonResponse
-import json
 from django.utils.timezone import now, timedelta
-import uuid
-from django.core.mail import send_mail
-
-from .form import RegistrationForm, UserLoginForm, ProfileSettingsForm, UserUpdateForm, PasswordResetRequestForm, PasswordResetConfirmForm
+from django.core.mail import EmailMessage, send_mail
+from django.template.loader import render_to_string
+from django.contrib.sites.shortcuts import get_current_site
+from django.views.decorators.csrf import csrf_protect, csrf_exempt
+from django.utils.translation import activate
+from django.contrib.auth import (
+    login, 
+    logout, 
+    authenticate, 
+    get_user_model, 
+    update_session_auth_hash
+)
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.utils.encoding import force_bytes, force_str
+from django.utils.http import (
+    urlsafe_base64_encode, 
+    urlsafe_base64_decode
+)
+from .form import (
+    RegistrationForm,
+    UserLoginForm,
+    ProfileSettingsForm,
+    UserUpdateForm,
+    PasswordResetRequestForm,
+    PasswordResetConfirmForm
+)
 from .models import Profile, PasswordResetCode
 from .token import TokenGenerator
 
