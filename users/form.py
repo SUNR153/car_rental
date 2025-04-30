@@ -66,6 +66,14 @@ class UserLoginForm(forms.Form):
         return self.cleaned_data
 
 class ProfileSettingsForm(forms.ModelForm):
+    MAP_CHOICES = [
+    ('google', 'Google Maps'),
+    ('yandex', 'Yandex Maps'),
+    ('2gis', '2GIS'),
+    ]
+
+    preferred_map = forms.ChoiceField(choices=MAP_CHOICES)
+
     class Meta:
         model = Profile
         fields = ['avatar', 'driver_license']

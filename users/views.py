@@ -291,3 +291,7 @@ def password_reset_confirm(request):
 
 def password_reset_done(request):
     return render(request, 'users/password_reset_done.html')
+
+@login_required
+def show_map(request):
+    return render(request, 'users/map_embed.html')

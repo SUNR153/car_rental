@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from .form import RentalForm
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseForbidden
 
 User = get_user_model()
 
@@ -53,6 +54,12 @@ def rental_create(request, car_id):
                 end_date=end
             )
             
+            if car.author != request.user:
+                Notification.objects.create(
+                    user=car.author,
+                    message=f"{request.user.email} rented your car '{car.brand} {car.model}' from {start} to {end}."
+            )
+
             messages.success(request, 'Rental successfully created!')
             return redirect('cars:car_detail', pk=car.pk)
             
@@ -129,3 +136,35 @@ def rental_create(request, car_id):
         'default_start': datetime.now().strftime('%Y-%m-%d'),
         'default_end': (datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d')
     })
+
+@login_required
+def rental_extend(request, pk):
+    rental = get_object_or_404(Rental, pk=pk)
+
+    if request.user != rental.customer:
+        return HttpResponseForbidden("You are not allowed to edit this rental.")
+
+    if request.method == 'POST':
+        try:
+            start = datetime.strptime(request.POST['start_date'], '%Y-%m-%d').date()
+            end = datetime.strptime(request.POST['end_date'], '%Y-%m-%d').date()
+
+            if end < start:
+                messages.error(request, "End date cannot be before start date.")
+            else:
+                rental.start_date = start
+                rental.end_date = end
+                rental.total_price = (end - start).days * rental.car.price_per_day
+                rental.save()
+                messages.success(request, "Rental period updated.")
+                return redirect('rentals:rental_detail', pk=rental.pk)
+
+        except Exception as e:
+            messages.error(request, f"Error: {e}")
+
+    return render(request, 'rentals/rental_extend.html', {'rental': rental})
+
+@login_required
+def owner_rentals(request):
+    rentals = Rental.objects.filter(car__author=request.user).select_related('car', 'customer')
+    return render(request, 'rentals/owner_rentals.html', {'rentals': rentals})

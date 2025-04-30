@@ -16,6 +16,11 @@
     <p><strong>{% trans "Email:" %}</strong> {{ user.email }}</p>
     <p><strong>{% trans "Driver's License:" %}</strong>
     {% if user.profile.driver_license %}{% trans "Yes" %}{% else %}{% trans "No" %}{% endif %}
+    {% if user.is_authenticated and user.profile %}
+      <a href="{% url 'rentals:owner_rentals' %}" class="button">
+        {% trans "View My Car Rentals" %}
+      </a>
+    {% endif %}
     </p>
     <a href="{% url 'users:user_update' user.pk %}" class="btn btn-primary">{% trans "Edit Profile" %}</a>
   </div>

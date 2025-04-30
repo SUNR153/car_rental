@@ -33,6 +33,13 @@ class Profile(models.Model):
     language = models.CharField(max_length=10, default='en')
     background = models.ImageField(upload_to='backgrounds/', blank=True, null=True)
     driver_license = models.BooleanField(default=False)
+    MAP_CHOICES = [
+    ('google', 'Google Maps'),
+    ('yandex', 'Yandex Maps'),
+    ('2gis', '2GIS'),
+    ]
+
+    preferred_map = models.CharField(max_length=20, choices=MAP_CHOICES, default='google')
 
     def __str__(self):
         return f"{self.user.username} ({self.user.get_role_display()})"

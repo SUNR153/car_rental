@@ -10,4 +10,6 @@ urlpatterns = [
     path('create/<int:car_id>/', views.rental_create, name='rental_create'),
     path('<int:pk>/edit/', views.rental_update, name='rental_update'),
     path('<int:pk>/delete/', views.rental_delete, name='rental_delete'),
+    path('<int:pk>/extend/', views.rental_extend, name='rental_extend'),
+    path('owner/', views.owner_rentals, name='owner_rentals'),
 ]

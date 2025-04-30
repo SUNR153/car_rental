@@ -17,8 +17,9 @@
         <p><strong>{% trans "Features:" %}</strong> {{ car.features }}</p>
 
         {% if user.is_authenticated %}
-            <a href="{% url 'rentals:rental_create' car.id %}" class="button">{% trans "Rent this car" %}</a>
-
+            {% if user.is_authenticated and user != car.author %}
+                <a href="{% url 'rentals:rental_create' car.id %}" class="button">{% trans "Rent this car" %}</a>
+            {% endif %}
             {% if user == car.author %}
                 <a href="{% url 'cars:car_update' car.id %}" class="button">{% trans "Update" %}</a>
                 <a href="{% url 'cars:car_delete' car.id %}" class="button">{% trans "Delete" %}</a>
@@ -32,9 +33,9 @@
             {% else %}
                 <a href="{% url 'favorites:add_to_favorites' car.id %}" class="button btn-primary">🤍 {% trans "Add to Favorites" %}</a>
             {% endif %}
-
-            <a href="{% url 'chats:chat_view' car.id %}" class="button btn-secondary">💬 {% trans "Start Chat" %}</a>
-
+            {% if user.is_authenticated and user != car.author %}
+                <a href="{% url 'chats:chat_view' car.id %}" class="button btn-secondary">💬 {% trans "Start Chat" %}</a>
+            {% endif %}
         {% endif %}
 
         <a href="{% url 'cars:car_list' %}" class="button">{% trans "Back" %}</a>
