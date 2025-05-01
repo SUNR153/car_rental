@@ -28,10 +28,12 @@
             <a href="{% url 'reviews:review_list' car_id=car.id %}" class="button">{% trans "Reviews" %}</a>
             <a href="{% url 'reviews:review_create' %}?car_id={{ car.id }}" class="button">{% trans "Add Review" %}</a>
 
-            {% if is_favorite %}
-                <a href="{% url 'favorites:remove_from_favorites' car.id %}" class="button btn-danger">❤️ {% trans "Remove from Favorites" %}</a>
-            {% else %}
-                <a href="{% url 'favorites:add_to_favorites' car.id %}" class="button btn-primary">🤍 {% trans "Add to Favorites" %}</a>
+            {% if user.is_authenticated and user != car.author %}
+                {% if is_favorite %}
+                    <a href="{% url 'favorites:remove_from_favorites' car.id %}" class="button btn-danger">❤️ {% trans "Remove from Favorites" %}</a>
+                {% else %}
+                    <a href="{% url 'favorites:add_to_favorites' car.id %}" class="button btn-primary">🤍 {% trans "Add to Favorites" %}</a>
+                {% endif %}
             {% endif %}
             {% if user.is_authenticated and user != car.author %}
                 <a href="{% url 'chats:chat_view' car.id %}" class="button btn-secondary">💬 {% trans "Start Chat" %}</a>

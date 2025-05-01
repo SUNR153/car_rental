@@ -1,27 +1,65 @@
 {% extends "base.html" %}
-{% load i18n %}
-{% load static %}
+{% load i18n static %}
 
 {% block content %}
 <div class="page-container">
     <h2>{% trans "Available cars" %}</h2>
+
+    <form method="get" class="filter-form">
+        <label>{% trans "Brand" %}</label>
+        <input type="text" name="brand" value="{{ request.GET.brand }}">
+
+        <label>{% trans "Model" %}</label>
+        <input type="text" name="model" value="{{ request.GET.model }}">
+
+        <label>{% trans "Year" %}</label>
+        <input type="number" name="year" value="{{ request.GET.year }}">
+
+        <label>{% trans "Fuel type" %}</label>
+        <select name="fuel_type">
+            <option value="">{% trans "All" %}</option>
+            <option value="petrol" {% if request.GET.fuel_type == "petrol" %}selected{% endif %}>Petrol</option>
+            <option value="diesel" {% if request.GET.fuel_type == "diesel" %}selected{% endif %}>Diesel</option>
+            <option value="electric" {% if request.GET.fuel_type == "electric" %}selected{% endif %}>Electric</option>
+            <option value="hybrid" {% if request.GET.fuel_type == "hybrid" %}selected{% endif %}>Hybrid</option>
+        </select>
+
+        <label>{% trans "Transmission" %}</label>
+        <select name="transmission">
+            <option value="">{% trans "All" %}</option>
+            <option value="manual" {% if request.GET.transmission == "manual" %}selected{% endif %}>Manual</option>
+            <option value="automatic" {% if request.GET.transmission == "automatic" %}selected{% endif %}>Automatic</option>
+        </select>
+
+        <label>{% trans "Condition" %}</label>
+        <select name="condition">
+            <option value="">{% trans "All" %}</option>
+            <option value="new" {% if request.GET.condition == "new" %}selected{% endif %}>New</option>
+            <option value="used" {% if request.GET.condition == "used" %}selected{% endif %}>Used</option>
+        </select>
+
+        <button type="submit" class="button">{% trans "Filter" %}</button>
+        <a href="{% url 'cars:car_list' %}" class="button secondary">{% trans "Reset" %}</a>
+    </form>
+
     <div class="card-grid">
         {% for car in cars %}
         <div class="card">
             {% if car.image %}
-                <img src="{{ car.image.url }}" alt="{{ car.make }} {{ car.model }}" class="car-image">
+                <img src="{{ car.image.url }}" alt="{{ car.brand }} {{ car.model }}" class="car-image">
             {% else %}
-                <img src="{% static 'images/default_car.jpg' %}" alt="No image" class="car-image">
+                <img src="{% static 'image/default-car.png' %}" alt="No image" class="car-image">
             {% endif %}
             <h3>{{ car.author.last_name }} {{ car.author.first_name }}</h3>
             <h3>{{ car.brand }} {{ car.model }}</h3>
-            <p><strong>{% trans "Price:" %}</strong> ${{ car.price_per_day }} / day</p>
+            <p><strong>{% trans "Price:" %}</strong> ${{ car.price_per_day }} / {% trans "day" %}</p>
             <a href="{% url 'cars:car_detail' car.id %}" class="button">{% trans "View car" %}</a>
         </div>
         {% empty %}
         <p>{% trans "No cars available at the moment." %}</p>
         {% endfor %}
     </div>
+
     {% if user.is_authenticated %}
     <a href="{% url 'cars:car_create' %}" class="button">{% trans "New post" %}</a>
     {% endif %}

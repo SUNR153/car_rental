@@ -7,17 +7,52 @@ from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 from django.contrib import messages
+from django.db.models import Q
 
 def car_list(request):
     today = timezone.now().date()
 
     rented_car_ids = Rental.objects.filter(
-        start_date__lte=today, end_date__gte=today
+        start_date__lte=today,
+        end_date__gte=today
     ).values_list('car_id', flat=True)
 
-    available_cars = Car.objects.exclude(id__in=rented_car_ids)
+    cars = Car.objects.exclude(id__in=rented_car_ids)
 
-    return render(request, 'cars/car_list.html', {'cars': available_cars})
+    brand = request.GET.get('brand')
+    year = request.GET.get('year')
+    fuel = request.GET.get('fuel')
+    transmission = request.GET.get('transmission')
+    seats = request.GET.get('seats')
+    min_price = request.GET.get('min_price')
+    max_price = request.GET.get('max_price')
+
+    if brand:
+        cars = cars.filter(brand=brand)
+    if year:
+        cars = cars.filter(year=year)
+    if fuel:
+        cars = cars.filter(fuel_type=fuel)
+    if transmission:
+        cars = cars.filter(transmission=transmission)
+    if seats:
+        cars = cars.filter(seats=seats)
+    if min_price:
+        cars = cars.filter(price_per_day__gte=min_price)
+    if max_price:
+        cars = cars.filter(price_per_day__lte=max_price)
+
+    context = {
+        'cars': cars,
+        'brands': Car.objects.values_list('brand', flat=True).distinct(),
+        'years': Car.objects.values_list('year', flat=True).distinct().order_by('year'),
+        'fuel_types': Car.objects.values_list('fuel_type', flat=True).distinct(),
+        'transmissions': Car.objects.values_list('transmission', flat=True).distinct(),
+        'seats_list': Car.objects.values_list('seats', flat=True).distinct().order_by('seats'),
+    }
+
+    return render(request, 'cars/car_list.html', context)
+
 
 
 def car_detail(request, pk):
