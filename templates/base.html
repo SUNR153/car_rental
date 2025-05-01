@@ -12,7 +12,12 @@
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 
-<body class="theme-transition {% if user.is_authenticated and user.profile %}{{ user.profile.theme }}{% else %}light{% endif %}">
+<body 
+  class="theme-transition {% if user.is_authenticated and user.profile %}{{ user.profile.theme }}{% else %}light{% endif %}" 
+  data-detected-city="{{ request.session.detected_city|default:'' }}" 
+  data-user-city="{% if user.is_authenticated and user.profile.city %}{{ user.profile.city }}{% else %}{% endif %}"
+  data-csrf="{{ csrf_token }}">
+
 
     <header>
         <nav class="navbar">

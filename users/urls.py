@@ -23,4 +23,5 @@ urlpatterns = [
     path('<int:pk>/edit/', views.user_update, name='user_update'),
     path('<int:pk>/delete/', views.user_delete, name='user_delete'),
     path('map/', views.show_map, name='show_map'),
+    path("set-city/", views.set_city, name="set_city"),
 ]

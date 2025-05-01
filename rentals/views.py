@@ -104,6 +104,10 @@ def rental_create(request, car_id):
         start_date = request.POST.get('start_date')
         end_date = request.POST.get('end_date')
 
+        if not car.available_dates.filter(start_date__lte=start_date, end_date__gte=end_date).exists():
+            messages.error(request, "This car is not available for the selected dates.")
+            return redirect('rentals:rental_create', car_id=car_id)
+
         start = datetime.strptime(start_date, '%Y-%m-%d').date()
         end = datetime.strptime(end_date, '%Y-%m-%d').date()
 

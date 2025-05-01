@@ -1,13 +1,29 @@
 {% extends "base.html" %}
 {% load i18n %}
+
 {% block content %}
 <div class="form-container">
     <h2>{% trans "Add new car" %}</h2>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
+        
+        <h3>{% trans "Car Info" %}</h3>
         {{ form.as_p }}
-        <button type="submit">{% trans "Add car" %}</button>
-        <a href="{% url 'cars:car_list' %}" class="button">{% trans "Back" %}</a>  
+        
+        <h3>{% trans "Available Dates" %}</h3>
+        {{ formset.management_form }}
+        <div class="date-forms">
+            {% for subform in formset %}
+                <div class="date-form">
+                    {{ subform.as_p }}
+                </div>
+            {% endfor %}
+        </div>
+        
+        <div class="form-buttons">
+            <button type="submit" class="submit-button">{% trans "Add car" %}</button>
+            <a href="{% url 'cars:car_list' %}" class="button cancel-button">{% trans "Back" %}</a>  
+        </div>
     </form>
 </div>
 {% endblock %}

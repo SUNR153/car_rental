@@ -76,7 +76,7 @@ class ProfileSettingsForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = ['avatar', 'driver_license']
+        fields = ['avatar', 'driver_license', 'preferred_map']
 
 class UserUpdateForm(forms.ModelForm):
     class Meta:

@@ -96,3 +96,11 @@ class Car(models.Model):
 
     def __str__(self):
         return f"Review by {self.author}"
+    
+class CarAvailability(models.Model):
+    car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='available_dates')
+    start_date = models.DateField()
+    end_date = models.DateField()
+
+    def __str__(self):
+        return f"{self.car} available from {self.start_date} to {self.end_date}"

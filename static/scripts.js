@@ -201,3 +201,34 @@ document.addEventListener('DOMContentLoaded', function () {
     fetchMessages();
     setInterval(fetchMessages, 3000);
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const needsCity = document.body.dataset.detectedCity;
+    const userCity = document.body.dataset.userCity;
+
+    if (!userCity && needsCity) {
+        const modal = document.createElement('div');
+        modal.className = 'modal-overlay';
+        modal.innerHTML = `
+            <div class="modal-window">
+                <h2>We detected your city</h2>
+                <p>Your city is <strong>${needsCity}</strong>. Do you want to save this as your location?</p>
+                <form method="POST" action="/users/set_city/">
+                    <input type="hidden" name="csrfmiddlewaretoken" value="${document.body.dataset.csrf}">
+                    <input type="hidden" name="city" value="${needsCity}">
+                    <label>Preferred map</label>
+                    <select name="preferred_map" required>
+                        <option value="google">Google Maps</option>
+                        <option value="yandex">Yandex Maps</option>
+                        <option value="2gis">2GIS</option>
+                    </select>
+                    <div class="modal-actions">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-secondary" onclick="document.querySelector('.modal-overlay').remove();">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        `;
+        document.body.appendChild(modal);
+    }
+});
