@@ -4,6 +4,7 @@ from .form import CarForm, CarAvailabilityForm
 from django.urls import reverse
 from rentals.models import Rental
 from django.utils import timezone
+from django.utils.timezone import now
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 from django.contrib import messages
@@ -11,6 +12,8 @@ from django.db.models import Q
 
 def car_list(request):
     today = timezone.now().date()
+
+    Rental.objects.filter(end_date__lt=today).delete()
 
     rented_car_ids = Rental.objects.filter(
         start_date__lte=today,

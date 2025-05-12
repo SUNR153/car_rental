@@ -7,14 +7,17 @@
 
     <ul class="rental-details">
         <li><strong>{% trans "Car:" %}</strong> {{ rental.car }}</li>
-        <li><strong>{% trans "Renter:" %}</strong> {{ rental.renter }}</li>
-        <li><strong>{% trans "Owner:" %}</strong> {{ rental.owner }}</li>
+        <li><strong>{% trans "Renter:" %}</strong> {{ rental.customer }}</li>
+        <li><strong>{% trans "Owner:" %}</strong> {{ rental.author }}</li>
         <li><strong>{% trans "Start Date:" %}</strong> {{ rental.start_date }}</li>
         <li><strong>{% trans "End Date:" %}</strong> {{ rental.end_date }}</li>
         <li><strong>{% trans "Status:" %}</strong> {{ rental.status }}</li>
     </ul>
 
     <div class="button-group">
+        {% if user.is_authenticated and user != car.author %}
+        <a href="{% url 'chats:chat_view' car.id %}" class="button btn-secondary">💬 {% trans "Start Chat" %}</a>
+        {% endif %}
         <a href="{% url 'rentals:rental_extend' rental.pk %}" class="button">{% trans "Edit" %}</a>
         <a href="{% url 'rentals:rental_delete' rental.pk %}" class="button delete-button">{% trans "Delete" %}</a>
         <a href="{% url 'rentals:my_rental' %}" class="button back-button">{% trans "Back to My Rentals" %}</a>

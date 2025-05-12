@@ -10,6 +10,7 @@ from .form import RentalForm
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
+from django.utils import timezone
 
 User = get_user_model()
 
@@ -25,7 +26,8 @@ def rental_list(request):
 
 def rental_detail(request, pk):
     rental = get_object_or_404(Rental, pk=pk)
-    return render(request, 'rentals/rental_detail.html', {'rental': rental})
+    car = rental.car 
+    return render(request, 'rentals/rental_detail.html', {'rental': rental, 'car': car})
 
 @login_required
 def rental_create(request, car_id):
@@ -172,3 +174,11 @@ def rental_extend(request, pk):
 def owner_rentals(request):
     rentals = Rental.objects.filter(car__author=request.user).select_related('car', 'customer')
     return render(request, 'rentals/owner_rentals.html', {'rentals': rentals})
+
+@login_required
+def profile(request):
+    today = timezone.now().date()
+
+    Rental.objects.filter(customer=request.user, end_date__lt=today).delete()
+
+    return render(request, 'users/profile.html', {'u': request.user})

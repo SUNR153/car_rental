@@ -1,46 +1,48 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% block content %}
+
 <div class="page-container">
     <h2>{{ car.make }} {{ car.model }}</h2>
 
-    <div class="car-detail">
-        <img src="{{ car.car_images.url }}" alt="{{ car.make }} {{ car.model }}">
+<div class="car-detail">
+    <img src="{{ car.car_images.url }}" alt="{{ car.make }} {{ car.model }}">
 
-        <p><strong>{% trans "Year:" %}</strong> {{ car.year }}</p>
-        <p><strong>{% trans "Price:" %}</strong> ${{ car.price_per_day }} / {% trans "day" %}</p>
-        <p><strong>{% trans "Condition:" %}</strong> {{ car.condition }}</p>
-        <p><strong>{% trans "Mileage:" %}</strong> {{ car.mileage }} km</p>
-        <p><strong>{% trans "Fuel:" %}</strong> {{ car.fuel_type }}</p>
-        <p><strong>{% trans "Transmission:" %}</strong> {{ car.transmission }}</p>
-        <p><strong>{% trans "Seats:" %}</strong> {{ car.seats }}</p>
-        <p><strong>{% trans "Features:" %}</strong> {{ car.features }}</p>
+    <p><strong>{% trans "Year:" %}</strong> {{ car.year }}</p>
+    <p><strong>{% trans "Price:" %}</strong> ${{ car.price_per_day }} / {% trans "day" %}</p>
+    <p><strong>{% trans "Condition:" %}</strong> {{ car.condition }}</p>
+    <p><strong>{% trans "Mileage:" %}</strong> {{ car.mileage }} km</p>
+    <p><strong>{% trans "Fuel:" %}</strong> {{ car.fuel_type }}</p>
+    <p><strong>{% trans "Transmission:" %}</strong> {{ car.transmission }}</p>
+    <p><strong>{% trans "Seats:" %}</strong> {{ car.seats }}</p>
+    <p><strong>{% trans "Features:" %}</strong> {{ car.features }}</p>
 
-        {% if user.is_authenticated %}
-            {% if user.is_authenticated and user != car.author %}
-                <a href="{% url 'rentals:rental_create' car.id %}" class="button">{% trans "Rent this car" %}</a>
-            {% endif %}
-            {% if user == car.author %}
-                <a href="{% url 'cars:car_update' car.id %}" class="button">{% trans "Update" %}</a>
-                <a href="{% url 'cars:car_delete' car.id %}" class="button">{% trans "Delete" %}</a>
-            {% endif %}
-
-            <a href="{% url 'reviews:review_list' car_id=car.id %}" class="button">{% trans "Reviews" %}</a>
-            <a href="{% url 'reviews:review_create' %}?car_id={{ car.id }}" class="button">{% trans "Add Review" %}</a>
-
-            {% if user.is_authenticated and user != car.author %}
-                {% if is_favorite %}
-                    <a href="{% url 'favorites:remove_from_favorites' car.id %}" class="button btn-danger">❤️ {% trans "Remove from Favorites" %}</a>
-                {% else %}
-                    <a href="{% url 'favorites:add_to_favorites' car.id %}" class="button btn-primary">🤍 {% trans "Add to Favorites" %}</a>
-                {% endif %}
-            {% endif %}
-            {% if user.is_authenticated and user != car.author %}
-                <a href="{% url 'chats:chat_view' car.id %}" class="button btn-secondary">💬 {% trans "Start Chat" %}</a>
-            {% endif %}
+    {% if user.is_authenticated %}
+        {% if user.is_authenticated and user != car.author %}
+            <a href="{% url 'rentals:rental_create' car.id %}" class="button">{% trans "Rent this car" %}</a>
+        {% endif %}
+        {% if user == car.author %}
+            <a href="{% url 'cars:car_update' car.id %}" class="button">{% trans "Update" %}</a>
+            <a href="{% url 'cars:car_delete' car.id %}" class="button">{% trans "Delete" %}</a>
         {% endif %}
 
-        <a href="{% url 'cars:car_list' %}" class="button">{% trans "Back" %}</a>
-    </div>
+        <a href="{% url 'reviews:review_list' car_id=car.id %}" class="button">{% trans "Reviews" %}</a>
+        <a href="{% url 'reviews:review_create' %}?car_id={{ car.id }}" class="button">{% trans "Add Review" %}</a>
+
+        {% if user.is_authenticated and user != car.author %}
+            {% if is_favorite %}
+                <a href="{% url 'favorites:remove_from_favorites' car.id %}" class="button btn-danger">❤️ {% trans "Remove from Favorites" %}</a>
+            {% else %}
+                <a href="{% url 'favorites:add_to_favorites' car.id %}" class="button btn-primary">🤍 {% trans "Add to Favorites" %}</a>
+            {% endif %}
+        {% endif %}
+        {% if user.is_authenticated and user != car.author %}
+            <a href="{% url 'chats:chat_view' car.id %}" class="button btn-secondary">💬 {% trans "Start Chat" %}</a>
+        {% endif %}
+    {% endif %}
+
+    <a href="{% url 'cars:car_list' %}" class="button">{% trans "Back" %}</a>
+</div>
+
 </div>
 {% endblock %}
