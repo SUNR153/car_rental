@@ -90,7 +90,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'car_rental',
-        'USER': 'Sunrise',
+        'USER': 'sunrise',
         'PASSWORD': '277353',
         'HOST': 'localhost',
         'PORT': '5432',  
