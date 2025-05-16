@@ -295,23 +295,3 @@ def password_reset_done(request):
 @login_required
 def show_map(request):
     return render(request, 'users/map_embed.html')
-
-# @login_required
-# @csrf_protect
-# def set_city(request):
-#     if request.method == 'POST':
-#         city = request.POST.get('city')
-#         map_type = request.POST.get('preferred_map')
-
-#         if city:
-#             profile = request.user.profile
-#             profile.city = city
-#             profile.preferred_map = map_type or 'google'
-#             profile.save()
-
-#             if 'detected_city' in request.session:
-#                 del request.session['detected_city']
-
-#             messages.success(request, f"Your location is set to {city} with map preference: {map_type.capitalize()}.")
-    
-#     return redirect('/')
