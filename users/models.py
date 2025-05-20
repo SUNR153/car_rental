@@ -33,7 +33,6 @@ class Profile(models.Model):
     language = models.CharField(max_length=10, default='en')
     background = models.ImageField(upload_to='backgrounds/', blank=True, null=True)
     driver_license = models.BooleanField(default=False)
-    city = models.CharField(max_length=255, blank=True, null=True)
     MAP_CHOICES = [
     ('google', 'Google Maps'),
     ('yandex', 'Yandex Maps'),

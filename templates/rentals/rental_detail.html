@@ -15,7 +15,7 @@
     </ul>
 
     <div class="button-group">
-        {% if user.is_authenticated and user != car.author %}
+        Т
         <a href="{% url 'chats:chat_view' car.id %}" class="button btn-secondary">💬 {% trans "Start Chat" %}</a>
         {% endif %}
         <a href="{% url 'rentals:rental_extend' rental.pk %}" class="button">{% trans "Edit" %}</a>
