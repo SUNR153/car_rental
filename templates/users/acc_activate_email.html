@@ -1,6 +1,11 @@
 {% autoescape off %}
-Hello, {{ user.first_name }} {{ user.last_name }}
-Thank you for registering on {{ domain }}.
-Please click the link below to activate your account:
+{% load i18n %}
+
+{% blocktrans with name=user.first_name surname=user.last_name site=domain %}
+Hello, {{ name }} {{ surname }}
+Thank you for registering on {{ site }}.
+{% endblocktrans %}
+
+{% trans "Please click the link below to activate your account:" %}
 http://{{ domain }}{% url 'users:activate' uidb64=uid token=token %}
 {% endautoescape %}

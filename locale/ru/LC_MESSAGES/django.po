@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: car_rental\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-24 00:00+0000\n"
+"POT-Creation-Date: 2025-05-20 23:10+0500\n"
 "PO-Revision-Date: 2025-04-24 00:00+0000\n"
 "Last-Translator: Зарип <your@email.com>\n"
 "Language-Team: Russian\n"
@@ -11,126 +11,355 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: .\myvenv\Lib\site-packages\django\views\templates\default_urlconf.html:7
+#: .\myvenv\Lib\site-packages\django\views\templates\default_urlconf.html:204
 msgid "The install worked successfully! Congratulations!"
 msgstr "Установка прошла успешно! Поздравляем!"
 
-msgid "View <a href=\"https://docs.djangoproject.com/en/%(version)s/releases/\" target=\"_blank\" rel=\"noopener\">release notes</a> for Django %(version)s"
-msgstr "Посмотрите <a href=\"https://docs.djangoproject.com/en/%(version)s/releases/\" target=\"_blank\" rel=\"noopener\">замечания к выпуску</a> для Django %(version)s"
+#: .\myvenv\Lib\site-packages\django\views\templates\default_urlconf.html:206
+#, python-format
+msgid ""
+"View <a href=\"https://docs.djangoproject.com/en/%(version)s/releases/\" "
+"target=\"_blank\" rel=\"noopener\">release notes</a> for Django %(version)s"
+msgstr ""
+"Посмотрите <a href=\"https://docs.djangoproject.com/en/%(version)s/releases/"
+"\" target=\"_blank\" rel=\"noopener\">замечания к выпуску</a> для Django "
+"%(version)s"
 
-msgid "You are seeing this page because <a href=\"https://docs.djangoproject.com/en/%(version)s/ref/settings/#debug\" target=\"_blank\" rel=\"noopener\">DEBUG=True</a> is in your settings file and you have not configured any URLs."
-msgstr "Вы видите эту страницу, потому что в вашем файле настроек установлено <a href=\"https://docs.djangoproject.com/en/%(version)s/ref/settings/#debug\" target=\"_blank\" rel=\"noopener\">DEBUG=True</a> и вы не настроили URL-адреса."
+#: .\myvenv\Lib\site-packages\django\views\templates\default_urlconf.html:208
+#, python-format
+msgid ""
+"You are seeing this page because <a href=\"https://docs.djangoproject.com/en/"
+"%(version)s/ref/settings/#debug\" target=\"_blank\" "
+"rel=\"noopener\">DEBUG=True</a> is in your settings file and you have not "
+"configured any URLs."
+msgstr ""
+"Вы видите эту страницу, потому что в вашем файле настроек установлено <a "
+"href=\"https://docs.djangoproject.com/en/%(version)s/ref/settings/#debug\" "
+"target=\"_blank\" rel=\"noopener\">DEBUG=True</a> и вы не настроили URL-"
+"адреса."
 
+#: .\myvenv\Lib\site-packages\django\views\templates\default_urlconf.html:217
 msgid "Django Documentation"
 msgstr "Документация Django"
 
-msgid "Topics, references, &amp; how-to’s"
+#: .\myvenv\Lib\site-packages\django\views\templates\default_urlconf.html:218
+msgid "Topics, references, & how-to’s"
 msgstr "Темы, ссылки и руководство"
 
+#: .\myvenv\Lib\site-packages\django\views\templates\default_urlconf.html:226
 msgid "Tutorial: A Polling App"
 msgstr "Учебник: Приложение для голосования"
 
+#: .\myvenv\Lib\site-packages\django\views\templates\default_urlconf.html:227
 msgid "Get started with Django"
 msgstr "Начните работать с Django"
 
+#: .\myvenv\Lib\site-packages\django\views\templates\default_urlconf.html:235
 msgid "Django Community"
 msgstr "Сообщество Django"
 
+#: .\myvenv\Lib\site-packages\django\views\templates\default_urlconf.html:236
 msgid "Connect, get help, or contribute"
 msgstr "Свяжитесь, получите помощь или внесите свой вклад"
 
+#: .\myvenv\Lib\site-packages\django\views\templates\directory_index.html:8
+#: .\myvenv\Lib\site-packages\django\views\templates\directory_index.html:11
+#, python-format
 msgid "Index of %(directory)s"
 msgstr "Индекс %(directory)s"
 
+#: .\templates\base.html:45
 msgid "Cars"
 msgstr "Автомобили"
 
+#: .\templates\base.html:47
 msgid "Profile"
 msgstr "Профиль"
 
+#: .\templates\base.html:48
+#, fuzzy
+#| msgid "My Rentals"
+msgid "My rentals"
+msgstr "Мои аренды"
+
+#: .\templates\base.html:49
+#, fuzzy
+#| msgid "Reviews"
+msgid "My review"
+msgstr "Мои отзывы"
+
+#: .\templates\base.html:50
+msgid "Favorite"
+msgstr "Избранное"
+
+#: .\templates\base.html:51 .\templates\chats\my_chat.html:4
+#: .\templates\chats\my_chat.html:8
+msgid "My Chats"
+msgstr "Мои чаты"
+
+#: .\templates\base.html:52
+msgid "Map"
+msgstr "Карта"
+
+#: .\templates\base.html:53
 msgid "Logout"
 msgstr "Выйти"
 
+#: .\templates\base.html:58 .\templates\users\login.html:41
+#: .\templates\users\register.html:4 .\templates\users\register.html:8
+#: .\templates\users\register.html:33
 msgid "Register"
 msgstr "Зарегистрироваться"
 
+#: .\templates\base.html:59 .\templates\users\login.html:4
+#: .\templates\users\login.html:8 .\templates\users\login.html:35
+#: .\templates\users\register.html:38
 msgid "Login"
 msgstr "Войти"
 
+#: .\templates\cars\car_create.html:6
 msgid "Add new car"
 msgstr "Добавить новый автомобиль"
 
+#: .\templates\cars\car_create.html:12
+#, fuzzy
+#| msgid "Details"
+msgid "Car details"
+msgstr "Детали автомобиля"
+
+#: .\templates\cars\car_create.html:17
+#, fuzzy
+#| msgid "Available cars"
+msgid "Availability"
+msgstr "Доступность"
+
+#: .\templates\cars\car_create.html:21
 msgid "Add car"
 msgstr "Добавить автомобиль"
 
+#: .\templates\cars\car_create.html:22 .\templates\cars\car_details.html:44
+#: .\templates\cars\car_update.html:10
+#: .\templates\reviews\review_detail.html:20
+#: .\templates\reviews\review_list.html:14
+#: .\templates\users\users_update.html:11
+msgid "Back"
+msgstr "Назад"
+
+#: .\templates\cars\car_delete.html:5
 msgid "Delete car"
 msgstr "Удалить автомобиль"
 
+#: .\templates\cars\car_delete.html:6
 msgid "Are you sure you want to delete"
 msgstr "Вы уверены, что хотите удалить"
 
+#: .\templates\cars\car_delete.html:9
 msgid "Yes, delete"
 msgstr "Да, удалить"
 
+#: .\templates\cars\car_delete.html:10
+#: .\templates\rentals\rental_delete.html:16
+#: .\templates\rentals\rental_update.html:14
+#: .\templates\reviews\review_create.html:12
+#: .\templates\reviews\review_delete.html:14
+#: .\templates\reviews\review_update.html:13
+#: .\templates\users\users_delete.html:10
 msgid "Cancel"
 msgstr "Отмена"
 
-#: .templates/cars/car_details.html:8
+#: .\templates\cars\car_details.html:11
 msgid "Year:"
 msgstr "Год:"
 
-#: .templates/cars/car_details.html:9 .templates/cars/car_list.html:12
+#: .\templates\cars\car_details.html:12 .\templates\cars\car_list.html:55
 msgid "Price:"
 msgstr "Цена:"
 
-#: .templates/cars/car_details.html:10
+#: .\templates\cars\car_details.html:12 .\templates\cars\car_list.html:55
+msgid "day"
+msgstr "день"
+
+#: .\templates\cars\car_details.html:13
 msgid "Condition:"
 msgstr "Состояние:"
 
-#: .templates/cars/car_details.html:11
-msgid "Miliage:"
+#: .\templates\cars\car_details.html:14
+#, fuzzy
+#| msgid "Miliage:"
+msgid "Mileage:"
 msgstr "Пробег:"
 
-#: .templates/cars/car_details.html:12
+#: .\templates\cars\car_details.html:15
 msgid "Fuel:"
 msgstr "Топливо:"
 
-#: .templates/cars/car_details.html:13
+#: .\templates\cars\car_details.html:16
 msgid "Transmission:"
 msgstr "Коробка передач:"
 
-#: .templates/cars/car_details.html:14
+#: .\templates\cars\car_details.html:17
 msgid "Seats:"
 msgstr "Мест:"
 
-#: .templates/cars/car_details.html:15
-msgid "Fearures:"
+#: .\templates\cars\car_details.html:18
+#, fuzzy
+#| msgid "Fearures:"
+msgid "Features:"
 msgstr "Особенности:"
 
-#: .templates/cars/car_details.html:16
+#: .\templates\cars\car_details.html:22
 msgid "Rent this car"
 msgstr "Арендовать этот автомобиль"
 
-#: .templates/cars/car_list.html:6
+#: .\templates\cars\car_details.html:25
+#, fuzzy
+#| msgid "Update car"
+msgid "Update"
+msgstr "Обновить"
+
+#: .\templates\cars\car_details.html:26
+#: .\templates\rentals\rental_detail.html:22
+#: .\templates\reviews\review_detail.html:18
+msgid "Delete"
+msgstr "Удалить"
+
+#: .\templates\cars\car_details.html:29 .\templates\reviews\review_list.html:6
+msgid "Reviews"
+msgstr "Отзывы"
+
+#: .\templates\cars\car_details.html:30
+#, fuzzy
+#| msgid "Edit Review"
+msgid "Add Review"
+msgstr "Добавить отзыв"
+
+#: .\templates\cars\car_details.html:34
+msgid "Remove from Favorites"
+msgstr "Удалить из избранного"
+
+#: .\templates\cars\car_details.html:36
+msgid "Add to Favorites"
+msgstr "Добавить в избранное"
+
+#: .\templates\cars\car_details.html:40
+#: .\templates\rentals\rental_detail.html:19
+#, fuzzy
+#| msgid "Start Date:"
+msgid "Start Chat"
+msgstr "Начать чат"
+
+#: .\templates\cars\car_list.html:6
 msgid "Available cars"
 msgstr "Доступные автомобили"
 
-#: .templates/cars/car_list.html:13
+#: .\templates\cars\car_list.html:9
+msgid "Brand"
+msgstr "Марка"
+
+#: .\templates\cars\car_list.html:12
+msgid "Model"
+msgstr "Модель"
+
+#: .\templates\cars\car_list.html:15
+#, fuzzy
+#| msgid "Year:"
+msgid "Year"
+msgstr "Год:"
+
+#: .\templates\cars\car_list.html:18
+msgid "Fuel type"
+msgstr "Тип топлива"
+
+#: .\templates\cars\car_list.html:20 .\templates\cars\car_list.html:29
+#: .\templates\cars\car_list.html:36
+msgid "All"
+msgstr "Все"
+
+#: .\templates\cars\car_list.html:27
+#, fuzzy
+#| msgid "Transmission:"
+msgid "Transmission"
+msgstr "Коробка передач"
+
+#: .\templates\cars\car_list.html:34
+#, fuzzy
+#| msgid "Condition:"
+msgid "Condition"
+msgstr "Состояние"
+
+#: .\templates\cars\car_list.html:41
+msgid "Filter"
+msgstr "Фильтр"
+
+#: .\templates\cars\car_list.html:42
+msgid "Reset"
+msgstr "Сбросить"
+
+#: .\templates\cars\car_list.html:56
 msgid "View car"
 msgstr "Посмотреть автомобиль"
 
-#: .templates/cars/car_list.html:17
+#: .\templates\cars\car_list.html:59
 msgid "No cars available at the moment."
 msgstr "В данный момент нет доступных автомобилей."
 
-#: .templates/cars/car_update.html:5 .templates/cars/car_update.html:9
+#: .\templates\cars\car_list.html:64
+msgid "New post"
+msgstr "Новая запись"
+
+#: .\templates\cars\car_update.html:5 .\templates\cars\car_update.html:9
 msgid "Update car"
 msgstr "Обновить автомобиль"
 
-#: .templates/core/about.html:5
+#: .\templates\cars\set_availability.html:5
+msgid "Set Availability for"
+msgstr "Установить доступность для"
+
+#: .\templates\cars\set_availability.html:10
+msgid "Save"
+msgstr "Сохранить"
+
+#: .\templates\chats\chat.html:6
+msgid "Chat about"
+msgstr "Чат о"
+
+#: .\templates\chats\chat.html:22
+#, fuzzy
+#| msgid "No reviews yet."
+msgid "No messages yet."
+msgstr "Пока нет сообщений."
+
+#: .\templates\chats\chat.html:28
+msgid "Type your message..."
+msgstr "Введите ваше сообщение..."
+
+#: .\templates\chats\chat.html:29 .\templates\users\password_reset.html:9
+msgid "Send"
+msgstr "Отправить"
+
+#: .\templates\chats\chat.html:33
+#, fuzzy
+#| msgid "Back to My Rentals"
+msgid "Back to My Chats"
+msgstr "Вернуться к моим чатам"
+
+#: .\templates\chats\my_chat.html:15
+#, python-format
+msgid "Chat about %(chat.car.brand)s %(chat.car.model)s"
+msgstr "Чат о %(chat.car.brand)s %(chat.car.model)s"
+
+#: .\templates\chats\my_chat.html:21
+#, fuzzy
+#| msgid "You haven't rented any cars yet."
+msgid "You don't have any chats yet."
+msgstr "У вас пока нет чатов."
+
+#: .\templates\core\about.html:5
 msgid "About VROOOM"
 msgstr "О VROOOM"
 
-#: .templates/core/about.html:6
+#: .\templates\core\about.html:6
 msgid ""
 "VROOOM is a platform where you can rent a car or list your own vehicle for "
 "rent. Our mission is to make car sharing simple, secure, and accessible for "
@@ -140,103 +369,202 @@ msgstr ""
 "свой собственный для аренды. Наша миссия — сделать каршеринг простым, "
 "надёжным и доступным для всех."
 
-#: .templates/core/contact.html:5
+#: .\templates\core\contact.html:5
 msgid "Contact Us"
 msgstr "Свяжитесь с нами"
 
-#: .templates/core/contact.html:6
+#: .\templates\core\contact.html:6
 msgid "If you have any questions or need help, feel free to reach out to us."
 msgstr "Если у вас есть вопросы или нужна помощь, свяжитесь с нами."
 
-#: .templates/core/contact.html:8 .templates/users/profile.html:17 .templates/users/users_details.html:7
+#: .\templates\core\contact.html:8 .\templates\users\profile.html:16
+#: .\templates\users\users_details.html:7
 msgid "Email:"
 msgstr "Эл. почта:"
 
-#: .templates/core/contact.html:9
+#: .\templates\core\contact.html:9
 msgid "Phone:"
 msgstr "Телефон:"
 
-#: .templates/core/contact.html:10
+#: .\templates\core\contact.html:10
 msgid "Address:"
 msgstr "Адрес:"
 
-#: .templates/core/index.html:4
+#: .\templates\core\index.html:4
 msgid "Welcome to VROOOM - Car Rental"
 msgstr "Добро пожаловать в VROOOM — аренда автомобилей"
 
-#: .templates/core/index.html:9
+#: .\templates\core\index.html:9
 msgid "Need a ride?"
 msgstr "Нужна машина?"
 
-#: .templates/core/index.html:10
+#: .\templates\core\index.html:10
 msgid "Choose from a wide variety of cars and rent in seconds!"
 msgstr "Выбирайте из множества автомобилей и арендуйте за секунды!"
 
-#: .templates/core/index.html:11
+#: .\templates\core\index.html:11
 msgid "Browse Cars"
 msgstr "Просмотреть автомобили"
 
-#: .templates/core/index.html:17
+#: .\templates\core\index.html:17
 msgid "Affordable Prices"
 msgstr "Доступные цены"
 
-#: .templates/core/index.html:18
+#: .\templates\core\index.html:18
 msgid "We offer the best prices on the market without hidden fees."
 msgstr "Мы предлагаем лучшие цены на рынке без скрытых платежей."
 
-#: .templates/core/index.html:21
+#: .\templates\core\index.html:21
 msgid "Trusted by Thousands"
 msgstr "Доверяют тысячи"
 
-#: .templates/core/index.html:22
+#: .\templates\core\index.html:22
 msgid "Join thousands of happy customers who rent with us daily."
 msgstr "Присоединяйтесь к тысячам довольных клиентов, арендующих у нас каждый день."
 
-#: .templates/core/index.html:25
+#: .\templates\core\index.html:25
 msgid "24/7 Support"
 msgstr "Круглосуточная поддержка"
 
-#: .templates/core/index.html:26
+#: .\templates\core\index.html:26
 msgid "We’re always here to help, no matter the time or place."
 msgstr "Мы всегда готовы помочь, в любое время и в любом месте."
 
-#: .templates/rentals/my_rental.html:5
+#: .\templates\favorites\favorites_list.html:5
+msgid "My Favorite Cars"
+msgstr "Мои избранные автомобили"
+
+#: .\templates\favorites\favorites_list.html:10
+msgid "Price per day"
+msgstr "Цена за день"
+
+#: .\templates\favorites\favorites_list.html:11
+#: .\templates\users\users_list.html:10
+msgid "View"
+msgstr "Просмотр"
+
+#: .\templates\favorites\favorites_list.html:12
+msgid "Remove"
+msgstr "Удалить"
+
+#: .\templates\favorites\favorites_list.html:15
+#, fuzzy
+#| msgid "You haven't rented any cars yet."
+msgid "You have no favorite cars yet."
+msgstr "У вас пока нет избранных автомобилей."
+
+#: .\templates\notifications\notifications_list.html:6
+msgid "My Notifications"
+msgstr "Мои уведомления"
+
+#: .\templates\notifications\notifications_list.html:10
+msgid "Mark all as read"
+msgstr "Пометить все как прочитанные"
+
+#: .\templates\notifications\notifications_list.html:19
+msgid "Mark as read"
+msgstr "Пометить как прочитанное"
+
+#: .\templates\notifications\notifications_list.html:26
+msgid "No notifications yet."
+msgstr "Пока нет уведомлений."
+
+#: .\templates\rentals\my_rental.html:4
 msgid "My Rentals"
 msgstr "Мои аренды"
 
-#: .templates/rentals/my_rental.html:7
-msgid "Rented by Me"
-msgstr "Арендованные мной"
+#: .\templates\rentals\my_rental.html:11
+#: .\templates\rentals\rental_list.html:15
+msgid "Details"
+msgstr "Детали"
 
-#: .templates/rentals/my_rental.html:11 .templates/rentals/my_rental.html:22 .templates/rentals/rental_list.html:14
-msgid "to"
-msgstr "до"
+#: .\templates\rentals\my_rental.html:16
+#: .\templates\rentals\rental_list.html:20
+msgid "No rentals found."
+msgstr "Аренды не найдены."
 
-#: .templates/rentals/my_rental.html:15
-msgid "You haven't rented any cars yet."
-msgstr "Вы ещё не арендовали ни одного автомобиля."
+#: .\templates\rentals\owner_rentals.html:5
+msgid "Your car rentals"
+msgstr "Ваши арендованные автомобили"
 
-#: .templates/rentals/my_rental.html:18
-msgid "Cars I Rent Out"
-msgstr "Автомобили, которые я сдаю"
+#: .\templates\rentals\owner_rentals.html:9
+#, fuzzy
+#| msgid "Cars"
+msgid "Car"
+msgstr "Автомобиль"
 
-#: .templates/rentals/my_rental.html:26
-msgid "Your cars haven't been rented yet."
-msgstr "Ваши автомобили ещё не были арендованы."
+#: .\templates\rentals\owner_rentals.html:10
+#, fuzzy
+#| msgid "Renter:"
+msgid "Renter"
+msgstr "Арендатор"
 
-#: .templates/rentals/rental_create.html:5
-msgid "Create Rental"
-msgstr "Создать аренду"
+#: .\templates\rentals\owner_rentals.html:11
+#: .\templates\rentals\rental_list.html:14
+msgid "From"
+msgstr "С"
 
-#: .templates/rentals/rental_create.html:9
-msgid "Submit Rental"
-msgstr "Отправить запрос на аренду"
+#: .\templates\rentals\owner_rentals.html:12
+msgid "To"
+msgstr "До"
 
-#: .templates/rentals/rental_delete.html:5
+#: .\templates\rentals\owner_rentals.html:13
+#, fuzzy
+#| msgid "Affordable Prices"
+msgid "Total Price"
+msgstr "Общая стоимость"
+
+#: .\templates\rentals\owner_rentals.html:27
+#, fuzzy
+#| msgid "No rentals found."
+msgid "No rentals yet."
+msgstr "Пока нет аренд."
+
+#: .\templates\rentals\rental_create.html:6
+#, fuzzy
+#| msgid "Renter:"
+msgid "Rent"
+msgstr "Арендовать"
+
+#: .\templates\rentals\rental_create.html:12
+#: .\templates\rentals\rental_extend.html:11
+#, fuzzy
+#| msgid "Start Date:"
+msgid "Start Date"
+msgstr "Дата начала"
+
+#: .\templates\rentals\rental_create.html:18
+#: .\templates\rentals\rental_extend.html:14
+#, fuzzy
+#| msgid "End Date:"
+msgid "End Date"
+msgstr "Дата окончания"
+
+#: .\templates\rentals\rental_create.html:24
+#, fuzzy
+#| msgid "Rental Details"
+msgid "Rental Price"
+msgstr "Стоимость аренды"
+
+#: .\templates\rentals\rental_create.html:26
+msgid "Select dates to calculate"
+msgstr "Выберите даты для расчёта"
+
+#: .\templates\rentals\rental_create.html:34
+msgid "Book Now"
+msgstr "Забронировать сейчас"
+
+#: .\templates\rentals\rental_create.html:38
+#, fuzzy
+#| msgid "Back to My Rentals"
+msgid "Back to Car"
+msgstr "Вернуться к автомобилю"
+
+#: .\templates\rentals\rental_delete.html:5
 msgid "Delete Rental"
 msgstr "Удалить аренду"
 
-#: .templates/rentals/rental_delete.html:8
+#: .\templates\rentals\rental_delete.html:8
 #, python-format
 msgid ""
 "\n"
@@ -245,290 +573,449 @@ msgid ""
 "        "
 msgstr ""
 "\n"
-"            Вы уверены, что хотите удалить аренду автомобиля <strong>%(car)s</strong> "
-"с <strong>%(start)s</strong> по <strong>%(end)s</strong>?\n"
+"            Вы уверены, что хотите удалить аренду автомобиля "
+"<strong>%(car)s</strong> с <strong>%(start)s</strong> по <strong>%(end)s</"
+"strong>?\n"
 "        "
 
-#: .templates/rentals/rental_delete.html:15 .templates/reviews/review_delete.html:13 .templates/users/users_delete.html:9
+#: .\templates\rentals\rental_delete.html:15
+#: .\templates\reviews\review_delete.html:13
+#: .\templates\users\users_delete.html:9
 msgid "Yes, Delete"
 msgstr "Да, удалить"
 
-#: .templates/rentals/rental_detail.html:6
+#: .\templates\rentals\rental_detail.html:6
 msgid "Rental Details"
 msgstr "Детали аренды"
 
-#: .templates/rentals/rental_detail.html:9
+#: .\templates\rentals\rental_detail.html:9
 msgid "Car:"
 msgstr "Автомобиль:"
 
-#: .templates/rentals/rental_detail.html:10
+#: .\templates\rentals\rental_detail.html:10
 msgid "Renter:"
 msgstr "Арендатор:"
 
-#: .templates/rentals/rental_detail.html:11
+#: .\templates\rentals\rental_detail.html:11
 msgid "Owner:"
 msgstr "Владелец:"
 
-#: .templates/rentals/rental_detail.html:12
+#: .\templates\rentals\rental_detail.html:12
 msgid "Start Date:"
 msgstr "Дата начала:"
 
-#: .templates/rentals/rental_detail.html:13
+#: .\templates\rentals\rental_detail.html:13
 msgid "End Date:"
 msgstr "Дата окончания:"
 
-#: .templates/rentals/rental_detail.html:14
+#: .\templates\rentals\rental_detail.html:14
 msgid "Status:"
 msgstr "Статус:"
 
-#: .templates/rentals/rental_detail.html:18 .templates/reviews/review_detail.html:16
+#: .\templates\rentals\rental_detail.html:21
+#: .\templates\reviews\review_detail.html:17
 msgid "Edit"
 msgstr "Редактировать"
 
-#: .templates/rentals/rental_detail.html:19 .templates/reviews/review_detail.html:17
-msgid "Delete"
-msgstr "Удалить"
-
-#: .templates/rentals/rental_detail.html:20
+#: .\templates\rentals\rental_detail.html:23
 msgid "Back to My Rentals"
 msgstr "Вернуться к моим арендам"
 
-#: .templates/rentals/rental_list.html:6
-msgid "All Rentals"
-msgstr "Все аренды"
+#: .\templates\rentals\rental_extend.html:6
+msgid "Extend or Shorten Rental Period"
+msgstr "Продлить или сократить период аренды"
 
-#: .templates/rentals/rental_list.html:13
-msgid "Rented by"
-msgstr "Арендовано"
-
-#: .templates/rentals/rental_list.html:14
-msgid "From"
-msgstr "С"
-
-#: .templates/rentals/rental_list.html:15
-msgid "Details"
-msgstr "Детали"
-
-#: .templates/rentals/rental_list.html:20
-msgid "No rentals found."
-msgstr "Аренды не найдены."
-
-#: .templates/rentals/rental_update.html:6
+#: .\templates\rentals\rental_extend.html:17
+#: .\templates\rentals\rental_update.html:6
 msgid "Update Rental"
 msgstr "Обновить аренду"
 
-#: .templates/rentals/rental_update.html:13 .templates/reviews/review_update.html:11 .templates/users/users_update.html:9
+#: .\templates\rentals\rental_extend.html:20
+#, fuzzy
+#| msgid "Rental Details"
+msgid "Back to Rental Details"
+msgstr "Вернуться к деталям аренды"
+
+#: .\templates\rentals\rental_list.html:6
+msgid "All Rentals"
+msgstr "Все аренды"
+
+#: .\templates\rentals\rental_list.html:13
+msgid "Rented by"
+msgstr "Арендовано"
+
+#: .\templates\rentals\rental_list.html:14
+msgid "to"
+msgstr "до"
+
+#: .\templates\rentals\rental_update.html:13
+#: .\templates\reviews\review_update.html:11
+#: .\templates\users\users_update.html:10
 msgid "Save Changes"
 msgstr "Сохранить изменения"
 
-#: .templates/reviews/review_create.html:6
-msgid "Write a Review"
-msgstr "Оставить отзыв"
+#: .\templates\reviews\my_review.html:5
+#, fuzzy
+#| msgid "Reviews"
+msgid "My Reviews"
+msgstr "Мои отзывы"
 
-#: .templates/reviews/review_create.html:13
-msgid "Submit"
-msgstr "Отправить"
-
-#: .templates/reviews/review_delete.html:6
-msgid "Delete Review"
-msgstr "Удалить отзыв"
-
-#: .templates/reviews/review_delete.html:8
-msgid "Are you sure you want to delete this review?"
-msgstr "Вы уверены, что хотите удалить этот отзыв?"
-
-#: .templates/reviews/review_detail.html:6
-msgid "Review Detail"
-msgstr "Детали отзыва"
-
-#: .templates/reviews/review_detail.html:10 .templates/reviews/review_list.html:11
-msgid "By"
-msgstr "Автор:"
-
-#: .templates/reviews/review_detail.html:11 .templates/reviews/review_list.html:12
+#: .\templates\reviews\my_review.html:9
+#: .\templates\reviews\review_detail.html:11
+#: .\templates\reviews\review_list.html:12
 msgid "Rating"
 msgstr "Рейтинг"
 
-#: .templates/reviews/review_detail.html:12 .templates/reviews/review_list.html:12
-msgid "Comment"
-msgstr "Комментарий"
+#: .\templates\reviews\my_review.html:10
+#, fuzzy
+#| msgid "View car"
+msgid "view car"
+msgstr "Посмотреть автомобиль"
 
-#: .templates/reviews/review_list.html:6
-msgid "Reviews"
-msgstr "Отзывы"
-
-#: .templates/reviews/review_list.html:14 .templates/users/users_list.html:10
-msgid "View"
-msgstr "Просмотр"
-
-#: .templates/reviews/review_list.html:17
+#: .\templates\reviews\my_review.html:13
+#: .\templates\reviews\review_list.html:17
 msgid "No reviews yet."
 msgstr "Пока нет отзывов."
 
-#: .templates/reviews/review_update.html:6
+#: .\templates\reviews\review_create.html:6
+#, fuzzy
+#| msgid "Edit Review"
+msgid "Add Review for"
+msgstr "Добавить отзыв для"
+
+#: .\templates\reviews\review_create.html:10
+#, fuzzy
+#| msgid "Edit Review"
+msgid "Submit Review"
+msgstr "Отправить отзыв"
+
+#: .\templates\reviews\review_delete.html:6
+msgid "Delete Review"
+msgstr "Удалить отзыв"
+
+#: .\templates\reviews\review_delete.html:8
+msgid "Are you sure you want to delete this review?"
+msgstr "Вы уверены, что хотите удалить этот отзыв?"
+
+#: .\templates\reviews\review_detail.html:6
+msgid "Review Detail"
+msgstr "Детали отзыва"
+
+#: .\templates\reviews\review_detail.html:10
+#: .\templates\reviews\review_list.html:11
+msgid "By"
+msgstr "Автор:"
+
+#: .\templates\reviews\review_detail.html:12
+msgid "Comment"
+msgstr "Комментарий"
+
+#: .\templates\reviews\review_update.html:6
 msgid "Edit Review"
 msgstr "Редактировать отзыв"
 
-#: .templates/users/fail_activate.html:5
+#: .\templates\users\acc_activate_email.html:4
+#, python-format
+msgid ""
+"\n"
+"Hello, %(name)s %(surname)s\n"
+"Thank you for registering on %(site)s.\n"
+msgstr ""
+"\n"
+"Здравствуйте, %(name)s %(surname)s\n"
+"Спасибо за регистрацию на %(site)s.\n"
+
+#: .\templates\users\acc_activate_email.html:9
+msgid "Please click the link below to activate your account:"
+msgstr "Пожалуйста, перейдите по ссылке ниже, чтобы активировать ваш аккаунт:"
+
+#: .\templates\users\fail_activate.html:5
 msgid "Account Activation Failed"
 msgstr "Не удалось активировать аккаунт"
 
-#: .templates/users/fail_activate.html:6
+#: .\templates\users\fail_activate.html:6
 msgid "The activation link has expired or is invalid. Please register again."
 msgstr "Ссылка активации истекла или недействительна. Пожалуйста, зарегистрируйтесь снова."
 
-#: .templates/users/fail_activate.html:7
+#: .\templates\users\fail_activate.html:7
 msgid "Register Again"
 msgstr "Зарегистрироваться заново"
 
-#: .templates/users/login.html:26
+#: .\templates\users\login.html:20 .\templates\users\register.html:19
+#, fuzzy
+#| msgid "Change Password"
+msgid "Show password"
+msgstr "Показать пароль"
+
+#: .\templates\users\login.html:40
 msgid "Don't have an account?"
 msgstr "У вас нет аккаунта?"
 
-#: .templates/users/logout.html:5
+#: .\templates\users\login.html:42
+#, fuzzy
+#| msgid "Change Password"
+msgid "Forgot password"
+msgstr "Забыли пароль?"
+
+#: .\templates\users\logout.html:5
 msgid "You have been logged out"
 msgstr "Вы вышли из системы"
 
-#: .templates/users/logout.html:6
+#: .\templates\users\logout.html:6
 msgid "Thank you for using CarRental!"
 msgstr "Спасибо за использование CarRental!"
 
-#: .templates/users/logout.html:7
+#: .\templates\users\logout.html:7
 msgid "Log In Again"
 msgstr "Войти снова"
 
-#: .templates/users/logout.html:8
+#: .\templates\users\logout.html:8
 msgid "Go to Home"
 msgstr "Перейти на главную"
 
-#: .templates/users/profile.html:3 .templates/users/profile.html:6
-msgid "User Profile"
-msgstr "Профиль пользователя"
+#: .\templates\users\map_embed.html:5
+msgid "Your Preferred Map"
+msgstr "Ваша предпочтительная карта"
 
-#: .templates/users/profile.html:8
-msgid "Settings"
-msgstr "Настройки"
+#: .\templates\users\map_embed.html:12
+msgid "Open in Google Maps"
+msgstr "Открыть в Google Maps"
 
-#: .templates/users/profile.html:10
-msgid "Avatar"
-msgstr "Аватар"
+#: .\templates\users\map_embed.html:19
+msgid "Open in Yandex Maps"
+msgstr "Открыть в Яндекс Картах"
 
-#: .templates/users/profile.html:12
-msgid "Default Avatar"
-msgstr "Аватар по умолчанию"
+#: .\templates\users\map_embed.html:26
+msgid "Open in 2GIS"
+msgstr "Открыть в 2GIS"
 
-#: .templates/users/profile.html:14
-msgid "First name:"
-msgstr "Имя:"
+#: .\templates\users\password_reset.html:4
+msgid "Forgot your password?"
+msgstr "Забыли пароль?"
 
-#: .templates/users/profile.html:15
-msgid "Last name:"
-msgstr "Фамилия:"
+#: .\templates\users\password_reset.html:5
+msgid "Enter your email address to receive a password reset link."
+msgstr "Введите ваш адрес электронной почты, чтобы получить ссылку для сброса пароля."
 
-#: .templates/users/profile.html:16 .templates/users/users_details.html:6
-msgid "Username:"
-msgstr "Имя пользователя:"
+#: .\templates\users\password_reset_complete.html:4
+msgid "Password reset complete"
+msgstr "Сброс пароля завершён"
 
-#: .templates/users/profile.html:18
-msgid "Driver's License:"
-msgstr "Водительское удостоверение:"
+#: .\templates\users\password_reset_complete.html:8
+msgid "Password has been reset"
+msgstr "Пароль сброшен"
 
-#: .templates/users/profile.html:19
-msgid "Yes"
-msgstr "Да"
+#: .\templates\users\password_reset_complete.html:9
+msgid "You can now log in with your new password."
+msgstr "Теперь вы можете войти с новым паролем."
 
-#: .templates/users/profile.html:19
-msgid "No"
-msgstr "Нет"
+#: .\templates\users\password_reset_complete.html:10
+#, fuzzy
+#| msgid "Log In Again"
+msgid "Log in"
+msgstr "Войти"
 
-#: .templates/users/profile.html:21
-msgid "Edit Profile"
-msgstr "Редактировать профиль"
+#: .\templates\users\password_reset_confirm.html:4
+#, fuzzy
+#| msgid "Change Password"
+msgid "Enter New Password"
+msgstr "Введите новый пароль"
 
-#: .templates/users/register.html:29
-msgid "Already have an account?"
-msgstr "Уже есть аккаунт?"
-
-#: .templates/users/register_email_message.html:5
-msgid ""
-"Thank you for registering! A confirmation message has been sent to your "
-"email address"
-msgstr ""
-"Спасибо за регистрацию! Сообщение с подтверждением было отправлено на ваш "
-"адрес электронной почты."
-
-#: .templates/users/settings.html:6
-msgid "Profile Settings"
-msgstr "Настройки профиля"
-
-#: .templates/users/settings.html:11
-msgid "Personalization"
-msgstr "Персонализация"
-
-#: .templates/users/settings.html:16
-msgid "Current Background"
-msgstr "Текущий фон"
-
-#: .templates/users/settings.html:21
-msgid "Custom Background"
-msgstr "Пользовательский фон"
-
-#: .templates/users/settings.html:24
-msgid "Reset Background"
-msgstr "Сбросить фон"
-
-#: .templates/users/settings.html:29
-msgid "Save Settings"
-msgstr "Сохранить настройки"
-
-#: .templates/users/settings.html:40
+#: .\templates\users\password_reset_confirm.html:8
+#: .\templates\users\settings.html:37
 msgid "Change Password"
 msgstr "Сменить пароль"
 
-#: .templates/users/settings.html:43
+#: .\templates\users\password_reset_done.html:4
+#, fuzzy
+#| msgid "Email:"
+msgid "Email Sent"
+msgstr "Письмо отправлено"
+
+#: .\templates\users\password_reset_done.html:5
+msgid ""
+"We have sent you an email with a password reset link. Please check your "
+"inbox (or console)."
+msgstr "Мы отправили вам письмо со ссылкой для сброса пароля. Пожалуйста, проверьте ваш почтовый ящик (или консоль)."
+
+#: .\templates\users\password_reset_done.html:6
+msgid "Return to Login"
+msgstr "Вернуться к входу"
+
+#: .\templates\users\password_reset_email.html:2
+#, python-format
+msgid ""
+"You're receiving this email because you requested a password reset for your "
+"user account at %(site_name)s."
+msgstr "Вы получили это письмо, так как запросили сброс пароля для вашего аккаунта на %(site_name)s."
+
+#: .\templates\users\password_reset_email.html:4
+msgid "Please go to the following page and choose a new password:"
+msgstr "Пожалуйста, перейдите на следующую страницу и выберите новый пароль:"
+
+#: .\templates\users\password_reset_email.html:8
+msgid "Your username, in case you’ve forgotten:"
+msgstr "Ваше имя пользователя, если вы забыли:"
+
+#: .\templates\users\password_reset_email.html:10
+#, fuzzy
+#| msgid "Thank you for использование CarRental!"
+msgid "Thanks for using our site!"
+msgstr "Спасибо за использование нашего сайта!"
+
+#: .\templates\users\password_reset_email.html:12
+#, python-format
+msgid "The %(site_name)s team"
+msgstr "Команда %(site_name)s"
+
+#: .\templates\users\profile.html:3 .\templates\users\profile.html:6
+msgid "User Profile"
+msgstr "Профиль пользователя"
+
+#: .\templates\users\profile.html:9
+msgid "Avatar"
+msgstr "Аватар"
+
+#: .\templates\users\profile.html:11
+msgid "Default Avatar"
+msgstr "Аватар по умолчанию"
+
+#: .\templates\users\profile.html:13
+msgid "First name:"
+msgstr "Имя:"
+
+#: .\templates\users\profile.html:14
+msgid "Last name:"
+msgstr "Фамилия:"
+
+#: .\templates\users\profile.html:15 .\templates\users\users_details.html:6
+msgid "Username:"
+msgstr "Имя пользователя:"
+
+#: .\templates\users\profile.html:17
+msgid "Driver's License:"
+msgstr "Водительское удостоверение:"
+
+#: .\templates\users\profile.html:18
+msgid "Yes"
+msgstr "Да"
+
+#: .\templates\users\profile.html:18
+msgid "No"
+msgstr "Нет"
+
+#: .\templates\users\profile.html:21
+#, fuzzy
+#| msgid "My Rentals"
+msgid "View My Car Rentals"
+msgstr "Посмотреть мои аренды"
+
+#: .\templates\users\profile.html:25
+msgid "Edit Profile"
+msgstr "Редактировать профиль"
+
+#: .\templates\users\register.html:37
+msgid "Already have an account?"
+msgstr "Уже есть аккаунт?"
+
+#: .\templates\users\register_email_message.html:5
+#, fuzzy
+#| msgid ""
+#| "Thank you for registering! A confirmation message has been sent to your "
+#| "email address"
+msgid ""
+"Thank you for registering! A confirmation message has been sent to your "
+"email address "
+msgstr "Спасибо за регистрацию! Сообщение с подтверждением было отправлено на ваш адрес электронной почты."
+
+#: .\templates\users\settings.html:6
+msgid "Profile Settings"
+msgstr "Настройки профиля"
+
+#: .\templates\users\settings.html:10
+msgid "Personalization"
+msgstr "Персонализация"
+
+#: .\templates\users\settings.html:15
+msgid "Current Background"
+msgstr "Текущий фон"
+
+#: .\templates\users\settings.html:19
+msgid "Custom Background"
+msgstr "Пользовательский фон"
+
+#: .\templates\users\settings.html:22
+msgid "Reset Background"
+msgstr "Сбросить фон"
+
+#: .\templates\users\settings.html:26
+msgid "Save Settings"
+msgstr "Сохранить настройки"
+
+#: .\templates\users\settings.html:40
 msgid "Update Password"
 msgstr "Обновить пароль"
 
-#: .templates/users/success_activate.html:4
+#: .\templates\users\success_activate.html:4
 msgid "Congratulations on activating your account! You can now log in!"
 msgstr "Поздравляем с активацией аккаунта! Теперь вы можете войти."
 
-#: .templates/users/users_create.html:5
+#: .\templates\users\users_create.html:5
 msgid "Create User"
 msgstr "Создать пользователя"
 
-#: .templates/users/users_create.html:9
+#: .\templates\users\users_create.html:9
 msgid "Create"
 msgstr "Создать"
 
-#: .templates/users/users_delete.html:5
+#: .\templates\users\users_delete.html:5
 msgid "Delete Account"
 msgstr "Удалить аккаунт"
 
-#: .templates/users/users_delete.html:6
+#: .\templates\users\users_delete.html:6
 msgid "Are you sure you want to delete the account for"
 msgstr "Вы уверены, что хотите удалить аккаунт пользователя"
 
-#: .templates/users/users_details.html:5
+#: .\templates\users\users_details.html:5
 msgid "User Info"
 msgstr "Информация о пользователе"
 
-#: .templates/users/users_details.html:8
+#: .\templates\users\users_details.html:8
 msgid "Full Name:"
 msgstr "Полное имя:"
 
-#: .templates/users/users_list.html:5
+#: .\templates\users\users_list.html:5
 msgid "All Users"
 msgstr "Все пользователи"
 
-#: .templates/users/users_list.html:13
+#: .\templates\users\users_list.html:13
 msgid "No users found."
 msgstr "Пользователи не найдены."
 
-#: .templates/users/users_update.html:5
+#: .\templates\users\users_update.html:5
 msgid "Update Profile"
 msgstr "Обновить профиль"
 
-#: .templates/users/users_update.html:10
-msgid "Back"
-msgstr "Назад"
+#~ msgid "Rented by Me"
+#~ msgstr "Арендованные мной"
+
+#~ msgid "Cars I Rent Out"
+#~ msgstr "Автомобили, которые я сдаю"
+
+#~ msgid "Your cars haven't been rented yet."
+#~ msgstr "Ваши автомобили ещё не были арендованы."
+
+#~ msgid "Create Rental"
+#~ msgstr "Создать аренду"
+
+#~ msgid "Submit Rental"
+#~ msgstr "Отправить запрос на аренду"
+
+#~ msgid "Write a Review"
+#~ msgstr "Оставить отзыв"
+
+#~ msgid "Submit"
+#~ msgstr "Отправить"
+
+#~ msgid "Settings"
+#~ msgstr "Настройки"

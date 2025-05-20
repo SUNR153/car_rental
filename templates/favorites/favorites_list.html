@@ -1,16 +1,17 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
-<h2>My Favorite Cars</h2>
+<h2>{% trans "My Favorite Cars" %}</h2>
 
 {% for favorite in favorites %}
     <div>
         <h3>{{ favorite.car.brand }} {{ favorite.car.model }}</h3>
-        <p>Price per day: ${{ favorite.car.price_per_day }}</p>
-        <a href="{% url 'cars:car_detail' favorite.car.id %}">View</a>
-        <a href="{% url 'favorites:remove_from_favorites' favorite.car.id %}">Remove</a>
+        <p>{% trans "Price per day" %}: ${{ favorite.car.price_per_day }}</p>
+        <a href="{% url 'cars:car_detail' favorite.car.id %}">{% trans "View" %}</a>
+        <a href="{% url 'favorites:remove_from_favorites' favorite.car.id %}">{% trans "Remove" %}</a>
     </div>
 {% empty %}
-    <p>You have no favorite cars yet.</p>
+    <p>{% trans "You have no favorite cars yet." %}</p>
 {% endfor %}
 {% endblock %}

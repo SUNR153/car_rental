@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
+{% load i18n %}  {# Подключаем теги перевода #}
 
 {% block content %}
-<h2>My Reviews</h2>
+<h2>{% trans "My Reviews" %}</h2>
 <ul>
     {% for review in reviews %}
     <li>
-        {{ review.comment }} (Rating: {{ review.rating }})
-        <a href="{% url 'cars:car_detail' pk=review.car.pk %}">view car</a>
+        {{ review.comment }} ({% trans "Rating" %}: {{ review.rating }})
+        <a href="{% url 'cars:car_detail' pk=review.car.pk %}">{% trans "view car" %}</a>
     </li>
     {% empty %}
-    <li>No reviews yet.</li>
+    <li>{% trans "No reviews yet." %}</li>
     {% endfor %}
 </ul>
 {% endblock %}

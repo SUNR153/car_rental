@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-23 23:46+0500\n"
+"POT-Creation-Date: 2025-05-20 23:11+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,62 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: .\myvenv\Lib\site-packages\django\views\templates\default_urlconf.html:7
+#: .\myvenv\Lib\site-packages\django\views\templates\default_urlconf.html:204
+msgid "The install worked successfully! Congratulations!"
+msgstr "Орнату сәтті аяқталды! Құттықтаймыз!"
+
+#: .\myvenv\Lib\site-packages\django\views\templates\default_urlconf.html:206
+#, python-format
+msgid ""
+"View <a href=\"https://docs.djangoproject.com/en/%(version)s/releases/\" "
+"target=\"_blank\" rel=\"noopener\">release notes</a> for Django %(version)s"
+msgstr ""
+"Django %(version)s <a href=\"https://docs.djangoproject.com/en/%(version)s/releases/\" "
+"target=\"_blank\" rel=\"noopener\">шығарылым ескертпелерін</a> қараңыз"
+
+#: .\myvenv\Lib\site-packages\django\views\templates\default_urlconf.html:208
+#, python-format
+msgid ""
+"You are seeing this page because <a href=\"https://docs.djangoproject.com/en/"
+"%(version)s/ref/settings/#debug\" target=\"_blank\" "
+"rel=\"noopener\">DEBUG=True</a> is in your settings file and you have not "
+"configured any URLs."
+msgstr ""
+"Сіз бұл бетті көріп отырсыз, өйткені сіздің баптаулар файлыңызда <a href=\"https://docs.djangoproject.com/en/"
+"%(version)s/ref/settings/#debug\" target=\"_blank\" "
+"rel=\"noopener\">DEBUG=True</a> қосылған және сіз ешқандай URL мекенжайларын конфигурацияламадыңыз."
+
+#: .\myvenv\Lib\site-packages\django\views\templates\default_urlconf.html:217
+msgid "Django Documentation"
+msgstr "Django құжаттамасы"
+
+#: .\myvenv\Lib\site-packages\django\views\templates\default_urlconf.html:218
+msgid "Topics, references, & how-to’s"
+msgstr "Тақырыптар, сілтемелер және нұсқаулар"
+
+#: .\myvenv\Lib\site-packages\django\views\templates\default_urlconf.html:226
+msgid "Tutorial: A Polling App"
+msgstr "Оқулық: Саулнама қосымшасы"
+
+#: .\myvenv\Lib\site-packages\django\views\templates\default_urlconf.html:227
+msgid "Get started with Django"
+msgstr "Django-мен бастау"
+
+#: .\myvenv\Lib\site-packages\django\views\templates\default_urlconf.html:235
+msgid "Django Community"
+msgstr "Django қауымдастығы"
+
+#: .\myvenv\Lib\site-packages\django\views\templates\default_urlconf.html:236
+msgid "Connect, get help, or contribute"
+msgstr "Байланысу, көмек алу немесе үлес қосу"
+
+#: .\myvenv\Lib\site-packages\django\views\templates\directory_index.html:8
+#: .\myvenv\Lib\site-packages\django\views\templates\directory_index.html:11
+#, python-format
+msgid "Index of %(directory)s"
+msgstr "%(directory)s индексі"
 
 #: .\templates\base.html:45
 msgid "Cars"
@@ -27,100 +83,282 @@ msgid "Profile"
 msgstr "Профиль"
 
 #: .\templates\base.html:48
+#, fuzzy
+#| msgid "My Rentals"
+msgid "My rentals"
+msgstr "Менің жалға алуларым"
+
+#: .\templates\base.html:49
+#, fuzzy
+#| msgid "Reviews"
+msgid "My review"
+msgstr "Менің пікірлерім"
+
+#: .\templates\base.html:50
+msgid "Favorite"
+msgstr "Таңдаулы"
+
+#: .\templates\base.html:51 .\templates\chats\my_chat.html:4
+#: .\templates\chats\my_chat.html:8
+msgid "My Chats"
+msgstr "Менің чаттарым"
+
+#: .\templates\base.html:52
+msgid "Map"
+msgstr "Карта"
+
+#: .\templates\base.html:53
 msgid "Logout"
 msgstr "Шығу"
 
-#: .\templates\base.html:50 .\templates\users\login.html:26
-#: .\templates\users\register.html:6 .\templates\users\register.html:27
+#: .\templates\base.html:58 .\templates\users\login.html:41
+#: .\templates\users\register.html:4 .\templates\users\register.html:8
+#: .\templates\users\register.html:33
 msgid "Register"
 msgstr "Тіркелу"
 
-#: .\templates\base.html:51 .\templates\users\login.html:4
-#: .\templates\users\login.html:7 .\templates\users\login.html:24
-#: .\templates\users\register.html:29
+#: .\templates\base.html:59 .\templates\users\login.html:4
+#: .\templates\users\login.html:8 .\templates\users\login.html:35
+#: .\templates\users\register.html:38
 msgid "Login"
 msgstr "Кіру"
 
-#: .\templates\cars\car_create.html:5
+#: .\templates\cars\car_create.html:6
 msgid "Add new car"
 msgstr "Жаңа автомобиль қосу"
 
-#: .\templates\cars\car_create.html:9
+#: .\templates\cars\car_create.html:12
+#, fuzzy
+#| msgid "Details"
+msgid "Car details"
+msgstr "Автомобиль мәліметтері"
+
+#: .\templates\cars\car_create.html:17
+#, fuzzy
+#| msgid "Available cars"
+msgid "Availability"
+msgstr "Қолжетімділік"
+
+#: .\templates\cars\car_create.html:21
 msgid "Add car"
 msgstr "Автомобильді қосу"
 
-#: .\templates\cars\car_dalete.html:5
+#: .\templates\cars\car_create.html:22 .\templates\cars\car_details.html:44
+#: .\templates\cars\car_update.html:10
+#: .\templates\reviews\review_detail.html:20
+#: .\templates\reviews\review_list.html:14
+#: .\templates\users\users_update.html:11
+msgid "Back"
+msgstr "Артқа"
+
+#: .\templates\cars\car_delete.html:5
 msgid "Delete car"
 msgstr "Автомобильді жою"
 
-#: .\templates\cars\car_dalete.html:6
+#: .\templates\cars\car_delete.html:6
 msgid "Are you sure you want to delete"
 msgstr "Сіз шынымен жойғыңыз келе ме"
 
-#: .\templates\cars\car_dalete.html:9
+#: .\templates\cars\car_delete.html:9
 msgid "Yes, delete"
 msgstr "Иә, жою"
 
-#: .\templates\cars\car_dalete.html:10
+#: .\templates\cars\car_delete.html:10
 #: .\templates\rentals\rental_delete.html:16
 #: .\templates\rentals\rental_update.html:14
-#: .\templates\reviews\review_create.html:14
+#: .\templates\reviews\review_create.html:12
 #: .\templates\reviews\review_delete.html:14
+#: .\templates\reviews\review_update.html:13
 #: .\templates\users\users_delete.html:10
 msgid "Cancel"
 msgstr "Бас тарту"
 
-#: .\templates\cars\car_details.html:8
+#: .\templates\cars\car_details.html:11
 msgid "Year:"
 msgstr "Жылы:"
 
-#: .\templates\cars\car_details.html:9 .\templates\cars\car_list.html:12
+#: .\templates\cars\car_details.html:12 .\templates\cars\car_list.html:55
 msgid "Price:"
 msgstr "Бағасы:"
 
-#: .\templates\cars\car_details.html:10
+#: .\templates\cars\car_details.html:12 .\templates\cars\car_list.html:55
+msgid "day"
+msgstr "күн"
+
+#: .\templates\cars\car_details.html:13
 msgid "Condition:"
 msgstr "Жағдайы:"
 
-#: .\templates\cars\car_details.html:11
-msgid "Miliage:"
-msgstr "Пробегі:"
+#: .\templates\cars\car_details.html:14
+#, fuzzy
+#| msgid "Miliage:"
+msgid "Mileage:"
+msgstr "Жүріс:"
 
-#: .\templates\cars\car_details.html:12
+#: .\templates\cars\car_details.html:15
 msgid "Fuel:"
 msgstr "Жанармай:"
 
-#: .\templates\cars\car_details.html:13
+#: .\templates\cars\car_details.html:16
 msgid "Transmission:"
 msgstr "Коробка:"
 
-#: .\templates\cars\car_details.html:14
+#: .\templates\cars\car_details.html:17
 msgid "Seats:"
 msgstr "Орындар саны:"
 
-#: .\templates\cars\car_details.html:15
-msgid "Fearures:"
-msgstr "Ерекшеліктері:"
+#: .\templates\cars\car_details.html:18
+#, fuzzy
+#| msgid "Fearures:"
+msgid "Features:"
+msgstr "Мүмкіндіктер:"
 
-#: .\templates\cars\car_details.html:16
+#: .\templates\cars\car_details.html:22
 msgid "Rent this car"
 msgstr "Бұл автомобильді жалға алу"
+
+#: .\templates\cars\car_details.html:25
+#, fuzzy
+#| msgid "Update car"
+msgid "Update"
+msgstr "Жаңарту"
+
+#: .\templates\cars\car_details.html:26
+#: .\templates\rentals\rental_detail.html:22
+#: .\templates\reviews\review_detail.html:18
+msgid "Delete"
+msgstr "Жою"
+
+#: .\templates\cars\car_details.html:29 .\templates\reviews\review_list.html:6
+msgid "Reviews"
+msgstr "Пікірлер"
+
+#: .\templates\cars\car_details.html:30
+#, fuzzy
+#| msgid "Edit Review"
+msgid "Add Review"
+msgstr "Пікір қосу"
+
+#: .\templates\cars\car_details.html:34
+msgid "Remove from Favorites"
+msgstr "Таңдаулылардан алып тастау"
+
+#: .\templates\cars\car_details.html:36
+msgid "Add to Favorites"
+msgstr "Таңдаулыларға қосу"
+
+#: .\templates\cars\car_details.html:40
+#: .\templates\rentals\rental_detail.html:19
+#, fuzzy
+#| msgid "Start Date:"
+msgid "Start Chat"
+msgstr "Чатты бастау"
 
 #: .\templates\cars\car_list.html:6
 msgid "Available cars"
 msgstr "Қол жетімді автомобильдер"
 
-#: .\templates\cars\car_list.html:13
+#: .\templates\cars\car_list.html:9
+msgid "Brand"
+msgstr "Бренд"
+
+#: .\templates\cars\car_list.html:12
+msgid "Model"
+msgstr "Модель"
+
+#: .\templates\cars\car_list.html:15
+#, fuzzy
+#| msgid "Year:"
+msgid "Year"
+msgstr "Жылы:"
+
+#: .\templates\cars\car_list.html:18
+msgid "Fuel type"
+msgstr "Жанармай түрі"
+
+#: .\templates\cars\car_list.html:20 .\templates\cars\car_list.html:29
+#: .\templates\cars\car_list.html:36
+msgid "All"
+msgstr "Барлығы"
+
+#: .\templates\cars\car_list.html:27
+#, fuzzy
+#| msgid "Transmission:"
+msgid "Transmission"
+msgstr "Трансмиссия"
+
+#: .\templates\cars\car_list.html:34
+#, fuzzy
+#| msgid "Condition:"
+msgid "Condition"
+msgstr "Жағдай"
+
+#: .\templates\cars\car_list.html:41
+msgid "Filter"
+msgstr "Сүзгі"
+
+#: .\templates\cars\car_list.html:42
+msgid "Reset"
+msgstr "Қалпына келтіру"
+
+#: .\templates\cars\car_list.html:56
 msgid "View car"
 msgstr "Автомобильді қарау"
 
-#: .\templates\cars\car_list.html:17
+#: .\templates\cars\car_list.html:59
 msgid "No cars available at the moment."
 msgstr "Қазіргі уақытта автомобильдер жоқ."
+
+#: .\templates\cars\car_list.html:64
+msgid "New post"
+msgstr "Жаңа жазба"
 
 #: .\templates\cars\car_update.html:5 .\templates\cars\car_update.html:9
 msgid "Update car"
 msgstr "Автомобильді жаңарту"
+
+#: .\templates\cars\set_availability.html:5
+msgid "Set Availability for"
+msgstr "Қолжетімділікті орнату"
+
+#: .\templates\cars\set_availability.html:10
+msgid "Save"
+msgstr "Сақтау"
+
+#: .\templates\chats\chat.html:6
+msgid "Chat about"
+msgstr "Жайлы чат"
+
+#: .\templates\chats\chat.html:22
+#, fuzzy
+#| msgid "No reviews yet."
+msgid "No messages yet."
+msgstr "Әлі хабарламалар жоқ."
+
+#: .\templates\chats\chat.html:28
+msgid "Type your message..."
+msgstr "Хабарламаңызды теріңіз..."
+
+#: .\templates\chats\chat.html:29 .\templates\users\password_reset.html:9
+msgid "Send"
+msgstr "Жіберу"
+
+#: .\templates\chats\chat.html:33
+#, fuzzy
+#| msgid "Back to My Rentals"
+msgid "Back to My Chats"
+msgstr "Менің чаттарыма оралу"
+
+#: .\templates\chats\my_chat.html:15
+#, python-format
+msgid "Chat about %(chat.car.brand)s %(chat.car.model)s"
+msgstr "%(chat.car.brand)s %(chat.car.model)s туралы чат"
+
+#: .\templates\chats\my_chat.html:21
+#, fuzzy
+#| msgid "You haven't rented any cars yet."
+msgid "You don't have any chats yet."
+msgstr "Сізде әлі чаттар жоқ."
 
 #: .\templates\core\about.html:5
 msgid "About VROOOM"
@@ -142,10 +380,11 @@ msgstr "Бізбен байланысу"
 
 #: .\templates\core\contact.html:6
 msgid "If you have any questions or need help, feel free to reach out to us."
-msgstr "Егер сұрақтарыңыз болса немесе көмек керек болса, бізге хабарласудан "
+msgstr ""
+"Егер сұрақтарыңыз болса немесе көмек керек болса, бізге хабарласудан "
 "тартынбаңыз."
 
-#: .\templates\core\contact.html:8 .\templates\users\profile.html:17
+#: .\templates\core\contact.html:8 .\templates\users\profile.html:16
 #: .\templates\users\users_details.html:7
 msgid "Email:"
 msgstr "Электрондық пошта:"
@@ -195,41 +434,140 @@ msgid "24/7 Support"
 msgstr "Тәулік бойы қолдау"
 
 #: .\templates\core\index.html:26
-msgid "We're always here to help, no matter the time or place."
-msgstr "Біз әрдайым көмекке дайынбыз, уақыты мен орнына қарамастан."
+#, fuzzy
+#| msgid "We're always here to help, no matter the time or place."
+msgid "We’re always here to help, no matter the time or place."
+msgstr "Біз әрқашан көмектесуге дайынбыз, уақыт пен орынға қарамастан."
 
-#: .\templates\rentals\my_rental.html:5
+#: .\templates\favorites\favorites_list.html:5
+msgid "My Favorite Cars"
+msgstr "Менің таңдаулы автомобильдер"
+
+#: .\templates\favorites\favorites_list.html:10
+msgid "Price per day"
+msgstr "Бір күндік баға"
+
+#: .\templates\favorites\favorites_list.html:11
+#: .\templates\users\users_list.html:10
+msgid "View"
+msgstr "Қарау"
+
+#: .\templates\favorites\favorites_list.html:12
+msgid "Remove"
+msgstr "Жою"
+
+#: .\templates\favorites\favorites_list.html:15
+#, fuzzy
+#| msgid "You haven't rented any cars yet."
+msgid "You have no favorite cars yet."
+msgstr "Сізде әлі таңдаулы автомобильдер жоқ."
+
+#: .\templates\notifications\notifications_list.html:6
+msgid "My Notifications"
+msgstr "Менің хабарламаларым"
+
+#: .\templates\notifications\notifications_list.html:10
+msgid "Mark all as read"
+msgstr "Барлығын оқылды деп белгілеу"
+
+#: .\templates\notifications\notifications_list.html:19
+msgid "Mark as read"
+msgstr "Оқылды деп белгілеу"
+
+#: .\templates\notifications\notifications_list.html:26
+msgid "No notifications yet."
+msgstr "Әлі хабарламалар жоқ."
+
+#: .\templates\rentals\my_rental.html:4
 msgid "My Rentals"
 msgstr "Менің жалға алуларым"
 
-#: .\templates\rentals\my_rental.html:7
-msgid "Rented by Me"
-msgstr "Мен жалға алғандар"
+#: .\templates\rentals\my_rental.html:11
+#: .\templates\rentals\rental_list.html:15
+msgid "Details"
+msgstr "Толығырақ"
 
-#: .\templates\rentals\my_rental.html:11 .\templates\rentals\my_rental.html:22
+#: .\templates\rentals\my_rental.html:16
+#: .\templates\rentals\rental_list.html:20
+msgid "No rentals found."
+msgstr "Жалға алулар табылмады."
+
+#: .\templates\rentals\owner_rentals.html:5
+msgid "Your car rentals"
+msgstr "Сіздің автомобиль жалдауларыңыз"
+
+#: .\templates\rentals\owner_rentals.html:9
+#, fuzzy
+#| msgid "Cars"
+msgid "Car"
+msgstr "Автомобиль"
+
+#: .\templates\rentals\owner_rentals.html:10
+#, fuzzy
+#| msgid "Renter:"
+msgid "Renter"
+msgstr "Жалға алушы"
+
+#: .\templates\rentals\owner_rentals.html:11
 #: .\templates\rentals\rental_list.html:14
-msgid "to"
-msgstr "-ден"
+msgid "From"
+msgstr "Бастап"
 
-#: .\templates\rentals\my_rental.html:15
-msgid "You haven't rented any cars yet."
-msgstr "Сіз әлі ешқандай автомобиль жалға алмадыңыз."
+#: .\templates\rentals\owner_rentals.html:12
+msgid "To"
+msgstr "Дейін"
 
-#: .\templates\rentals\my_rental.html:18
-msgid "Cars I Rent Out"
-msgstr "Мен жалға беретін автомобильдер"
+#: .\templates\rentals\owner_rentals.html:13
+#, fuzzy
+#| msgid "Affordable Prices"
+msgid "Total Price"
+msgstr "Жалпы баға"
 
-#: .\templates\rentals\my_rental.html:26
-msgid "Your cars haven't been rented yet."
-msgstr "Сіздің автомобильдеріңіз әлі жалға берілмеді."
+#: .\templates\rentals\owner_rentals.html:27
+#, fuzzy
+#| msgid "No rentals found."
+msgid "No rentals yet."
+msgstr "Әлі жалдаулар жоқ."
 
-#: .\templates\rentals\rental_create.html:5
-msgid "Create Rental"
-msgstr "Жалға алуды жасау"
+#: .\templates\rentals\rental_create.html:6
+#, fuzzy
+#| msgid "Renter:"
+msgid "Rent"
+msgstr "Жалға алу"
 
-#: .\templates\rentals\rental_create.html:9
-msgid "Submit Rental"
-msgstr "Жалға алуды жіберу"
+#: .\templates\rentals\rental_create.html:12
+#: .\templates\rentals\rental_extend.html:11
+#, fuzzy
+#| msgid "Start Date:"
+msgid "Start Date"
+msgstr "Басталу күні"
+
+#: .\templates\rentals\rental_create.html:18
+#: .\templates\rentals\rental_extend.html:14
+#, fuzzy
+#| msgid "End Date:"
+msgid "End Date"
+msgstr "Аяқталу күні"
+
+#: .\templates\rentals\rental_create.html:24
+#, fuzzy
+#| msgid "Rental Details"
+msgid "Rental Price"
+msgstr "Жалдау бағасы"
+
+#: .\templates\rentals\rental_create.html:26
+msgid "Select dates to calculate"
+msgstr "Есептеу үшін күндерді таңдаңыз"
+
+#: .\templates\rentals\rental_create.html:34
+msgid "Book Now"
+msgstr "Қазір брондау"
+
+#: .\templates\rentals\rental_create.html:38
+#, fuzzy
+#| msgid "Back to My Rentals"
+msgid "Back to Car"
+msgstr "Автомобильге оралу"
 
 #: .\templates\rentals\rental_delete.html:5
 msgid "Delete Rental"
@@ -244,9 +582,9 @@ msgid ""
 "        "
 msgstr ""
 "\n"
-"            Сіз шынымен <strong>%(car)s</strong> автомобилін <strong>"
-"%(start)s</strong>-ден <strong>%(end)s</strong>-ге дейінгі жалға алуды жойғыңыз "
-"келе ме?\n"
+"            Сіз шынымен <strong>%(car)s</strong> автомобилін "
+"<strong>%(start)s</strong>-ден <strong>%(end)s</strong>-ге дейінгі жалға "
+"алуды жойғыңыз келе ме?\n"
 "        "
 
 #: .\templates\rentals\rental_delete.html:15
@@ -283,19 +621,29 @@ msgstr "Аяқталу күні:"
 msgid "Status:"
 msgstr "Статусы:"
 
-#: .\templates\rentals\rental_detail.html:18
-#: .\templates\reviews\review_detail.html:16
+#: .\templates\rentals\rental_detail.html:21
+#: .\templates\reviews\review_detail.html:17
 msgid "Edit"
 msgstr "Өңдеу"
 
-#: .\templates\rentals\rental_detail.html:19
-#: .\templates\reviews\review_detail.html:17
-msgid "Delete"
-msgstr "Жою"
-
-#: .\templates\rentals\rental_detail.html:20
+#: .\templates\rentals\rental_detail.html:23
 msgid "Back to My Rentals"
 msgstr "Жалға алуларыма оралу"
+
+#: .\templates\rentals\rental_extend.html:6
+msgid "Extend or Shorten Rental Period"
+msgstr "Жалдау мерзімін ұзарту немесе қысқарту"
+
+#: .\templates\rentals\rental_extend.html:17
+#: .\templates\rentals\rental_update.html:6
+msgid "Update Rental"
+msgstr "Жалға алуды жаңарту"
+
+#: .\templates\rentals\rental_extend.html:20
+#, fuzzy
+#| msgid "Rental Details"
+msgid "Back to Rental Details"
+msgstr "Жалға алу туралы мәліметтер"
 
 #: .\templates\rentals\rental_list.html:6
 msgid "All Rentals"
@@ -306,34 +654,49 @@ msgid "Rented by"
 msgstr "Жалға алған"
 
 #: .\templates\rentals\rental_list.html:14
-msgid "From"
-msgstr "Бастап"
-
-#: .\templates\rentals\rental_list.html:15
-msgid "Details"
-msgstr "Толығырақ"
-
-#: .\templates\rentals\rental_list.html:20
-msgid "No rentals found."
-msgstr "Жалға алулар табылмады."
-
-#: .\templates\rentals\rental_update.html:6
-msgid "Update Rental"
-msgstr "Жалға алуды жаңарту"
+msgid "to"
+msgstr "-ден"
 
 #: .\templates\rentals\rental_update.html:13
 #: .\templates\reviews\review_update.html:11
-#: .\templates\users\users_update.html:9
+#: .\templates\users\users_update.html:10
 msgid "Save Changes"
 msgstr "Өзгерістерді сақтау"
 
-#: .\templates\reviews\review_create.html:6
-msgid "Write a Review"
-msgstr "Пікір жазу"
+#: .\templates\reviews\my_review.html:5
+#, fuzzy
+#| msgid "Reviews"
+msgid "My Reviews"
+msgstr "Менің пікірлерім"
 
-#: .\templates\reviews\review_create.html:13
-msgid "Submit"
-msgstr "Жіберу"
+#: .\templates\reviews\my_review.html:9
+#: .\templates\reviews\review_detail.html:11
+#: .\templates\reviews\review_list.html:12
+msgid "Rating"
+msgstr "Рейтинг"
+
+#: .\templates\reviews\my_review.html:10
+#, fuzzy
+#| msgid "View car"
+msgid "view car"
+msgstr "Автомобильді қарау"
+
+#: .\templates\reviews\my_review.html:13
+#: .\templates\reviews\review_list.html:17
+msgid "No reviews yet."
+msgstr "Әлі пікір жоқ."
+
+#: .\templates\reviews\review_create.html:6
+#, fuzzy
+#| msgid "Edit Review"
+msgid "Add Review for"
+msgstr "Үшін пікір қосу"
+
+#: .\templates\reviews\review_create.html:10
+#, fuzzy
+#| msgid "Edit Review"
+msgid "Submit Review"
+msgstr "Пікірді жіберу"
 
 #: .\templates\reviews\review_delete.html:6
 msgid "Delete Review"
@@ -352,30 +715,28 @@ msgstr "Пікір туралы мәлімет"
 msgid "By"
 msgstr "Авторы"
 
-#: .\templates\reviews\review_detail.html:11
-#: .\templates\reviews\review_list.html:12
-msgid "Rating"
-msgstr "Рейтинг"
-
 #: .\templates\reviews\review_detail.html:12
 msgid "Comment"
 msgstr "Пікір"
 
-#: .\templates\reviews\review_list.html:6
-msgid "Reviews"
-msgstr "Пікірлер"
-
-#: .\templates\reviews\review_list.html:14 .\templates\users\users_list.html:10
-msgid "View"
-msgstr "Қарау"
-
-#: .\templates\reviews\review_list.html:17
-msgid "No reviews yet."
-msgstr "Әлі пікір жоқ."
-
 #: .\templates\reviews\review_update.html:6
 msgid "Edit Review"
 msgstr "Пікірді өңдеу"
+
+#: .\templates\users\acc_activate_email.html:4
+#, python-format
+msgid ""
+"\n"
+"Hello, %(name)s %(surname)s\n"
+"Thank you for registering on %(site)s.\n"
+msgstr ""
+"\n"
+"Сәлем, %(name)s %(surname)s\n"
+"%(site)s сайтында тіркелгеніңіз үшін рақмет.\n"
+
+#: .\templates\users\acc_activate_email.html:9
+msgid "Please click the link below to activate your account:"
+msgstr "Тіркелгіңізді белсендіру үшін төмендегі сілтемені басыңыз:"
 
 #: .\templates\users\fail_activate.html:5
 msgid "Account Activation Failed"
@@ -389,9 +750,21 @@ msgstr "Белсендіру сілтемесінің мерзімі өтіп к
 msgid "Register Again"
 msgstr "Қайта тіркелу"
 
-#: .\templates\users\login.html:26
+#: .\templates\users\login.html:20 .\templates\users\register.html:19
+#, fuzzy
+#| msgid "Change Password"
+msgid "Show password"
+msgstr "Құпия сөзді көрсету"
+
+#: .\templates\users\login.html:40
 msgid "Don't have an account?"
 msgstr "Тіркелгіңіз жоқ па?"
+
+#: .\templates\users\login.html:42
+#, fuzzy
+#| msgid "Change Password"
+msgid "Forgot password"
+msgstr "Құпия сөзді ұмыттыңыз ба?"
 
 #: .\templates\users\logout.html:5
 msgid "You have been logged out"
@@ -399,7 +772,7 @@ msgstr "Сіз жүйеден шықтыңыз"
 
 #: .\templates\users\logout.html:6
 msgid "Thank you for using CarRental!"
-msgstr "CarRental қызметін пайдаланғаныңызға рахмет!"
+msgstr "CarRental қызметін пайдаланғаныңызға рақмет!"
 
 #: .\templates\users\logout.html:7
 msgid "Log In Again"
@@ -409,89 +782,192 @@ msgstr "Қайтадан кіру"
 msgid "Go to Home"
 msgstr "Басты бетке өту"
 
+#: .\templates\users\map_embed.html:5
+msgid "Your Preferred Map"
+msgstr "Сіз таңдаған карта"
+
+#: .\templates\users\map_embed.html:12
+msgid "Open in Google Maps"
+msgstr "Google Maps-те ашу"
+
+#: .\templates\users\map_embed.html:19
+msgid "Open in Yandex Maps"
+msgstr "Яндекс Картада ашу"
+
+#: .\templates\users\map_embed.html:26
+msgid "Open in 2GIS"
+msgstr "2GIS-те ашу"
+
+#: .\templates\users\password_reset.html:4
+msgid "Forgot your password?"
+msgstr "Құпия сөзіңізді ұмыттыңыз ба?"
+
+#: .\templates\users\password_reset.html:5
+msgid "Enter your email address to receive a password reset link."
+msgstr "Құпия сөзді қалпына келтіру сілтемесін алу үшін электрондық поштаңызды енгізіңіз."
+
+#: .\templates\users\password_reset_complete.html:4
+msgid "Password reset complete"
+msgstr "Құпия сөзді қалпына келтіру аяқталды"
+
+#: .\templates\users\password_reset_complete.html:8
+msgid "Password has been reset"
+msgstr "Құпия сөз қалпына келтірілді"
+
+#: .\templates\users\password_reset_complete.html:9
+msgid "You can now log in with your new password."
+msgstr "Енді жаңа құпия сөзбен жүйеге кіре аласыз."
+
+#: .\templates\users\password_reset_complete.html:10
+#, fuzzy
+#| msgid "Log In Again"
+msgid "Log in"
+msgstr "Кіру"
+
+#: .\templates\users\password_reset_confirm.html:4
+#, fuzzy
+#| msgid "Change Password"
+msgid "Enter New Password"
+msgstr "Жаңа құпия сөзді енгізіңіз"
+
+#: .\templates\users\password_reset_confirm.html:8
+#: .\templates\users\settings.html:37
+msgid "Change Password"
+msgstr "Құпия сөзді өзгерту"
+
+#: .\templates\users\password_reset_done.html:4
+#, fuzzy
+#| msgid "Email:"
+msgid "Email Sent"
+msgstr "Электрондық хат жіберілді"
+
+#: .\templates\users\password_reset_done.html:5
+msgid ""
+"We have sent you an email with a password reset link. Please check your "
+"inbox (or console)."
+msgstr ""
+"Біз сізге құпия сөзді қалпына келтіру сілтемесі бар электрондық хат жібердік. "
+"Кіріс жәшігіңізді (немесе консольді) тексеріңіз."
+
+#: .\templates\users\password_reset_done.html:6
+msgid "Return to Login"
+msgstr "Кіру бетіне оралу"
+
+#: .\templates\users\password_reset_email.html:2
+#, python-format
+msgid ""
+"You're receiving this email because you requested a password reset for your "
+"user account at %(site_name)s."
+msgstr ""
+"Сіз бұл хатты %(site_name)s сайтындағы пайдаланушы тіркелгіңіз үшін құпия сөзді "
+"қалпына келтіруді сұрағаныңыз үшін алып отырсыз."
+
+#: .\templates\users\password_reset_email.html:4
+msgid "Please go to the following page and choose a new password:"
+msgstr "Келесі бетке өтіп, жаңа құпия сөз таңдаңыз:"
+
+#: .\templates\users\password_reset_email.html:8
+msgid "Your username, in case you’ve forgotten:"
+msgstr "Егер ұмытып қалсаңыз, сіздің пайдаланушы атыңыз:"
+
+#: .\templates\users\password_reset_email.html:10
+#, fuzzy
+#| msgid "Thank you for using CarRental!"
+msgid "Thanks for using our site!"
+msgstr "Біздің сайтты пайдаланғаныңызға рақмет!"
+
+#: .\templates\users\password_reset_email.html:12
+#, python-format
+msgid "The %(site_name)s team"
+msgstr "%(site_name)s командасы"
+
 #: .\templates\users\profile.html:3 .\templates\users\profile.html:6
 msgid "User Profile"
 msgstr "Пайдаланушы профилі"
 
-#: .\templates\users\profile.html:8
-msgid "Settings"
-msgstr "Баптаулар"
-
-#: .\templates\users\profile.html:10
+#: .\templates\users\profile.html:9
 msgid "Avatar"
 msgstr "Аватар"
 
-#: .\templates\users\profile.html:12
+#: .\templates\users\profile.html:11
 msgid "Default Avatar"
 msgstr "Әдепкі аватар"
 
-#: .\templates\users\profile.html:14
+#: .\templates\users\profile.html:13
 msgid "First name:"
 msgstr "Аты:"
 
-#: .\templates\users\profile.html:15
+#: .\templates\users\profile.html:14
 msgid "Last name:"
 msgstr "Тегі:"
 
-#: .\templates\users\profile.html:16 .\templates\users\users_details.html:6
+#: .\templates\users\profile.html:15 .\templates\users\users_details.html:6
 msgid "Username:"
 msgstr "Пайдаланушы аты:"
 
-#: .\templates\users\profile.html:18
+#: .\templates\users\profile.html:17
 msgid "Driver's License:"
 msgstr "Жүргізуші куәлігі:"
 
-#: .\templates\users\profile.html:19
+#: .\templates\users\profile.html:18
 msgid "Yes"
 msgstr "Иә"
 
-#: .\templates\users\profile.html:19
+#: .\templates\users\profile.html:18
 msgid "No"
 msgstr "Жоқ"
 
 #: .\templates\users\profile.html:21
+#, fuzzy
+#| msgid "My Rentals"
+msgid "View My Car Rentals"
+msgstr "Менің автомобиль жалдауларымды қарау"
+
+#: .\templates\users\profile.html:25
 msgid "Edit Profile"
 msgstr "Профильді өңдеу"
 
-#: .\templates\users\register.html:29
+#: .\templates\users\register.html:37
 msgid "Already have an account?"
 msgstr "Аккаунтыңыз бар ма?"
 
 #: .\templates\users\register_email_message.html:5
+#, fuzzy
+#| msgid ""
+#| "Thank you for registering! A confirmation message has been sent to your "
+#| "email address"
 msgid ""
 "Thank you for registering! A confirmation message has been sent to your "
-"email address"
-msgstr "Тіркелгеніңіз үшін рахмет! Растау хабарламасы сіздің электрондық поштаңызға жіберілді"
+"email address "
+msgstr ""
+"Тіркелгеніңіз үшін рақмет! Растау хабарламасы сіздің электрондық поштаңызға "
+"жіберілді"
 
 #: .\templates\users\settings.html:6
 msgid "Profile Settings"
 msgstr "Профиль баптаулары"
 
-#: .\templates\users\settings.html:11
+#: .\templates\users\settings.html:10
 msgid "Personalization"
 msgstr "Жекелендіру"
 
-#: .\templates\users\settings.html:16
+#: .\templates\users\settings.html:15
 msgid "Current Background"
 msgstr "Қазіргі фон"
 
-#: .\templates\users\settings.html:21
+#: .\templates\users\settings.html:19
 msgid "Custom Background"
 msgstr "Теңшеулі фон"
 
-#: .\templates\users\settings.html:24
+#: .\templates\users\settings.html:22
 msgid "Reset Background"
 msgstr "Фонды қалпына келтіру"
 
-#: .\templates\users\settings.html:29
+#: .\templates\users\settings.html:26
 msgid "Save Settings"
 msgstr "Баптауларды сақтау"
 
 #: .\templates\users\settings.html:40
-msgid "Change Password"
-msgstr "Құпия сөзді өзгерту"
-
-#: .\templates\users\settings.html:43
 msgid "Update Password"
 msgstr "Құпия сөзді жаңарту"
 
@@ -535,6 +1011,26 @@ msgstr "Пайдаланушылар табылмады."
 msgid "Update Profile"
 msgstr "Профильді жаңарту"
 
-#: .\templates\users\users_update.html:10
-msgid "Back"
-msgstr "Артқа"
+#~ msgid "Rented by Me"
+#~ msgstr "Мен жалға алғандар"
+
+#~ msgid "Cars I Rent Out"
+#~ msgstr "Мен жалға беретін автомобильдер"
+
+#~ msgid "Your cars haven't been rented yet."
+#~ msgstr "Сіздің автомобильдеріңіз әлі жалға берілмеді."
+
+#~ msgid "Create Rental"
+#~ msgstr "Жалға алуды жасау"
+
+#~ msgid "Submit Rental"
+#~ msgstr "Жалға алуды жіберу"
+
+#~ msgid "Write a Review"
+#~ msgstr "Пікір жазу"
+
+#~ msgid "Submit"
+#~ msgstr "Жіберу"
+
+#~ msgid "Settings"
+#~ msgstr "Баптаулар"
