@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="form-container">
+    <h2>{% trans "Extend or Shorten Rental Period" %}</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <label for="start_date">{% trans "Start Date" %}</label>
+        <input type="date" name="start_date" value="{{ rental.start_date|date:'Y-m-d' }}" required>
+
+        <label for="end_date">{% trans "End Date" %}</label>
+        <input type="date" name="end_date" value="{{ rental.end_date|date:'Y-m-d' }}" required>
+
+        <button type="submit" class="btn btn-primary">{% trans "Update Rental" %}</button>
+    </form>
+
+    <a href="{% url 'rentals:rental_detail' rental.pk %}" class="button mt-3">{% trans "Back to Rental Details" %}</a>
+</div>
+{% endblock %}

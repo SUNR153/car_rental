@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results - CarRental</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>CarRental</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="car_list.html">Cars</a></li>
+                <li><a href="register.html">Register</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Search Results</h2>
+        <form action="search_results.html" method="GET">
+            <input type="text" name="query" placeholder="Search for cars..." required>
+            <button type="submit">Search</button>
+        </form>
+        
+        <div class="car-list">
+            <div class="car-item">
+                <img src="car1.jpg" alt="Car">
+                <h3>Toyota Corolla</h3>
+                <p><strong>Price:</strong> $50/day</p>
+                <a href="car_details.html" class="button">View Details</a>
+            </div>
+            <div class="car-item">
+                <img src="car2.jpg" alt="Car">
+                <h3>Honda Civic</h3>
+                <p><strong>Price:</strong> $55/day</p>
+                <a href="car_details.html" class="button">View Details</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 CarRental. All rights reserved.</p>
+    </footer>
+
+
+</body>
+</html>

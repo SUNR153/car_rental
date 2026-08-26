@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="page-container">
+    <h2>{% trans "Add Review for" %} {{ car }}</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">{% trans "Submit Review" %}</button>
+    </form>
+    <a href="{% url 'cars:car_detail' car.id %}" class="button">{% trans "Cancel" %}</a>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="form-container">
+    <h2>{% trans "Add new car" %}</h2>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <fieldset>
+            <legend>{% trans "Car details" %}</legend>
+            {{ form.as_p }}
+        </fieldset>
+
+        <fieldset>
+            <legend>{% trans "Availability" %}</legend>
+            {{ availability_form.as_p }}
+        </fieldset>
+
+        <button type="submit" class="btn btn-primary">{% trans "Add car" %}</button>
+        <a href="{% url 'cars:car_list' %}" class="btn btn-secondary">{% trans "Back" %}</a>
+    </form>
+</div>
+{% endblock %}

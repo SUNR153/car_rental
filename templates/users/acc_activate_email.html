@@ -1,0 +1,11 @@
+{% autoescape off %}
+{% load i18n %}
+
+{% blocktrans with name=user.first_name surname=user.last_name site=domain %}
+Hello, {{ name }} {{ surname }}
+Thank you for registering on {{ site }}.
+{% endblocktrans %}
+
+{% trans "Please click the link below to activate your account:" %}
+http://{{ domain }}{% url 'users:activate' uidb64=uid token=token %}
+{% endautoescape %}

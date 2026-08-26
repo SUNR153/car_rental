@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="page-container">
+    <h2>{% trans "Edit Review" %}</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button">{% trans "Save Changes" %}</button>
+    </form>
+    <a href="{% url 'reviews:review_list' %}">{% trans "Cancel" %}</a>
+    
+</div>
+{% endblock %}

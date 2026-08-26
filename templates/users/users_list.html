@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+<div class="page-container">
+    <h2>{% trans "All Users" %}</h2>
+    <ul class="user-list">
+        {% for u in users %}
+            <li>
+                {{ u.username }} - {{ u.email }}
+                <a href="{% url 'users:user_detail' u.pk %}" class="button small">{% trans "View" %}</a>
+            </li>
+        {% empty %}
+            <li>{% trans "No users found." %}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

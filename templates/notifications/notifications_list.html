@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="page-container">
+    <h2>{% trans "My Notifications" %}</h2>
+
+    {% if notifications %}
+        <a href="{% url 'notifications:mark_all_as_read' %}" class="btn btn-primary">
+            {% trans "Mark all as read" %}
+        </a>
+        <ul class="notifications-list">
+            {% for notification in notifications %}
+                <li class="{% if not notification.is_read %}unread{% endif %}">
+                    {{ notification.message }} 
+                    <small>({{ notification.created_at|date:"Y-m-d H:i" }})</small>
+                    {% if not notification.is_read %}
+                        <a href="{% url 'notifications:mark_as_read' notification.id %}" class="btn btn-sm btn-secondary">
+                            {% trans "Mark as read" %}
+                        </a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>{% trans "No notifications yet." %}</p>
+    {% endif %}
+</div>
+{% endblock %}

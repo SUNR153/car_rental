@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+<div class="page-container">
+    <h2>{% trans "Update Profile" %}</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ user_form.as_p }}
+        {{ profile_form.as_p }}
+        <button type="submit" class="button">{% trans "Save Changes" %}</button>
+        <a href="{% url 'users:profile' %}">{% trans "Back" %}</a>
+    </form>
+</div>
+{% endblock %}
