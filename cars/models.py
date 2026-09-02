@@ -94,9 +94,6 @@ class Car(models.Model):
         return self.author.email
     author_email.short_description = 'Email автора'
 
-    def __str__(self):
-        return f"Review by {self.author}"
-    
 class CarAvailability(models.Model):
     car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='available_dates')
     start_date = models.DateField()
