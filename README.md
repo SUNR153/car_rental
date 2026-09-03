@@ -29,7 +29,16 @@ pip install -r req.txt
 
 cp .env.example .env          # и заполнить своими значениями
 python manage.py migrate
+python manage.py seed_demo_data  # опционально: заполнить демо-данными (10 машин, 3 пользователя, отзывы)
 python manage.py runserver
+```
+
+Тестовый вход после сидинга: `demo.customer1@vrooom.example` / `demopass123`
+
+## Тесты
+
+```bash
+python manage.py test
 ```
 
 ## Переменные окружения
