@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.test import TestCase
+from django.urls import reverse
 
 from .models import Car, CarAvailability
 
@@ -91,3 +92,54 @@ class CarAvailabilityModelTests(TestCase):
         )
         self.assertIn(str(self.car), str(availability))
         self.assertIn('2026-01-01', str(availability))
+
+
+class CarViewTests(TestCase):
+    def setUp(self):
+        self.owner = User.objects.create_user(
+            username='owner',
+            email='owner@example.com',
+            password='pass12345',
+        )
+        self.other_user = User.objects.create_user(
+            username='other',
+            email='other@example.com',
+            password='pass12345',
+        )
+        self.car = Car.objects.create(
+            author=self.owner,
+            brand='Toyota',
+            model='Camry',
+            year=2022,
+            price_per_day='50.00',
+        )
+
+    def test_car_list_returns_200(self):
+        response = self.client.get(reverse('cars:car_list'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Toyota')
+
+    def test_car_detail_returns_200(self):
+        response = self.client.get(reverse('cars:car_detail', args=[self.car.pk]))
+        self.assertEqual(response.status_code, 200)
+
+    def test_car_create_requires_login(self):
+        response = self.client.get(reverse('cars:car_create'))
+        self.assertEqual(response.status_code, 302)
+
+    def test_car_delete_forbidden_for_non_owner(self):
+        self.client.login(username='other@example.com', password='pass12345')
+        response = self.client.post(reverse('cars:car_delete', args=[self.car.pk]))
+        self.assertEqual(response.status_code, 403)
+        self.assertTrue(Car.objects.filter(pk=self.car.pk).exists())
+
+    def test_car_delete_allowed_for_owner(self):
+        self.client.login(username='owner@example.com', password='pass12345')
+        response = self.client.post(reverse('cars:car_delete', args=[self.car.pk]))
+        self.assertEqual(response.status_code, 302)
+        self.assertFalse(Car.objects.filter(pk=self.car.pk).exists())
+
+    def test_car_update_forbidden_for_non_owner(self):
+        self.client.login(username='other@example.com', password='pass12345')
+        response = self.client.get(reverse('cars:car_update', args=[self.car.pk]))
+        self.assertEqual(response.status_code, 403)

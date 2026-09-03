@@ -17,7 +17,11 @@
         <a href="{% url 'reviews:review_update' pk=review.pk %}" class="button">{% trans "Edit" %}</a>
         <a href="{% url 'reviews:review_delete' pk=review.pk %}" class="button delete-button">{% trans "Delete" %}</a>
         {% endif %}
-        <a href="{% url 'reviews:review_list' %}" class="button small">{% trans "Back" %}</a>
+        {% if review.car %}
+        <a href="{% url 'reviews:review_list' car_id=review.car.id %}" class="button small">{% trans "Back" %}</a>
+        {% else %}
+        <a href="{% url 'reviews:my_review' %}" class="button small">{% trans "Back" %}</a>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

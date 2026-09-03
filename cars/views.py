@@ -117,6 +117,10 @@ def car_update(request, pk):
 @login_required
 def car_delete(request, pk):
     car = get_object_or_404(Car, pk=pk)
+
+    if request.user != car.author:
+        return HttpResponseForbidden("You do not have permission to delete this car.")
+
     if request.method == 'POST':
         car.delete()
         messages.success(request, "Car deleted.")

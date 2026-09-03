@@ -7,6 +7,7 @@ from users.models import User
 from .form import ReviewForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
+from django.http import HttpResponseForbidden
 
 User = get_user_model()
 
@@ -51,7 +52,10 @@ def review_create(request):
 @login_required
 def review_update(request, pk):
     review = get_object_or_404(Review, pk=pk)
-    
+
+    if request.user != review.author:
+        return HttpResponseForbidden("You do not have permission to edit this review.")
+
     if request.method == 'POST':
         form = ReviewForm(request.POST, instance=review)
         if form.is_valid():

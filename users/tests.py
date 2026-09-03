@@ -2,6 +2,7 @@ from datetime import timedelta
 
 from django.contrib.auth import get_user_model
 from django.test import TestCase
+from django.urls import reverse
 from django.utils import timezone
 
 from .models import PasswordResetCode, Profile
@@ -74,3 +75,74 @@ class PasswordResetCodeModelTests(TestCase):
             expires_at=timezone.now() - timedelta(minutes=1),
         )
         self.assertTrue(code.is_expired())
+
+
+class UserViewTests(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(
+            username='owner',
+            email='owner@example.com',
+            password='pass12345',
+        )
+        self.other_user = User.objects.create_user(
+            username='other',
+            email='other@example.com',
+            password='pass12345',
+        )
+
+    def test_login_view_get_returns_200(self):
+        response = self.client.get(reverse('users:login'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_login_with_correct_credentials_redirects(self):
+        response = self.client.post(reverse('users:login'), {
+            'email': 'owner@example.com',
+            'password': 'pass12345',
+        })
+        self.assertEqual(response.status_code, 302)
+
+    def test_login_with_wrong_password_stays_on_page(self):
+        response = self.client.post(reverse('users:login'), {
+            'email': 'owner@example.com',
+            'password': 'wrongpass',
+        })
+        self.assertEqual(response.status_code, 200)
+
+    def test_profile_requires_login(self):
+        response = self.client.get(reverse('users:profile'))
+        self.assertEqual(response.status_code, 302)
+
+    def test_user_update_requires_login(self):
+        response = self.client.get(reverse('users:user_update', args=[self.user.pk]))
+        self.assertEqual(response.status_code, 302)
+
+    def test_user_update_forbidden_for_other_user(self):
+        self.client.login(username='other@example.com', password='pass12345')
+        response = self.client.get(reverse('users:user_update', args=[self.user.pk]))
+        self.assertEqual(response.status_code, 403)
+
+    def test_user_update_allowed_for_self(self):
+        self.client.login(username='owner@example.com', password='pass12345')
+        response = self.client.get(reverse('users:user_update', args=[self.user.pk]))
+        self.assertEqual(response.status_code, 200)
+
+    def test_user_delete_forbidden_for_other_user(self):
+        self.client.login(username='other@example.com', password='pass12345')
+        response = self.client.post(reverse('users:user_delete', args=[self.user.pk]))
+        self.assertEqual(response.status_code, 403)
+        self.assertTrue(User.objects.filter(pk=self.user.pk).exists())
+
+    def test_user_delete_allowed_for_self(self):
+        self.client.login(username='owner@example.com', password='pass12345')
+        response = self.client.post(reverse('users:user_delete', args=[self.user.pk]))
+        self.assertEqual(response.status_code, 302)
+        self.assertFalse(User.objects.filter(pk=self.user.pk).exists())
+
+    def test_password_reset_request_rejects_unknown_email(self):
+        # PasswordResetRequestForm.clean_email() validates the email exists,
+        # so an unknown email re-renders the form with an error (not a crash).
+        response = self.client.post(reverse('users:password_reset'), {
+            'email': 'nobody@example.com',
+        })
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'не найден')

@@ -1,16 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Rental
 from cars.models import Car
-from users.models import User
 from django.contrib import messages
-from django.urls import reverse
 from datetime import datetime, timedelta
-from django.contrib.auth.models import User
-from .form import RentalForm
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 from django.utils import timezone
+from notifications.models import Notification
 
 User = get_user_model()
 
@@ -26,58 +23,17 @@ def rental_list(request):
 
 def rental_detail(request, pk):
     rental = get_object_or_404(Rental, pk=pk)
-    car = rental.car 
+    car = rental.car
     return render(request, 'rentals/rental_detail.html', {'rental': rental, 'car': car})
 
+
 @login_required
-def rental_create(request, car_id):
-    car = get_object_or_404(Car, pk=car_id)
-
-    if not request.user.profile.driver_license:
-        messages.error(request, "You must have a valid driver's license to rent a car.")
-        return redirect('cars:car_detail', pk=car.pk)
-
-    if request.method == 'POST':
-        try:
-            start_date = request.POST.get('start_date')
-            end_date = request.POST.get('end_date')
-            
-            start = datetime.strptime(start_date, '%Y-%m-%d').date()
-            end = datetime.strptime(end_date, '%Y-%m-%d').date()
-            
-            if end < start:
-                messages.error(request, 'The end date cannot be earlier than the start date.')
-                return redirect('rentals:rental_create', car_id=car_id)
-            
-            Rental.objects.create(
-                car=car,
-                customer=request.user,
-                start_date=start,
-                end_date=end
-            )
-            
-            if car.author != request.user:
-                Notification.objects.create(
-                    user=car.author,
-                    message=f"{request.user.email} rented your car '{car.brand} {car.model}' from {start} to {end}."
-            )
-
-            messages.success(request, 'Rental successfully created!')
-            return redirect('cars:car_detail', pk=car.pk)
-            
-        except Exception as e:
-            messages.error(request, f'Error: {str(e)}')
-            return redirect('rentals:rental_create', car_id=car_id)
-
-    return render(request, 'rentals/rental_create.html', {
-        'car': car,
-        'default_start': datetime.now().strftime('%Y-%m-%d'),
-        'default_end': (datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d')
-    })
-
-
 def rental_update(request, pk):
     rental = get_object_or_404(Rental, pk=pk)
+
+    if request.user != rental.customer and request.user != rental.car.author:
+        return HttpResponseForbidden("You do not have permission to edit this rental.")
+
     if request.method == 'POST':
         rental.car_id = request.POST['car']
         rental.customer_id = request.POST['customer']
@@ -90,15 +46,19 @@ def rental_update(request, pk):
     users = User.objects.all()
     return render(request, 'rentals/rental_update.html', {'rental': rental, 'cars': cars, 'users': users})
 
+@login_required
 def rental_delete(request, pk):
     rental = get_object_or_404(Rental, pk=pk)
+
+    if request.user != rental.customer and request.user != rental.car.author:
+        return HttpResponseForbidden("You do not have permission to delete this rental.")
+
     if request.method == 'POST':
         rental.delete()
         return redirect('/rentals/')
     return render(request, 'rentals/rental_delete.html', {'rental': rental})
 
-from notifications.models import Notification
-
+@login_required
 def rental_create(request, car_id):
     car = get_object_or_404(Car, pk=car_id)
 

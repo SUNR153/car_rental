@@ -1,7 +1,7 @@
 import json
 import uuid
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseForbidden
 from django.contrib import messages
 from django.utils import timezone
 from django.utils.timezone import now, timedelta
@@ -58,8 +58,12 @@ def user_create(request):
         return redirect('users:user_list')
     return render(request, 'users/users_create.html', {'form': form})
 
+@login_required
 def user_update(request, pk):
     user = get_object_or_404(User, pk=pk)
+
+    if request.user != user:
+        return HttpResponseForbidden("You do not have permission to edit this profile.")
 
     if request.method == 'POST':
         user_form = UserUpdateForm(request.POST, instance=user)
@@ -80,8 +84,13 @@ def user_update(request, pk):
     })
 
 
+@login_required
 def user_delete(request, pk):
     user = get_object_or_404(User, pk=pk)
+
+    if request.user != user:
+        return HttpResponseForbidden("You do not have permission to delete this account.")
+
     if request.method == 'POST':
         user.delete()
         return redirect('users:user_list')
@@ -246,22 +255,29 @@ def password_reset_request(request):
         form = PasswordResetRequestForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data['email']
-            user = User.objects.get(email=email)
-            
-            reset_code = PasswordResetCode.objects.create(user=user)
-            
-            reset_url = request.build_absolute_uri(
-                f"/en/users/password_reset_confirm/?code={reset_code.code}"
-            )
-            
-            send_mail(
-                subject='Сброс пароля',
-                message=f'Перейдите по ссылке для сброса пароля: {reset_url}',
-                from_email='zarip.tursunov@bk.ru',
-                recipient_list=[email],
-                fail_silently=False,
-            )
-            
+
+            try:
+                user = User.objects.get(email=email)
+            except User.DoesNotExist:
+                user = None
+
+            if user:
+                reset_code = PasswordResetCode.objects.create(user=user)
+
+                reset_url = request.build_absolute_uri(
+                    f"/en/users/password_reset_confirm/?code={reset_code.code}"
+                )
+
+                send_mail(
+                    subject='Сброс пароля',
+                    message=f'Перейдите по ссылке для сброса пароля: {reset_url}',
+                    from_email='zarip.tursunov@bk.ru',
+                    recipient_list=[email],
+                    fail_silently=False,
+                )
+
+            # Always show the same message, whether or not the email exists,
+            # to avoid leaking which emails are registered.
             messages.success(request, 'Письмо с инструкциями отправлено.')
             return redirect('users:password_reset_done')
     else:

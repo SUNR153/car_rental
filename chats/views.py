@@ -62,7 +62,7 @@ def fetch_messages(request, chat_id):
 
 @login_required
 def api_messages(request, chat_id):
-    chat = Chat.objects.get(id=chat_id)
+    chat = get_object_or_404(Chat, id=chat_id, participants=request.user)
     messages = chat.messages.order_by('created_at')
     result = []
 
@@ -81,7 +81,7 @@ def api_messages(request, chat_id):
 @login_required
 def api_send_message(request, chat_id):
     if request.method == "POST":
-        chat = Chat.objects.get(id=chat_id)
+        chat = get_object_or_404(Chat, id=chat_id, participants=request.user)
         data = json.loads(request.body)
         content = data.get('content')
 

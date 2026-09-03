@@ -11,7 +11,7 @@
         {% csrf_token %}
         <div class="form-actions">
             <button type="submit" class="button delete-button">{% trans "Yes, Delete" %}</button>
-            <a href="{% url 'reviews:review_list' %}" class="button cancel-button">{% trans "Cancel" %}</a>
+            <a href="{% url 'reviews:review_detail' review.pk %}" class="button cancel-button">{% trans "Cancel" %}</a>
         </div>
     </form>
 </div>
