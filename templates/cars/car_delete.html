@@ -3,7 +3,7 @@
 {% block content %}
 <div class="form-container">
     <h2>{% trans "Delete car" %}</h2>
-    <p>{% trans "Are you sure you want to delete" %}<strong>{{ car.make }} {{ car.model }}</strong>?</p>
+    <p>{% trans "Are you sure you want to delete" %}<strong>{{ car.brand }} {{ car.model }}</strong>?</p>
     <form method="post">
         {% csrf_token %}
         <button type="submit">{% trans "Yes, delete" %}</button>

@@ -3,10 +3,12 @@
 {% block content %}
 
 <div class="page-container">
-    <h2>{{ car.make }} {{ car.model }}</h2>
+    <h2>{{ car.brand }} {{ car.model }}</h2>
 
 <div class="car-detail">
-    <img src="{{ car.car_images.url }}" alt="{{ car.make }} {{ car.model }}">
+    {% if car.image %}
+    <img src="{{ car.image.url }}" alt="{{ car.brand }} {{ car.model }}">
+    {% endif %}
 
     <p><strong>{% trans "Year:" %}</strong> {{ car.year }}</p>
     <p><strong>{% trans "Price:" %}</strong> ${{ car.price_per_day }} / {% trans "day" %}</p>
